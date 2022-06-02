@@ -63,6 +63,10 @@
   </p>
 </main>
 
+<footer style="width:100%">
+  <p style="text-align:center">Full website coming soon! &#x2764;</p>
+</footer>
+
 <style>
   img.logo {
     border-radius: 100%;
