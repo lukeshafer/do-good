@@ -1,14 +1,12 @@
 <script lang="ts">
-  import Nav from '$lib/components/Nav.svelte';
+  import Header from './Header.svelte';
   import 'normalize.css';
   import '../global.css';
 </script>
 
-<Nav>
-  <!-- hold -->
-</Nav>
+<Header />
 
-<slot><!-- optional fallback --></slot>
+<slot />
 
 <style>
 </style>
