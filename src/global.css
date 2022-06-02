@@ -1,0 +1,80 @@
+/* Define global styles for ALL elements here */
+
+:root {
+  /* Color Palette */
+  --primary-color: #e6deff;
+  --secondary-color: #254d56;
+  --background-color: #f5f6f8;
+  --accent-color: #bbd0ff;
+
+  --title-font: 'Podkova';
+  --body-font: 'Fira Code';
+
+  /* Root Font Size for determining rem and em values  */
+  font-size: min(130%, 3vw);
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('/fonts/fira-code/FiraCode-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Podkova';
+  src: url('/fonts/podkova/Podkova-VariableFont_wght.ttf');
+}
+
+body {
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+main {
+  background-color: var(--primary-color);
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 2em;
+  margin: 3em 2.5em;
+  max-width: 40em;
+  text-align: center;
+  color: var(--secondary-color);
+  border-radius: 2em;
+  box-shadow: 0.4em 0.4em 0.5em var(--secondary-color);
+}
+
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2em;
+  font-size: 0.6em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--title-font), 'Times New Roman', Times, serif;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+p {
+  font: 500 1em var(--body-font);
+}
+
+a {
+  font: 500 2em var(--body-font);
+}
