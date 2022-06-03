@@ -1,10 +1,23 @@
 <script lang="ts">
-  import Header from './Header.svelte';
+  import Header from '$lib/components/Header.svelte';
+  import Logo from '$lib/components/Logo.svelte';
+  import Navbar from '$lib/components/Navbar.svelte';
+  import NavItem from '$lib/components/NavItem.svelte';
   import 'normalize.css';
   import '../global.css';
 </script>
 
-<Header />
+<Header>
+  <Logo />
+  <Navbar>
+    <NavItem href="/">Home</NavItem>
+    <NavItem href="/">What is DGC?</NavItem>
+    <NavItem href="/">How can I help?</NavItem>
+    <NavItem href="/">About Us</NavItem>
+    <NavItem href="/">Join</NavItem>
+    <NavItem href="/">FAQ</NavItem>
+  </Navbar>
+</Header>
 
 <slot />
 

@@ -76,5 +76,5 @@ p {
 }
 
 a {
-  font: 500 2em var(--body-font);
+  font-family: var(--body-font);
 }
