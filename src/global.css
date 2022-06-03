@@ -2,10 +2,22 @@
 
 :root {
   /* Color Palette */
-  --primary-color: #e6deff;
-  --secondary-color: #254d56;
-  --background-color: #f5f6f8;
-  --accent-color: #bbd0ff;
+  /* Colors all have a separate 'values' variable, which lets us add opacity */
+  /*  - i.e. rgba( var(--primary-values), 0.5) will be the primary color with 50% opacity */
+  /*  - a handy vscode extension for this is "Color Highlight" which can be set to highlight
+        RGB values without an rgb function */
+
+  --primary-values: 230, 222, 255;
+  --primary-color: rgb(var(--primary-values));
+
+  --secondary-values: 37, 77, 86;
+  --secondary-color: rgb(var(--secondary-values));
+
+  --background-values: 245, 246, 248;
+  --background-color: rgb(var(--background-values));
+
+  --accent-values: 187, 208, 255;
+  --accent-color: rgb(var(--accent-values));
 
   --title-font: 'Podkova';
   --body-font: 'Fira Code';
