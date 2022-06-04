@@ -23,7 +23,7 @@
 <style>
   .grid-wrapper {
     display: grid;
-    font-size: 0.8em;
+    font-size: min(0.8em, 2vw);
     grid-template-columns: 6em 7em 20em 10em;
     grid-template-rows: repeat(6, 3em);
   }
@@ -86,7 +86,7 @@
     margin: 0.2em 1em;
     font: 600 1em 'Fira Code';
     text-align: left;
-    letter-spacing: 1px;
+    letter-spacing: 0.07em;
     color: #342e7a;
   }
 </style>
