@@ -25,6 +25,15 @@
   --box-shadow-values: 101, 117, 153;
   --box-shadow-color: rgb(var(--box-shadow-values));
 
+  --h-shadow-primary-values: 204, 121, 116;
+  --h-shadow-primary-color: rgb(var(--h-shadow-primary-values));
+
+  --h-shadow-secondary-values: 39, 128, 148;
+  --h-shadow-secondary-color: rgb(var(--h-shadow-secondary-values));
+
+  --text-accent-values: 83, 68, 173;
+  --text-accent-color: rgb(var(--text-accent-values));
+
   --title-font: 'Podkova';
   --body-font: 'Fira Code';
 
@@ -35,6 +44,12 @@
 @font-face {
   font-family: 'Fira Code';
   src: url('/fonts/fira-code/FiraCode-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Genty';
+  src: url('/fonts/genty/GentyDemo-Regular.otf') format('opentype'),
+    url('/fonts/genty/GentyDemo-Regular.ttf') format('truetype');
 }
 
 @font-face {

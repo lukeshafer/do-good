@@ -9,7 +9,7 @@
 <style>
   article {
     position: relative;
-    padding: 1em;
+    padding: 0.2em;
     text-align: center;
     border-radius: 1.5em;
     border: 2px solid var(--border-color);
