@@ -4,6 +4,7 @@
   import Navbar from '$lib/components/Nav/Navbar.svelte';
   import NavItem from '$lib/components/Nav/NavItem.svelte';
   import 'normalize.css';
+  import '../colors.css';
   import '../global.css';
 </script>
 

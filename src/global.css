@@ -1,38 +1,7 @@
 /* Define global styles for ALL elements here */
 
 :root {
-  /* Color Palette */
-  /* Colors all have a separate 'values' variable, which lets us add opacity */
-  /*  - i.e. rgba( var(--primary-values), 0.5) will be the primary color with 50% opacity */
-  /*  - a handy vscode extension for this is "Color Highlight" which can be set to highlight
-        RGB values without an rgb function */
-
-  --primary-values: 230, 222, 255;
-  --primary-color: rgb(var(--primary-values));
-
-  --secondary-values: 37, 77, 86;
-  --secondary-color: rgb(var(--secondary-values));
-
-  --background-values: 245, 246, 248;
-  --background-color: rgb(var(--background-values));
-
-  --accent-values: 187, 208, 255;
-  --accent-color: rgb(var(--accent-values));
-
-  --border-values: 119, 131, 141;
-  --border-color: rgb(var(--border-values));
-
-  --box-shadow-values: 101, 117, 153;
-  --box-shadow-color: rgb(var(--box-shadow-values));
-
-  --h-shadow-primary-values: 204, 121, 116;
-  --h-shadow-primary-color: rgb(var(--h-shadow-primary-values));
-
-  --h-shadow-secondary-values: 39, 128, 148;
-  --h-shadow-secondary-color: rgb(var(--h-shadow-secondary-values));
-
-  --text-accent-values: 83, 68, 173;
-  --text-accent-color: rgb(var(--text-accent-values));
+  /* FYI - Color Palettes are defined in /src/colors.css !! */
 
   --title-font: 'Podkova';
   --body-font: 'Fira Code';
