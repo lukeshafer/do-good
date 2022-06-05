@@ -8,6 +8,7 @@
 
 <style>
   article {
+    /* Adding comment to force a merge */
     position: relative;
     padding: 0.2em;
     text-align: center;
