@@ -8,8 +8,8 @@
     class="logo"
     src="images/do-good-logo.png"
     alt="A logo of two hands holding the moon, with the words 'Do Good' above them"
-    {width}
-    {height} />
+    style:width
+    style:height />
 </a>
 
 <style>

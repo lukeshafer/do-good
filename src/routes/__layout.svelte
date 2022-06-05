@@ -9,7 +9,7 @@
 </script>
 
 <Header>
-  <Logo />
+  <Logo width="10em" />
   <Navbar>
     <NavItem href="/">Home</NavItem>
     <NavItem href="/">What is DGC?</NavItem>
