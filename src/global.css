@@ -72,3 +72,10 @@ p {
 a {
   font-family: var(--body-font);
 }
+
+@media (prefers-reduced-motion) {
+  * {
+    transition: none;
+    animation: none;
+  }
+}
