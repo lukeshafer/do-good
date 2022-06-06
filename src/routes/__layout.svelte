@@ -8,17 +8,17 @@
   import '../global.css';
 </script>
 
-<Header>
-  <Logo width="10em" />
-  <Navbar>
-    <NavItem href="/">Home</NavItem>
-    <NavItem href="/">What is DGC?</NavItem>
-    <NavItem href="/">How can I help?</NavItem>
-    <NavItem href="/">About Us</NavItem>
-    <NavItem href="/">Join</NavItem>
-    <NavItem href="/">FAQ</NavItem>
-  </Navbar>
-</Header>
+<header>
+  <logo width="10em" />
+  <navbar>
+    <navitem href="/">Home</navitem>
+    <navitem href="/">What is DGC?</navitem>
+    <navitem href="/">How can I help?</navitem>
+    <navitem href="/">About Us</navitem>
+    <navitem href="/">Join</navitem>
+    <navitem href="/">FAQ</navitem>
+  </navbar>
+</header>
 
 <slot />
 
