@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { isNavActive } from '$lib/stores';
+
   export let href: string;
+  let index: number;
 </script>
 
 <li>
-  <a {href}><slot /></a>
+  <a {href} on:click={() => ($isNavActive = false)}><slot /></a>
 </li>
 
 <style>
@@ -12,6 +15,7 @@
     display: flex;
     align-items: center;
     background-color: var(--primary-color);
+    width: 100%;
   }
 
   a {

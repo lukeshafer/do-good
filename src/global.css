@@ -32,9 +32,11 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+  overflow-x: hidden;
 }
 
 main {
+  text-align: center;
   margin: 2em auto;
   max-width: 50em;
 }
@@ -71,6 +73,16 @@ p {
 
 a {
   font-family: var(--body-font);
+}
+
+/* Use this class when you want text to be available to screen readers only */
+.visibly-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 @media (prefers-reduced-motion) {

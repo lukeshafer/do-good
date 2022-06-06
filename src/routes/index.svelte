@@ -8,7 +8,9 @@
 </svelte:head>
 
 <main>
-  <FeaturedBox background="var(--accent-color)">
+  <FeaturedBox
+    href="/fundraisers/rally-for-mr-talley"
+    background="var(--accent-color)">
     <h2 slot="title">Rally for<br /> Mr. Talley</h2>
     <p slot="goal">Goal: $5,000</p>
     <img

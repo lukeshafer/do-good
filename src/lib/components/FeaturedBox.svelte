@@ -1,9 +1,10 @@
 <script lang="ts">
   export let background: string;
+  export let href = '';
   import Box from '$lib/components/Box.svelte';
 </script>
 
-<Box {background}>
+<Box {background} {href}>
   <div class="grid-wrapper">
     <div class="title">
       <slot name="title" />
