@@ -30,5 +30,6 @@
   main {
     display: grid;
     justify-items: center;
+    justify-content: center;
   }
 </style>

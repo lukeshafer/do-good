@@ -97,9 +97,9 @@
     }
 
     ul {
-      margin: 5em 0 0 0;
+      margin: 8em 0 0 0;
       flex-flow: column nowrap;
-      align-items: flex-end;
+      align-items: flex-start;
       justify-content: center;
       gap: 1em;
       --delay: 100ms;

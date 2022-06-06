@@ -33,10 +33,13 @@ body {
   align-items: center;
   height: 100%;
   overflow-x: hidden;
+  margin: 2em;
 }
 
 main {
   text-align: center;
+  display: flex;
+  justify-content: center;
   margin: 2em auto;
   max-width: 50em;
 }

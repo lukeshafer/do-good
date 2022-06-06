@@ -15,12 +15,10 @@
     display: flex;
     align-items: center;
     background-color: var(--primary-color);
-    width: 100%;
   }
 
   a {
     display: block;
-    width: 100%;
     padding: 1em;
     font-size: 1.2em;
     font-weight: 300;

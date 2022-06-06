@@ -26,7 +26,7 @@
     display: grid;
     font-size: min(0.8em, 2vw);
     grid-template-columns: 6em 7em 20em 10em;
-    grid-template-rows: repeat(6, 3em);
+    grid-template-rows: repeat(5, 3em) auto;
   }
 
   .title {
@@ -78,9 +78,10 @@
     background-color: rgb(255, 255, 255, 0.7);
     grid-column: 3 / 5;
     grid-row: 4 / 7;
-    height: 90%;
+    height: auto;
     width: 90%;
     font-size: 1.1em;
+    margin-bottom: 0.5em;
   }
 
   .body > :global(*) {
@@ -89,5 +90,44 @@
     text-align: left;
     letter-spacing: 0.07em;
     color: #342e7a;
+  }
+
+  @media screen and (max-width: 700px) {
+    .grid-wrapper {
+      grid-template-columns: repeat(2, 40vw);
+      grid-template-rows: repeat(2, auto) auto;
+      row-gap: 1em;
+    }
+
+    .title {
+      grid-column: 1 / end;
+      grid-row: 1;
+      font-size: 1.7em;
+    }
+
+    .title > :global(*) {
+      text-indent: -1em;
+      margin: 0 0 0 1.2em;
+    }
+
+    .goal {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: 3em;
+      display: flex;
+      align-items: center;
+    }
+
+    .icon {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .body {
+      grid-column: 1 / end;
+      grid-row: 3;
+      width: 80vw;
+      font-size: 2em;
+    }
   }
 </style>
