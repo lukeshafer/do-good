@@ -7,7 +7,7 @@
   --body-font: 'Fira Code';
 
   /* Root Font Size for determining rem and em values  */
-  font-size: min(130%, 3vw);
+  font-size: min(130%, 4vw);
 }
 
 @font-face {
