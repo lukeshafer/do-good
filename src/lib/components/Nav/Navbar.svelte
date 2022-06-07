@@ -11,7 +11,7 @@
 
 <svelte:body />
 
-<div class="hamburger">
+<div class="hamburger" hidden={!$$slots.default}>
   <Hamburger />
 </div>
 <div

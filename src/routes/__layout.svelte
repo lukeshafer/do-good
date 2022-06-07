@@ -10,14 +10,7 @@
 
 <Header>
   <Logo width="10em" />
-  <Navbar>
-    <NavItem href="/">Home</NavItem>
-    <NavItem href="/">What is DGC?</NavItem>
-    <NavItem href="/">How can I help?</NavItem>
-    <NavItem href="/">About Us</NavItem>
-    <NavItem href="/">Join</NavItem>
-    <NavItem href="/">FAQ</NavItem>
-  </Navbar>
+  <Navbar />
 </Header>
 
 <slot />

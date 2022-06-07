@@ -24,13 +24,6 @@
       help us out!
     </p>
   </FeaturedBox>
-
-  <div class="button-wrapper">
-    <Box background="var(--button1-color)">
-      <div class="button-content">
-        <p>Help us out!</p>
-      </div></Box>
-  </div>
 </main>
 
 <style>
@@ -39,17 +32,5 @@
     justify-items: center;
     justify-content: center;
     gap: 2em;
-  }
-
-  div.button-wrapper {
-    display: flex;
-    flex-flow: row wrap;
-  }
-
-  div.button-content {
-    display: block;
-    height: 9em;
-    width: 9em;
-    margin: 0;
   }
 </style>
