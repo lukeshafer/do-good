@@ -1,22 +1,24 @@
 /* Define global styles for ALL elements here */
 
 :root {
-  /* Color Palette */
-  --primary-color: #e6deff;
-  --secondary-color: #254d56;
-  --background-color: #f5f6f8;
-  --accent-color: #bbd0ff;
+  /* FYI - Color Palettes are defined in /src/colors.css !! */
 
   --title-font: 'Podkova';
   --body-font: 'Fira Code';
 
   /* Root Font Size for determining rem and em values  */
-  font-size: min(130%, 3vw);
+  font-size: min(130%, 3.5vw);
 }
 
 @font-face {
   font-family: 'Fira Code';
   src: url('/fonts/fira-code/FiraCode-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Genty';
+  src: url('/fonts/genty/GentyDemo-Regular.otf') format('opentype'),
+    url('/fonts/genty/GentyDemo-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -30,19 +32,16 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+  overflow-x: hidden;
+  margin: 2em;
 }
 
 main {
-  background-color: var(--primary-color);
-  display: flex;
-  flex-flow: column nowrap;
-  padding: 2em;
-  margin: 3em 2.5em;
-  max-width: 40em;
   text-align: center;
-  color: var(--secondary-color);
-  border-radius: 2em;
-  box-shadow: 0.4em 0.4em 0.5em var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  margin: 2em auto;
+  max-width: 50em;
 }
 
 header {
@@ -76,5 +75,22 @@ p {
 }
 
 a {
-  font: 500 2em var(--body-font);
+  font-family: var(--body-font);
+}
+
+/* Use this class when you want text to be available to screen readers only */
+.visibly-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@media (prefers-reduced-motion) {
+  * {
+    transition: none;
+    animation: none;
+  }
 }
