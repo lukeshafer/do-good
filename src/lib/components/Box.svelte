@@ -17,7 +17,6 @@
 
 <style>
   article {
-    /* Adding comment to force a merge */
     position: relative;
     transition: transform 200ms;
     padding: 0.2em;
@@ -35,5 +34,6 @@
 
   a {
     text-decoration: none;
+    color: inherit;
   }
 </style>

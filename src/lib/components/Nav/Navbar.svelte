@@ -32,6 +32,7 @@
     width: 100%;
     background: var(--primary-color);
     margin-left: -10em;
+    padding-left: 10em;
     height: fit-content;
   }
 
@@ -82,6 +83,7 @@
     }
     nav {
       margin-left: 0;
+      padding-left: 0;
       transition: transform 500ms;
       transform: translateX(0);
       display: flex;

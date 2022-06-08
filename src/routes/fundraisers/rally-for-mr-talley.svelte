@@ -3,8 +3,8 @@
 </script>
 
 <main>
-  <Box background="var(--accent-color)">
-    <div>
+  <Box background="var(--primary-color)">
+    <div class="content">
       <h2>Rally for Mr. Talley!</h2>
       <p>
         We're fundraising for Mr. Brandon Talley, a single father who has been
@@ -34,10 +34,13 @@
         frameborder="0"
         allowfullscreen
         style="max-width:310px;border:0px solid #fff;margin:0 auto;" />
-      <p class="btn-container">
-        <a class="btn" href="https://chuffed.org/project/rally-for-mr-talley"
-          >Donate Now!</a>
-      </p>
+      <div class="link-wrapper">
+        <Box
+          background="var(--accent-color)"
+          href="https://chuffed.org/project/rally-for-mr-talley">
+          <p class="link" style="width:auto">Donate Now!</p>
+        </Box>
+      </div>
     </div>
   </Box>
 </main>
@@ -45,9 +48,17 @@
 <style>
   main {
     max-width: 40em;
+    padding: 0 2em;
+    color: var(--secondary-color);
   }
 
-  div {
-    padding: 1em;
+  .content {
+    padding: 1em 2em;
+  }
+
+  .link-wrapper {
+    width: 10em;
+    font-size: 1.3em;
+    margin: 1em auto;
   }
 </style>
