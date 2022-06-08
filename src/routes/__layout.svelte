@@ -17,6 +17,7 @@
     <NavItem href="/">About Us</NavItem>
     <NavItem href="/">Join</NavItem>
     <NavItem href="/">FAQ</NavItem>
+    <NavItem href="/ContactUs">Contact Us</NavItem>
   </Navbar>
 </Header>
 
