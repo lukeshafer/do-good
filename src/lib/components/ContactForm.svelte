@@ -1,3 +1,8 @@
+<!--
+  TODO 
+  - make it prettier
+  -->
+
 <script>
   let reasons = [
     { id: 1, text: '-Select-'},
@@ -5,9 +10,7 @@
     { id: 3, text: 'Question Not Answered by the FAQ'},
     { id: 4, text: 'Other'}
   ];
-  let reasonSelected;
   let reasonAnswer='';
-  let name;
   let pronouns = [
     { id: 1, text: '-Select-'},
     { id: 2, text: 'He/Him/His' },
@@ -16,16 +19,83 @@
     { id: 5, text: 'Ze/Hir/Hirs'},
     { id: 6, text: 'Other - Please Specify'}
   ];
-
-  let pronounSelected;
   let pronounAnswer='';
+ 
+  let name;
+  let pronounSelected;
   let email;
-  let phone;
+  let phone='';
+  let reasonSelected;
   let message;
   
+  let formFields = {name: '', pronouns: '', email: '', phone: '', reason: '', message: ''};
+  let errors = {name: '', pronouns: '', email: '', phone: '', reason: '', message: ''};
+  let valid = false;
+
+  let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+  let phoneTemplate = new RegExp('/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im');
+
+  function checkForSelection(selection) {
+    if(selection === '-Select-') {
+      return '';
+    }
+    else {
+      return selection;
+    }
+  }
 
   const handleSubmit = () => {
-    console.log(name, pronounSelected, email, phone, reasonSelected, message);
+    valid = true;
+
+    //validate name
+    if(formFields.name.trim().length < 1) {
+      valid = false;
+      errors.name = 'Name is required!';
+    } else {
+      errors.name = '';
+    }
+
+    //validate pronouns
+    if(formFields.pronouns == '-Select-') {
+      formFields.pronouns = '';
+    }
+
+    //validate email
+    if(!regex.test(formFields.email)) {
+      valid = false;
+      errors.email = 'Email is required and must be a valid email!';
+    } else {
+      errors.email = '';
+    }
+
+    //validate telephone
+    if(formFields.phone.trim().length > 0 && !formFields.phone.match(phoneTemplate)) {
+      valid = false;
+      errors.phone = 'Telephone (if provided) must contain at least 10 digits (###-###-####)!';
+    } else {
+      errors.phone = '';
+    }
+
+    //validate reason
+    formFields.reason = reasonSelected;
+    if(formFields.reason == '-Select-') {
+      valid = false;
+      errors.reason = 'Reason is required!';
+    } else {
+      errors.reason = '';
+    }
+
+    //validate message
+    if(formFields.message.trim().length == 0) {
+      valid = false;
+      errors.message = 'Message is required!';
+    } else {
+      errors.message = '';
+    }
+
+    if (valid) {
+      console.log('valid', formFields);
+    }
   };
 </script>
 
@@ -36,12 +106,14 @@
   <label class="required-field">
     Name:
   </label>
-  <input type="text" name="name" placeholder="Name" bind:value={name}>
+  <div class="error">{ errors.name }</div>
+  <input type="text" name="name" bind:value={formFields.name}>
+  
   <!--Pronouns-->
   <label>
     Pronouns:
   </label>
-  <select bind:value={pronounSelected} on:change="{() => pronounAnswer = ''}">
+  <select bind:value={pronounSelected} on:change="{() => formFields.pronoun = ''}">
     {#each pronouns as pronoun}
       <option value={pronoun.text}>{pronoun.text}</option>
     {/each}
@@ -49,18 +121,23 @@
   <!--Email-->
   <label class="required-field">
     Email:
-    <input type="email" name="email" placeholder="Email" bind:value={email}>
   </label>
+  <div class="error">{ errors.email }</div>
+  <input type="email" name="email" bind:value={formFields.email}>
+  
   <!--Phone-->
   <label>
     Telephone:
-    <input type="text" name="phone" placeholder="Phone" bind:value={phone}>
   </label>
+  <div class="error">{ errors.phone }</div>
+  <input type="text" name="phone" bind:value={formFields.phone}>
+  
   <!--Reason for Contacting Us-->
   <label class="required-field">
     Reason:
   </label>
-  <select placeholder="-Select-" on:change="{() => reasonAnswer = ''}">
+  <div class="error">{ errors.reason }</div>
+  <select bind:value={reasonSelected} on:change="{() => formFields.reason = ''}">
     {#each reasons as reason}
       <option value={reason.text}>{reason.text}
       </option>
@@ -69,8 +146,9 @@
   <!--Message-->
   <label class="required-field">
     Message:
-    <textarea name="message" placeholder="Message" bind:value={message}></textarea>
   </label>
+  <div class="error">{ errors.message }</div>
+  <textarea name="message" bind:value={formFields.message}></textarea>
   
   <!--Submit-->
   <span class="btn-wrapper">
@@ -114,6 +192,13 @@
     width: 90%;
     padding: 0.5em 1em;
     border: none;
+  }
+
+  .error {
+    font-weight: bold;
+    color: red;
+    font-size: small;
+    font-style: italic;
   }
 
   .required-field::before {
