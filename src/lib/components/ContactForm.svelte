@@ -10,7 +10,8 @@
     { id: 1, text: '-Select-' },
     { id: 2, text: 'Partnership Opportunity with My Company' },
     { id: 3, text: 'Question Not Answered by the FAQ' },
-    { id: 4, text: 'Other' },
+    { id: 4, text: 'Fundraising Request' },
+    { id: 5, text: 'Other' },
   ];
   let reasonAnswer = '';
   let pronouns = [
@@ -227,7 +228,6 @@
     font-family: 'Fira Code';
     background-color: rgb(255, 255, 255, 0.7);
   }
-
   textarea {
     resize: none;
   }
