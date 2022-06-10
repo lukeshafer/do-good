@@ -4,7 +4,7 @@
   - add file attachments options (POST-INITIAL RELEASE)
   -->
 <script>
-  import { element } from 'svelte/internal';
+  //import { post } from 'src/lib/routes/api/contacts';
 
   let pronouns = [
     { id: 1, text: '-Select-' },
@@ -37,10 +37,24 @@
   let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
   let phoneTemplate = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
-  const handleSubmit = () => {
-    valid = true;
+  /*
+  const callAPI = () => {
+    let request = new XMLHttpRequest();
+    request.open('POST', '/contacts');
+    request.send();
+    request.onload = () => {
+      console.log(request);
+      if (request.status == 200) {
+        console.log(JSON.parse(request.response));
+      } else {
+        console.log('error ${request.status} ${request.statusText}');
+      }
+    };
+  };
+  */
 
-    //validate name
+  const formValidation = () => {
+    valid = true;
     if (formFields.name.trim().length < 1) {
       valid = false;
       errors.name = 'Name is required!';
@@ -92,97 +106,143 @@
       errors.message = '';
     }
 
+    if (!valid) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  let requestName = formFields.name;
+  let requestPronouns = formFields.pronouns;
+  let requestEmail = formFields.email;
+  let requestPhone = formFields.phone;
+  let requestReason = formFields.reason;
+  let requestMessage = formFields.message;
+
+  let responseMessage = '';
+  // @ts-ignore
+  let responseError;
+
+  const submitForm = async () => {
+    valid = formValidation();
+
     if (valid) {
-      console.log('valid', formFields);
+      //callAPI();
+      console.log('request is : ', formFields);
+      try {
+        let submit = await fetch('contact', {
+          method: 'POST',
+          body: JSON.stringify({
+            requestName,
+            requestPronouns,
+            requestEmail,
+            requestPhone,
+            requestReason,
+            requestMessage,
+          }),
+        });
+
+        const data = await submit.json();
+        console.log(data);
+        responseMessage = data;
+      } catch (err) {
+        responseError = err;
+      }
     }
   };
 </script>
 
-<form
-  action="https://formspree.io/f/mgedqaob"
-  method="POST"
-  on:submit|preventDefault={handleSubmit}>
-  <span for="RequiredFieldsMessage" class="error info"
-    >Required fields are marked by an asterisk. (*)
-  </span>
+{#if !responseMessage && !responseError}
+  <!-- FORMSPREE LINK: https://formspree.io/f/mgedqaob-->
+  <!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>-->
+  <form on:submit|preventDefault={submitForm}>
+    <span for="RequiredFieldsMessage" class="error info"
+      >Required fields are marked by an asterisk. (*)
+    </span>
 
-  <!--Name-->
-  <span for="name" class="formField">
-    <label for="name" class="required-field"> Name: </label>
-    <label for="name-error" class="error">{errors.name}</label>
-  </span>
-  <input
-    type="text"
-    name="name"
-    placeholder="Name"
-    bind:value={formFields.name} />
-
-  <!--Pronouns-->
-  <label for="pronouns"> Pronouns: </label>
-  <select
-    placeholder={pronounSelected}
-    bind:value={pronounSelected}
-    on:change={() => (formFields.pronouns = pronounSelected)}>
-    {#each pronouns as pronoun}
-      <option value={pronoun.text}>{pronoun.text}</option>
-    {/each}
-  </select>
-  {#if pronounSelected == 'Other - Please Specify'}
-    {(formFields.pronouns = '')}
+    <!--Name-->
+    <span for="name" class="formField">
+      <label for="name" class="required-field"> Name: </label>
+      <label for="name-error" class="error">{errors.name}</label>
+    </span>
     <input
-      name="pronouns"
-      placeholder="Enter your pronouns"
-      bind:value={formFields.pronouns} />
-  {/if}
+      type="text"
+      name="name"
+      placeholder="Name"
+      bind:value={formFields.name} />
 
-  <!--Email-->
-  <span for="email" class="formField">
-    <label for="email" class="required-field"> Email: </label>
-    <label for="email-error" class="error">{errors.email}</label>
-  </span>
-  <input
-    type="email"
-    name="email"
-    placeholder="Email"
-    bind:value={formFields.email} />
+    <!--Pronouns-->
+    <label for="pronouns"> Pronouns: </label>
+    <select
+      placeholder={pronounSelected}
+      bind:value={pronounSelected}
+      on:change={() => (formFields.pronouns = pronounSelected)}>
+      {#each pronouns as pronoun}
+        <option value={pronoun.text}>{pronoun.text}</option>
+      {/each}
+    </select>
+    {#if pronounSelected == 'Other - Please Specify'}
+      {(formFields.pronouns = '')}
+      <input
+        name="pronouns"
+        placeholder="Enter your pronouns"
+        bind:value={formFields.pronouns} />
+    {/if}
 
-  <!--Phone-->
-  <span for="phone" class="formField">
-    <label for="phone"> Telephone: </label>
-    <label for="phone-error" class="error">{errors.phone}</label>
-  </span>
-  <input
-    type="text"
-    name="phone"
-    placeholder="Telephone"
-    bind:value={formFields.phone} />
+    <!--Email-->
+    <span for="email" class="formField">
+      <label for="email" class="required-field"> Email: </label>
+      <label for="email-error" class="error">{errors.email}</label>
+    </span>
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      bind:value={formFields.email} />
 
-  <!--Reason for Contacting Us-->
-  <span for="reason" class="formField">
-    <label for="reason" class="required-field"> Reason: </label>
-    <label for="reason-error" class="error">{errors.reason}</label>
-  </span>
-  <input
-    type="text"
-    name="reason"
-    placeholder="Reason"
-    bind:value={formFields.reason} />
+    <!--Phone-->
+    <span for="phone" class="formField">
+      <label for="phone"> Telephone: </label>
+      <label for="phone-error" class="error">{errors.phone}</label>
+    </span>
+    <input
+      type="text"
+      name="phone"
+      placeholder="Telephone"
+      bind:value={formFields.phone} />
 
-  <!--Message-->
-  <span for="message" class="formField">
-    <label for="message" class="required-field"> Message: </label>
-    <label for="message-error" class="error">{errors.message}</label>
-  </span>
-  <textarea
-    name="message"
-    placeholder="Message"
-    bind:value={formFields.message} />
+    <!--Reason for Contacting Us-->
+    <span for="reason" class="formField">
+      <label for="reason" class="required-field"> Reason: </label>
+      <label for="reason-error" class="error">{errors.reason}</label>
+    </span>
+    <input
+      type="text"
+      name="reason"
+      placeholder="Reason"
+      bind:value={formFields.reason} />
 
-  <!--Submit-->
-  <span class="btn-wrapper">
-    <button class="btn" type="submit">Submit</button>
-  </span>
-</form>
+    <!--Message-->
+    <span for="message" class="formField">
+      <label for="message" class="required-field"> Message: </label>
+      <label for="message-error" class="error">{errors.message}</label>
+    </span>
+    <textarea
+      name="message"
+      placeholder="Message"
+      bind:value={formFields.message} />
+
+    <!--Submit-->
+    <span class="btn-wrapper">
+      <button class="btn" type="submit">Submit</button>
+    </span>
+  </form>
+{:else if responseMessage}
+  <p>Submission has been received.</p>
+{:else}
+  <p>{responseError}</p>
+{/if}
 
 <style>
   form {
