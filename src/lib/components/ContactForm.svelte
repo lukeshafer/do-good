@@ -6,14 +6,6 @@
 <script>
   import { element } from 'svelte/internal';
 
-  let reasons = [
-    { id: 1, text: '-Select-' },
-    { id: 2, text: 'Partnership Opportunity with My Company' },
-    { id: 3, text: 'Question Not Answered by the FAQ' },
-    { id: 4, text: 'Fundraising Request' },
-    { id: 5, text: 'Other' },
-  ];
-  let reasonAnswer = '';
   let pronouns = [
     { id: 1, text: '-Select-' },
     { id: 2, text: 'He/Him/His' },
@@ -22,14 +14,7 @@
     { id: 5, text: 'Ze/Hir/Hirs' },
     { id: 6, text: 'Other - Please Specify' },
   ];
-  let pronounAnswer = '';
-
-  let name = '';
-  let pronounSelected = '-Select-';
-  let email = '';
-  let phone = '';
-  let reasonSelected = '-Select-';
-  let message;
+  let pronounSelected = pronouns[0].text;
 
   let formFields = {
     name: '',
@@ -89,10 +74,12 @@
     }
 
     //validate reason
-    formFields.reason = reasonSelected;
-    if (formFields.reason == '-Select-') {
+    if (formFields.reason.trim().length < 1) {
       valid = false;
       errors.reason = 'Reason is required!';
+    } else if (formFields.reason.trim().length > 25) {
+      valid = false;
+      errors.reason = "Reason can't be longer than 25 characters!";
     } else {
       errors.reason = '';
     }
@@ -115,7 +102,7 @@
   action="https://formspree.io/f/mgedqaob"
   method="POST"
   on:submit|preventDefault={handleSubmit}>
-  <span for="notingRequiredFields" class="error"
+  <span for="RequiredFieldsMessage" class="error info"
     >Required fields are marked by an asterisk. (*)
   </span>
 
@@ -133,6 +120,7 @@
   <!--Pronouns-->
   <label for="pronouns"> Pronouns: </label>
   <select
+    placeholder={pronounSelected}
     bind:value={pronounSelected}
     on:change={() => (formFields.pronouns = pronounSelected)}>
     {#each pronouns as pronoun}
@@ -174,13 +162,11 @@
     <label for="reason" class="required-field"> Reason: </label>
     <label for="reason-error" class="error">{errors.reason}</label>
   </span>
-  <select
-    bind:value={reasonSelected}
-    on:change={() => (formFields.reason = reasonSelected)}>
-    {#each reasons as reason}
-      <option value={reason.text}>{reason.text} </option>
-    {/each}
-  </select>
+  <input
+    type="text"
+    name="reason"
+    placeholder="Reason"
+    bind:value={formFields.reason} />
 
   <!--Message-->
   <span for="message" class="formField">
@@ -221,7 +207,7 @@
   textarea,
   select {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     border-radius: 0;
     padding: 0.5em 1em;
     border: none;
@@ -234,9 +220,17 @@
 
   .error {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     color: red;
     font-style: italic;
+    font-family: 'Fira Code';
+    font-size: 55%;
+  }
+
+  .info {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 55%;
   }
 
   .required-field::before {
