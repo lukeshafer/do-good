@@ -1,54 +1,61 @@
 <!--
   TODO 
   - make it prettier
+  - add file attachments options (POST-INITIAL RELEASE)
   -->
-
 <script>
+  import { element } from 'svelte/internal';
+
   let reasons = [
-    { id: 1, text: '-Select-'},
-    { id: 2, text: 'Partnership Opportunity with My Company'},
-    { id: 3, text: 'Question Not Answered by the FAQ'},
-    { id: 4, text: 'Other'}
+    { id: 1, text: '-Select-' },
+    { id: 2, text: 'Partnership Opportunity with My Company' },
+    { id: 3, text: 'Question Not Answered by the FAQ' },
+    { id: 4, text: 'Other' },
   ];
-  let reasonAnswer='';
+  let reasonAnswer = '';
   let pronouns = [
-    { id: 1, text: '-Select-'},
+    { id: 1, text: '-Select-' },
     { id: 2, text: 'He/Him/His' },
-    { id: 3, text: 'She/Her/Hers'},
-    { id: 4, text: 'They/Them/Theirs'},
-    { id: 5, text: 'Ze/Hir/Hirs'},
-    { id: 6, text: 'Other - Please Specify'}
+    { id: 3, text: 'She/Her/Hers' },
+    { id: 4, text: 'They/Them/Theirs' },
+    { id: 5, text: 'Ze/Hir/Hirs' },
+    { id: 6, text: 'Other - Please Specify' },
   ];
-  let pronounAnswer='';
- 
-  let name;
-  let pronounSelected;
-  let email;
-  let phone='';
-  let reasonSelected;
+  let pronounAnswer = '';
+
+  let name = '';
+  let pronounSelected = '-Select-';
+  let email = '';
+  let phone = '';
+  let reasonSelected = '-Select-';
   let message;
-  
-  let formFields = {name: '', pronouns: '', email: '', phone: '', reason: '', message: ''};
-  let errors = {name: '', pronouns: '', email: '', phone: '', reason: '', message: ''};
+
+  let formFields = {
+    name: '',
+    pronouns: '',
+    email: '',
+    phone: '',
+    reason: '',
+    message: '',
+  };
+  let errors = {
+    name: '',
+    pronouns: '',
+    email: '',
+    phone: '',
+    reason: '',
+    message: '',
+  };
   let valid = false;
 
-  let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-  let phoneTemplate = new RegExp('/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im');
-
-  function checkForSelection(selection) {
-    if(selection === '-Select-') {
-      return '';
-    }
-    else {
-      return selection;
-    }
-  }
+  let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+  let phoneTemplate = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
   const handleSubmit = () => {
     valid = true;
 
     //validate name
-    if(formFields.name.trim().length < 1) {
+    if (formFields.name.trim().length < 1) {
       valid = false;
       errors.name = 'Name is required!';
     } else {
@@ -56,29 +63,33 @@
     }
 
     //validate pronouns
-    if(formFields.pronouns == '-Select-') {
+    if (formFields.pronouns == '-Select-') {
       formFields.pronouns = '';
     }
 
     //validate email
-    if(!regex.test(formFields.email)) {
+    if (!regex.test(formFields.email)) {
       valid = false;
-      errors.email = 'Email is required and must be a valid email!';
+      errors.email = 'Email is required - must be a valid email!';
     } else {
       errors.email = '';
     }
 
     //validate telephone
-    if(formFields.phone.trim().length > 0 && !formFields.phone.match(phoneTemplate)) {
+    if (
+      formFields.phone.trim().length > 0 &&
+      !formFields.phone.match(phoneTemplate)
+    ) {
       valid = false;
-      errors.phone = 'Telephone (if provided) must contain at least 10 digits (###-###-####)!';
+      errors.phone =
+        'If including telephone, must contain 10 numbers! Example: ###-###-####';
     } else {
       errors.phone = '';
     }
 
     //validate reason
     formFields.reason = reasonSelected;
-    if(formFields.reason == '-Select-') {
+    if (formFields.reason == '-Select-') {
       valid = false;
       errors.reason = 'Reason is required!';
     } else {
@@ -86,7 +97,7 @@
     }
 
     //validate message
-    if(formFields.message.trim().length == 0) {
+    if (formFields.message.trim().length == 0) {
       valid = false;
       errors.message = 'Message is required!';
     } else {
@@ -99,57 +110,87 @@
   };
 </script>
 
-<form action="https://formspree.io/f/mgedqaob"
-  method="POST" on:submit|preventDefault={handleSubmit}>
-  
+<form
+  action="https://formspree.io/f/mgedqaob"
+  method="POST"
+  on:submit|preventDefault={handleSubmit}>
+  <span for="notingRequiredFields" class="error"
+    >Required fields are marked by an asterisk. (*)
+  </span>
+
   <!--Name-->
-  <label class="required-field">
-    Name:
-  </label>
-  <div class="error">{ errors.name }</div>
-  <input type="text" name="name" bind:value={formFields.name}>
-  
+  <span for="name" class="formField">
+    <label for="name" class="required-field"> Name: </label>
+    <label for="name-error" class="error">{errors.name}</label>
+  </span>
+  <input
+    type="text"
+    name="name"
+    placeholder="Name"
+    bind:value={formFields.name} />
+
   <!--Pronouns-->
-  <label>
-    Pronouns:
-  </label>
-  <select bind:value={pronounSelected} on:change="{() => formFields.pronoun = ''}">
+  <label for="pronouns"> Pronouns: </label>
+  <select
+    bind:value={pronounSelected}
+    on:change={() => (formFields.pronouns = pronounSelected)}>
     {#each pronouns as pronoun}
       <option value={pronoun.text}>{pronoun.text}</option>
     {/each}
   </select>
+  {#if pronounSelected == 'Other - Please Specify'}
+    {(formFields.pronouns = '')}
+    <input
+      name="pronouns"
+      placeholder="Enter your pronouns"
+      bind:value={formFields.pronouns} />
+  {/if}
+
   <!--Email-->
-  <label class="required-field">
-    Email:
-  </label>
-  <div class="error">{ errors.email }</div>
-  <input type="email" name="email" bind:value={formFields.email}>
-  
+  <span for="email" class="formField">
+    <label for="email" class="required-field"> Email: </label>
+    <label for="email-error" class="error">{errors.email}</label>
+  </span>
+  <input
+    type="email"
+    name="email"
+    placeholder="Email"
+    bind:value={formFields.email} />
+
   <!--Phone-->
-  <label>
-    Telephone:
-  </label>
-  <div class="error">{ errors.phone }</div>
-  <input type="text" name="phone" bind:value={formFields.phone}>
-  
+  <span for="phone" class="formField">
+    <label for="phone"> Telephone: </label>
+    <label for="phone-error" class="error">{errors.phone}</label>
+  </span>
+  <input
+    type="text"
+    name="phone"
+    placeholder="Telephone"
+    bind:value={formFields.phone} />
+
   <!--Reason for Contacting Us-->
-  <label class="required-field">
-    Reason:
-  </label>
-  <div class="error">{ errors.reason }</div>
-  <select bind:value={reasonSelected} on:change="{() => formFields.reason = ''}">
+  <span for="reason" class="formField">
+    <label for="reason" class="required-field"> Reason: </label>
+    <label for="reason-error" class="error">{errors.reason}</label>
+  </span>
+  <select
+    bind:value={reasonSelected}
+    on:change={() => (formFields.reason = reasonSelected)}>
     {#each reasons as reason}
-      <option value={reason.text}>{reason.text}
-      </option>
+      <option value={reason.text}>{reason.text} </option>
     {/each}
   </select>
+
   <!--Message-->
-  <label class="required-field">
-    Message:
-  </label>
-  <div class="error">{ errors.message }</div>
-  <textarea name="message" bind:value={formFields.message}></textarea>
-  
+  <span for="message" class="formField">
+    <label for="message" class="required-field"> Message: </label>
+    <label for="message-error" class="error">{errors.message}</label>
+  </span>
+  <textarea
+    name="message"
+    placeholder="Message"
+    bind:value={formFields.message} />
+
   <!--Submit-->
   <span class="btn-wrapper">
     <button class="btn" type="submit">Submit</button>
@@ -157,62 +198,67 @@
 </form>
 
 <style>
-  section {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 1em 4em;
-  }
-
   form {
-    max-width: 25em;
+    /*max-width: 25em;*/
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: left;
     font-size: 1.5em;
-    gap: 0.7em;
+    gap: 0.25em;
   }
 
   label {
-    font-family: "Fira Code";
+    display: flex;
+    justify-content: flex-start;
+    font-family: 'Fira Code';
+    font-size: smaller;
   }
 
-  input, textarea {
-    border-radius: 0;
-    width: 80%;
-    padding: 0.5em 1em;
-    border: none;
-  }
-
+  input,
+  textarea,
   select {
+    display: flex;
+    align-items: stretch;
     border-radius: 0;
-    width: 90%;
     padding: 0.5em 1em;
     border: none;
+    font-family: 'Fira Code';
+    background-color: rgb(255, 255, 255, 0.7);
+  }
+
+  textarea {
+    resize: none;
   }
 
   .error {
-    font-weight: bold;
+    display: flex;
+    align-items: stretch;
     color: red;
-    font-size: small;
     font-style: italic;
   }
 
   .required-field::before {
-    content: "*";
+    content: '*';
     color: red;
-    vertical-align: super
+    vertical-align: super;
+    font-size: 60%;
   }
 
   .btn-wrapper {
-    height: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .formField {
+    display: flex;
+    justify-content: flex-start;
   }
 
   .btn {
     font-weight: lighter;
     cursor: pointer;
+    font-family: 'Fira Code';
   }
 </style>
