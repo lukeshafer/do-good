@@ -14,7 +14,7 @@
     <NavItem href="/">Home</NavItem>
     <NavItem href="/">What is DGC?</NavItem>
     <NavItem href="/">How can I help?</NavItem>
-    <NavItem href="/">About Us</NavItem>
+    <NavItem href="/about">About Us</NavItem>
     <NavItem href="/">Join</NavItem>
     <NavItem href="/">FAQ</NavItem>
     <NavItem href="/contact">Contact Us</NavItem>

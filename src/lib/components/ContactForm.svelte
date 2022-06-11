@@ -116,26 +116,37 @@
   };
 
   let responseMessage = '';
-  // @ts-ignore
-  let responseError;
+  let responseError = '';
 
   const submitForm = async () => {
-    valid = formValidation();
-
-    if (valid) {
+    if (formValidation()) {
       //callAPI();
       console.log('request is : ', formFields);
       try {
-        let submit = await fetch('/api/contact', {
+        let name = formFields.name;
+        let pronouns = formFields.pronouns;
+        let email = formFields.email;
+        let phone = formFields.phone;
+        let reason = formFields.reason;
+        let msg = formFields.message;
+        console.log(name, pronouns, email, phone, reason, msg);
+
+        const result = await fetch('api/contact', {
           method: 'POST',
-          //body: JSON.stringify({
-          // formFields,
-          //}),
+          body: JSON.stringify({
+            name,
+            pronouns,
+            email,
+            phone,
+            reason,
+            msg,
+          }),
         });
 
-        const data = await submit.json();
+        const data = await result.json();
         console.log(data);
         responseMessage = data;
+        console.log(responseMessage);
       } catch (err) {
         responseError = err;
       }
@@ -146,7 +157,10 @@
 {#if !responseMessage && !responseError}
   <!-- FORMSPREE LINK: https://formspree.io/f/mgedqaob-->
   <!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>-->
-  <form on:submit|preventDefault={submitForm}>
+  <form
+    action="/api/contact"
+    method="POST"
+    on:submit|preventDefault={submitForm}>
     <span for="RequiredFieldsMessage" class="error info"
       >Required fields are marked by an asterisk. (*)
     </span>
@@ -204,7 +218,9 @@
 
     <!--Reason for Contacting Us-->
     <span for="reason" class="formField">
-      <label for="reason" class="required-field"> Reason: </label>
+      <label for="reason" class="required-field">
+        Reason (explain in detail when possible):
+      </label>
       <label for="reason-error" class="error">{validationErrors.reason}</label>
     </span>
     <input
@@ -232,7 +248,14 @@
 {:else if responseMessage}
   <p>Success</p>
 {:else if responseError}
-  <p>Error</p>
+  <p>Error - Something went wrong on our end but you tried to enter:</p>
+  <br />
+  <p>Name: {formFields.name}</p>
+  <p>Pronouns: {formFields.pronouns}</p>
+  <p>Email: {formFields.email}</p>
+  <p>Phone: {formFields.phone}</p>
+  <p>Reason: {formFields.reason}</p>
+  <p>Message: {formFields.message}</p>
 {/if}
 
 <style>
@@ -299,6 +322,7 @@
   .formField {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
   }
 
   .btn {
