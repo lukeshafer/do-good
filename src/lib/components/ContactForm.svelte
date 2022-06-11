@@ -1,11 +1,9 @@
 <!--
   TODO 
-  - make it prettier
   - add file attachments options (POST-INITIAL RELEASE)
+  - fix 500 internal server error and build email/send email on POST successful
   -->
 <script lang="ts">
-  //import { post } from 'src/lib/routes/api/contacts';
-
   let pronouns = [
     { id: 1, text: '-Select-' },
     { id: 2, text: 'He/Him/His' },
@@ -36,22 +34,6 @@
 
   let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
   let phoneTemplate = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-
-  /*
-  const callAPI = () => {
-    let request = new XMLHttpRequest();
-    request.open('POST', '/contacts');
-    request.send();
-    request.onload = () => {
-      console.log(request);
-      if (request.status == 200) {
-        console.log(JSON.parse(request.response));
-      } else {
-        console.log('error ${request.status} ${request.statusText}');
-      }
-    };
-  };
-  */
 
   const formValidation = () => {
     valid = true;
@@ -120,7 +102,6 @@
 
   const submitForm = async () => {
     if (formValidation()) {
-      //callAPI();
       console.log('request is : ', formFields);
       try {
         let name = formFields.name;
