@@ -116,26 +116,37 @@
   };
 
   let responseMessage = '';
-  // @ts-ignore
-  let responseError;
+  let responseError = '';
 
   const submitForm = async () => {
-    valid = formValidation();
-
-    if (valid) {
+    if (formValidation()) {
       //callAPI();
       console.log('request is : ', formFields);
       try {
-        let submit = await fetch('/api/contact', {
+        let name = formFields.name;
+        let pronouns = formFields.pronouns;
+        let email = formFields.email;
+        let phone = formFields.phone;
+        let reason = formFields.reason;
+        let msg = formFields.message;
+        console.log(name, pronouns, email, phone, reason, msg);
+
+        const result = await fetch('api/contact', {
           method: 'POST',
-          //body: JSON.stringify({
-          // formFields,
-          //}),
+          body: JSON.stringify({
+            name,
+            pronouns,
+            email,
+            phone,
+            reason,
+            msg,
+          }),
         });
 
-        const data = await submit.json();
+        const data = await result.json();
         console.log(data);
         responseMessage = data;
+        console.log(responseMessage);
       } catch (err) {
         responseError = err;
       }
@@ -146,7 +157,10 @@
 {#if !responseMessage && !responseError}
   <!-- FORMSPREE LINK: https://formspree.io/f/mgedqaob-->
   <!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>-->
-  <form on:submit|preventDefault={submitForm}>
+  <form
+    action="/api/contact"
+    method="POST"
+    on:submit|preventDefault={submitForm}>
     <span for="RequiredFieldsMessage" class="error info"
       >Required fields are marked by an asterisk. (*)
     </span>
