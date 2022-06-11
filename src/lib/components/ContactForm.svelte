@@ -3,7 +3,7 @@
   - make it prettier
   - add file attachments options (POST-INITIAL RELEASE)
   -->
-<script>
+<script lang="ts">
   //import { post } from 'src/lib/routes/api/contacts';
 
   let pronouns = [
@@ -24,7 +24,7 @@
     reason: '',
     message: '',
   };
-  let errors = {
+  let validationErrors = {
     name: '',
     pronouns: '',
     email: '',
@@ -55,11 +55,13 @@
 
   const formValidation = () => {
     valid = true;
+
+    //validate name
     if (formFields.name.trim().length < 1) {
       valid = false;
-      errors.name = 'Name is required!';
+      validationErrors.name = 'Name is required!';
     } else {
-      errors.name = '';
+      validationErrors.name = '';
     }
 
     //validate pronouns
@@ -70,9 +72,9 @@
     //validate email
     if (!regex.test(formFields.email)) {
       valid = false;
-      errors.email = 'Email is required - must be a valid email!';
+      validationErrors.email = 'Email is required - must be a valid email!';
     } else {
-      errors.email = '';
+      validationErrors.email = '';
     }
 
     //validate telephone
@@ -81,29 +83,29 @@
       !formFields.phone.match(phoneTemplate)
     ) {
       valid = false;
-      errors.phone =
+      validationErrors.phone =
         'If including telephone, must contain 10 numbers! Example: ###-###-####';
     } else {
-      errors.phone = '';
+      validationErrors.phone = '';
     }
 
     //validate reason
     if (formFields.reason.trim().length < 1) {
       valid = false;
-      errors.reason = 'Reason is required!';
+      validationErrors.reason = 'Reason is required!';
     } else if (formFields.reason.trim().length > 25) {
       valid = false;
-      errors.reason = "Reason can't be longer than 25 characters!";
+      validationErrors.reason = "Reason can't be longer than 25 characters!";
     } else {
-      errors.reason = '';
+      validationErrors.reason = '';
     }
 
     //validate message
     if (formFields.message.trim().length == 0) {
       valid = false;
-      errors.message = 'Message is required!';
+      validationErrors.message = 'Message is required!';
     } else {
-      errors.message = '';
+      validationErrors.message = '';
     }
 
     if (!valid) {
@@ -112,13 +114,6 @@
       return true;
     }
   };
-
-  let requestName = formFields.name;
-  let requestPronouns = formFields.pronouns;
-  let requestEmail = formFields.email;
-  let requestPhone = formFields.phone;
-  let requestReason = formFields.reason;
-  let requestMessage = formFields.message;
 
   let responseMessage = '';
   // @ts-ignore
@@ -131,16 +126,11 @@
       //callAPI();
       console.log('request is : ', formFields);
       try {
-        let submit = await fetch('contact', {
+        let submit = await fetch('/api/contact', {
           method: 'POST',
-          body: JSON.stringify({
-            requestName,
-            requestPronouns,
-            requestEmail,
-            requestPhone,
-            requestReason,
-            requestMessage,
-          }),
+          //body: JSON.stringify({
+          // formFields,
+          //}),
         });
 
         const data = await submit.json();
@@ -164,7 +154,7 @@
     <!--Name-->
     <span for="name" class="formField">
       <label for="name" class="required-field"> Name: </label>
-      <label for="name-error" class="error">{errors.name}</label>
+      <label for="name-error" class="error">{validationErrors.name}</label>
     </span>
     <input
       type="text"
@@ -193,7 +183,7 @@
     <!--Email-->
     <span for="email" class="formField">
       <label for="email" class="required-field"> Email: </label>
-      <label for="email-error" class="error">{errors.email}</label>
+      <label for="email-error" class="error">{validationErrors.email}</label>
     </span>
     <input
       type="email"
@@ -204,7 +194,7 @@
     <!--Phone-->
     <span for="phone" class="formField">
       <label for="phone"> Telephone: </label>
-      <label for="phone-error" class="error">{errors.phone}</label>
+      <label for="phone-error" class="error">{validationErrors.phone}</label>
     </span>
     <input
       type="text"
@@ -215,7 +205,7 @@
     <!--Reason for Contacting Us-->
     <span for="reason" class="formField">
       <label for="reason" class="required-field"> Reason: </label>
-      <label for="reason-error" class="error">{errors.reason}</label>
+      <label for="reason-error" class="error">{validationErrors.reason}</label>
     </span>
     <input
       type="text"
@@ -226,7 +216,8 @@
     <!--Message-->
     <span for="message" class="formField">
       <label for="message" class="required-field"> Message: </label>
-      <label for="message-error" class="error">{errors.message}</label>
+      <label for="message-error" class="error"
+        >{validationErrors.message}</label>
     </span>
     <textarea
       name="message"
@@ -239,9 +230,9 @@
     </span>
   </form>
 {:else if responseMessage}
-  <p>Submission has been received.</p>
-{:else}
-  <p>{responseError}</p>
+  <p>Success</p>
+{:else if responseError}
+  <p>Error</p>
 {/if}
 
 <style>
