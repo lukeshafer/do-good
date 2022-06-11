@@ -1,4 +1,6 @@
 <script lang="ts">
+  import CollapsibleCard from 'svelte-collapsible-card';
+
   let questionList = [
     { key: 'Question 1', value: 'Answer 1' },
     { key: 'Question 2', value: 'Answer 2' },
@@ -8,13 +10,13 @@
 
 <main>
   <div class="cards">
-    <!--Need to work on creating a nice easy collapsible card that can then be put in an each loop for any and all questions in the QuestionList
+    <!--Need to work on creating a nice easy collapsible card that can then be put in an each loop for any and all questions in the QuestionList-->
     <CollapsibleCard>
-      <h2 slot="header" class="question">header</h2>
+      <h2 slot="header" class="question">{questionList[0].key}</h2>
       <div slot="body" class="answer">
-        <p>test text 123</p>
+        <p>{questionList[0].value}</p>
       </div>
-    </CollapsibleCard>-->
+    </CollapsibleCard>
   </div>
 </main>
 
