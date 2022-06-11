@@ -3,5 +3,5 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "cssPeek.peekFromLanguages": ["svelte"],
-  "conventionalCommits.scopes": ["Header", "Documentation", "Styles"]
+  "conventionalCommits.scopes": ["Header", "Documentation", "Styles", "Backend"]
 }

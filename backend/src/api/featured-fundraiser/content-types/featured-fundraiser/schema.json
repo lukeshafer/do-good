@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "featured_fundraisers",
+  "info": {
+    "singularName": "featured-fundraiser",
+    "pluralName": "featured-fundraisers",
+    "displayName": "Featured Fundraiser"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fundraiser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::fundraiser.fundraiser"
+    },
+    "Description": {
+      "type": "text",
+      "required": true
+    },
+    "Icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
