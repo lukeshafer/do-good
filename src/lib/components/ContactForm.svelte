@@ -98,7 +98,7 @@
   };
 
   let responseMessage = '';
-  let responseError = '';
+  let responseError;
 
   const submitForm = async () => {
     if (formValidation()) {
@@ -142,14 +142,17 @@
     action="/api/contact"
     method="POST"
     on:submit|preventDefault={submitForm}>
-    <span for="RequiredFieldsMessage" class="error info"
+    <span
+      for="Required fields are marked by an asterisk. (*)"
+      class="error info"
       >Required fields are marked by an asterisk. (*)
     </span>
 
     <!--Name-->
     <span for="name" class="formField">
       <label for="name" class="required-field"> Name: </label>
-      <label for="name-error" class="error">{validationErrors.name}</label>
+      <label for={validationErrors.name} class="error"
+        >{validationErrors.name}</label>
     </span>
     <input
       type="text"
@@ -178,7 +181,8 @@
     <!--Email-->
     <span for="email" class="formField">
       <label for="email" class="required-field"> Email: </label>
-      <label for="email-error" class="error">{validationErrors.email}</label>
+      <label for={validationErrors.email} class="error"
+        >{validationErrors.email}</label>
     </span>
     <input
       type="email"
@@ -189,7 +193,8 @@
     <!--Phone-->
     <span for="phone" class="formField">
       <label for="phone"> Telephone: </label>
-      <label for="phone-error" class="error">{validationErrors.phone}</label>
+      <label for={validationErrors.phone} class="error"
+        >{validationErrors.phone}</label>
     </span>
     <input
       type="text"
@@ -199,10 +204,13 @@
 
     <!--Reason for Contacting Us-->
     <span for="reason" class="formField">
-      <label for="reason" class="required-field">
+      <label
+        for="Reason (explain in detail when possible)"
+        class="required-field">
         Reason (explain in detail when possible):
       </label>
-      <label for="reason-error" class="error">{validationErrors.reason}</label>
+      <label for={validationErrors.reason} class="error"
+        >{validationErrors.reason}</label>
     </span>
     <input
       type="text"
@@ -213,7 +221,7 @@
     <!--Message-->
     <span for="message" class="formField">
       <label for="message" class="required-field"> Message: </label>
-      <label for="message-error" class="error"
+      <label for={validationErrors.message} class="error"
         >{validationErrors.message}</label>
     </span>
     <textarea

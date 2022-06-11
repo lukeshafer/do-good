@@ -4,6 +4,9 @@
 
 <main>
   <h1>Frequently Asked Questions</h1>
+  <p aria-labelledby="Click any question to see the answer!">
+    (Click any question to see the answer!)
+  </p>
 
   <FAQList />
 </main>
@@ -27,7 +30,16 @@
     flex-wrap: wrap;
   }
 
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+
   div {
     padding: 1em;
+  }
+
+  p {
+    font-style: italic;
   }
 </style>

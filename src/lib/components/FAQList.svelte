@@ -2,9 +2,20 @@
   import CollapsibleCard from 'svelte-collapsible-card';
 
   let questionList = [
-    { id: 1, question: 'Question 1', answer: 'Answer 1' },
-    { id: 2, question: 'Question 2', answer: 'Answer 2' },
-    { id: 3, question: 'Question 3', answer: 'Answer 3' },
+    { id: 1, question: 'Who do we help?', answer: 'Answer 1' },
+    { id: 2, question: 'Why Do Good Collective?', answer: 'Answer 2' },
+    { id: 3, question: "What are DGC's long-term goals?", answer: 'Answer 3' },
+    {
+      id: 4,
+      question: 'What is DGC currently working on?',
+      answer: 'Answer 4',
+    },
+    { id: 5, question: 'How do I apply for aid?', answer: 'Answer 5' },
+    {
+      id: 6,
+      question: 'How did Do Good Collective get started?',
+      answer: 'Answer 6',
+    },
   ];
 </script>
 
@@ -15,15 +26,25 @@
       <li>
         {#if !(item.id % 2 === 0)}
           <CollapsibleCard>
-            <h2 slot="header" class="question odd">{item.question}</h2>
-            <div slot="body" class="answer">
+            <h2
+              slot="header"
+              class="question odd"
+              aria-labelledby={item.question}>
+              {item.question}
+            </h2>
+            <div slot="body" class="answer" aria-labelledby={item.answer}>
               <p>{item.answer}</p>
             </div>
           </CollapsibleCard>
         {:else}
           <CollapsibleCard>
-            <h2 slot="header" class="question even">{item.question}</h2>
-            <div slot="body" class="answer">
+            <h2
+              slot="header"
+              class="question even"
+              aria-labelledby={item.question}>
+              {item.question}
+            </h2>
+            <div slot="body" class="answer" aria-labelledby={item.answer}>
               <p>{item.answer}</p>
             </div>
           </CollapsibleCard>
@@ -34,33 +55,16 @@
 </main>
 
 <style>
-  .grid-wrapper {
-    display: grid;
-    font-size: min(0.8em, 2vw);
-    grid-template-columns: 6em 7em 20em 10em;
-    grid-template-rows: repeat(5, 3em) auto;
-  }
-
-  .header {
-    padding: 0.5em;
-    display: flex;
-  }
-
   .even {
-    background-color: #cf8790;
+    background-color: #7db2aa;
   }
 
   .odd {
-    background-color: var(--accent-color);
+    background-color: #8e9cdb;
   }
 
   .answer {
-    background-color: rgb(255, 255, 255, 0.7);
-  }
-  .content {
-    padding: 1em 1em;
-    position: relative;
-    transition: 200ms;
+    background-color: #ffe389;
   }
 
   main {
@@ -70,10 +74,12 @@
 
   ul {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     list-style: none;
-    padding: 2em;
+    padding: 0.5em;
+    width: auto;
     margin: 0 auto;
     color: rgb(50, 50, 50);
     font-size: 1.1rem;
@@ -89,12 +95,15 @@
     align-items: center;
     justify-self: stretch;
     margin: 0;
-    width: 100%;
+    width: 95%;
     padding: 0.5em;
     display: flex;
   }
 
   div {
+    display: flex;
+    justify-content: flex-start;
     padding: 1em;
+    width: 100%;
   }
 </style>
