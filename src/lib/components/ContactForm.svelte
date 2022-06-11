@@ -218,7 +218,9 @@
 
     <!--Reason for Contacting Us-->
     <span for="reason" class="formField">
-      <label for="reason" class="required-field"> Reason: </label>
+      <label for="reason" class="required-field">
+        Reason (explain in detail when possible):
+      </label>
       <label for="reason-error" class="error">{validationErrors.reason}</label>
     </span>
     <input
@@ -246,7 +248,14 @@
 {:else if responseMessage}
   <p>Success</p>
 {:else if responseError}
-  <p>Error</p>
+  <p>Error - Something went wrong on our end but you tried to enter:</p>
+  <br />
+  <p>Name: {formFields.name}</p>
+  <p>Pronouns: {formFields.pronouns}</p>
+  <p>Email: {formFields.email}</p>
+  <p>Phone: {formFields.phone}</p>
+  <p>Reason: {formFields.reason}</p>
+  <p>Message: {formFields.message}</p>
 {/if}
 
 <style>
@@ -313,6 +322,7 @@
   .formField {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
   }
 
   .btn {
