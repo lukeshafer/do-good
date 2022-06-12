@@ -46,7 +46,7 @@
       id: 6,
       question: 'How did DGC get started?',
       answer:
-        "In May 2022, a group of friends came together to crowdfund a wheelchair for their friend, Enny. After the Enny's Wheels fundraiser raised over $3,300 in a week, the Discord server decided to continue crowdfunding efforts under Do Good Collective.",
+        "In May 2022, a group of friends in a Discord server came together to crowdfund a wheelchair for their friend, Enny. After the Enny's Wheels fundraiser raised over $3,300 in a week, the Discord server decided to continue crowdfunding efforts under Do Good Collective.",
       link: '',
     },
   ];
