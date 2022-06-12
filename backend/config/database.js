@@ -9,7 +9,6 @@ module.exports = ({ env }) => ({
         '..',
         env('DATABASE_FILENAME', '.tmp/data.db')
       ),
-      ssl: env('DATABASE_SSL', false),
     },
     useNullAsDefault: true,
   },
