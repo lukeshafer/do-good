@@ -12,23 +12,23 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "ShortDescription": {
+    "shortDescription": {
       "type": "text",
       "required": true,
       "maxLength": 200,
       "minLength": 100
     },
-    "Goal": {
+    "goal": {
       "type": "integer",
       "default": 0,
       "required": true
     },
-    "Cover": {
+    "cover": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -36,22 +36,22 @@
         "images"
       ]
     },
-    "Story": {
+    "story": {
       "type": "richtext"
     },
-    "DonationLink": {
+    "donationLink": {
       "type": "string",
       "required": true
     },
-    "AdditionalContentOptional": {
+    "additional": {
       "type": "component",
       "repeatable": true,
       "component": "blocks.section"
     },
-    "URL": {
+    "slug": {
       "type": "uid",
-      "targetField": "Title",
-      "required": true
+      "required": true,
+      "targetField": "title"
     }
   }
 }

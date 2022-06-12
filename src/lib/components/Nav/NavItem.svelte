@@ -6,7 +6,8 @@
 </script>
 
 <li>
-  <a {href} on:click={() => ($isNavActive = false)}><slot /></a>
+  <a sveltekit:prefetch {href} on:click={() => ($isNavActive = false)}
+    ><slot /></a>
 </li>
 
 <style>
