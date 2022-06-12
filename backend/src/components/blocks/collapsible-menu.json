@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_blocks_collapsible_menus",
+  "info": {
+    "displayName": "Collapsible Menu",
+    "icon": "angle-double-down"
+  },
+  "options": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "richtext"
+    }
+  }
+}

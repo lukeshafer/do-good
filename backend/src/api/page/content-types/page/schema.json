@@ -14,11 +14,12 @@
   "attributes": {
     "Title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
-    "Images": {
+    "Cover": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images"
@@ -32,6 +33,14 @@
       "type": "uid",
       "targetField": "Title",
       "required": true
+    },
+    "Blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.box",
+        "blocks.collapsible-menu",
+        "blocks.section"
+      ]
     }
   }
 }
