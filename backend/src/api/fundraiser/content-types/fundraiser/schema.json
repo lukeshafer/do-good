@@ -18,12 +18,15 @@
       "unique": true
     },
     "ShortDescription": {
-      "type": "text"
+      "type": "text",
+      "required": true,
+      "maxLength": 200,
+      "minLength": 100
     },
     "Goal": {
       "type": "integer",
       "default": 0,
-      "required": false
+      "required": true
     },
     "Cover": {
       "type": "media",
@@ -36,12 +39,19 @@
     "Story": {
       "type": "richtext"
     },
+    "DonationLink": {
+      "type": "string",
+      "required": true
+    },
+    "AdditionalContentOptional": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.section"
+    },
     "URL": {
       "type": "uid",
-      "targetField": "Title"
-    },
-    "FundraiserLink": {
-      "type": "string"
+      "targetField": "Title",
+      "required": true
     }
   }
 }

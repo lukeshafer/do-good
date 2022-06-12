@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_blocks_featured_pages",
+  "info": {
+    "displayName": "Featured Fundraiser",
+    "icon": "star",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "fundraiser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::fundraiser.fundraiser"
+    }
+  }
+}
