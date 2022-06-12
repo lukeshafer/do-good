@@ -1,11 +1,10 @@
 <!--
   TODO 
-  - make it prettier
   - add file attachments options (POST-INITIAL RELEASE)
+  - fix 500 internal server error and build email/send email on POST successful
+  - update success message: "Your submission has been received! We'll get back to you as soon as we can!"
   -->
 <script lang="ts">
-  //import { post } from 'src/lib/routes/api/contacts';
-
   let pronouns = [
     { id: 1, text: '-Select-' },
     { id: 2, text: 'He/Him/His' },
@@ -36,22 +35,6 @@
 
   let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
   let phoneTemplate = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-
-  /*
-  const callAPI = () => {
-    let request = new XMLHttpRequest();
-    request.open('POST', '/contacts');
-    request.send();
-    request.onload = () => {
-      console.log(request);
-      if (request.status == 200) {
-        console.log(JSON.parse(request.response));
-      } else {
-        console.log('error ${request.status} ${request.statusText}');
-      }
-    };
-  };
-  */
 
   const formValidation = () => {
     valid = true;
@@ -116,11 +99,10 @@
   };
 
   let responseMessage = '';
-  let responseError = '';
+  let responseError;
 
   const submitForm = async () => {
     if (formValidation()) {
-      //callAPI();
       console.log('request is : ', formFields);
       try {
         let name = formFields.name;
@@ -161,14 +143,17 @@
     action="/api/contact"
     method="POST"
     on:submit|preventDefault={submitForm}>
-    <span for="RequiredFieldsMessage" class="error info"
+    <span
+      for="Required fields are marked by an asterisk. (*)"
+      class="error info"
       >Required fields are marked by an asterisk. (*)
     </span>
 
     <!--Name-->
     <span for="name" class="formField">
       <label for="name" class="required-field"> Name: </label>
-      <label for="name-error" class="error">{validationErrors.name}</label>
+      <label for={validationErrors.name} class="error"
+        >{validationErrors.name}</label>
     </span>
     <input
       type="text"
@@ -197,7 +182,8 @@
     <!--Email-->
     <span for="email" class="formField">
       <label for="email" class="required-field"> Email: </label>
-      <label for="email-error" class="error">{validationErrors.email}</label>
+      <label for={validationErrors.email} class="error"
+        >{validationErrors.email}</label>
     </span>
     <input
       type="email"
@@ -208,7 +194,8 @@
     <!--Phone-->
     <span for="phone" class="formField">
       <label for="phone"> Telephone: </label>
-      <label for="phone-error" class="error">{validationErrors.phone}</label>
+      <label for={validationErrors.phone} class="error"
+        >{validationErrors.phone}</label>
     </span>
     <input
       type="text"
@@ -218,10 +205,13 @@
 
     <!--Reason for Contacting Us-->
     <span for="reason" class="formField">
-      <label for="reason" class="required-field">
+      <label
+        for="Reason (explain in detail when possible)"
+        class="required-field">
         Reason (explain in detail when possible):
       </label>
-      <label for="reason-error" class="error">{validationErrors.reason}</label>
+      <label for={validationErrors.reason} class="error"
+        >{validationErrors.reason}</label>
     </span>
     <input
       type="text"
@@ -232,7 +222,7 @@
     <!--Message-->
     <span for="message" class="formField">
       <label for="message" class="required-field"> Message: </label>
-      <label for="message-error" class="error"
+      <label for={validationErrors.message} class="error"
         >{validationErrors.message}</label>
     </span>
     <textarea
