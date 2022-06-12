@@ -1,5 +1,6 @@
 <!--TODO
   - Get link to Google Form/Application for aid to link question id: 5
+  - Add link to Join page for question id: 8
   - Confirm questions/answers with Contributors
 -->
 <script lang="ts">
@@ -48,6 +49,19 @@
       answer:
         "In May 2022, a group of friends in a Discord server came together to crowdfund a wheelchair for their friend, Enny. After the Enny's Wheels fundraiser raised over $3,300 in a week, the Discord server decided to continue crowdfunding efforts under Do Good Collective.",
       link: '',
+    },
+    {
+      id: 7,
+      question: 'Are my donations tax deductible?',
+      answer:
+        'Yes! Do Good Collective is parentered with a 501(c)(3), so all of your monetary donations made for Do Good Collective fundraisers are tax deductible.',
+    },
+    {
+      id: 8,
+      question: 'How can I get involved?',
+      answer:
+        'Click the link below to become a member of Do Good Collective!\nAlso, feel free to donate to our fundraisers and share them on social media. Challenge your friends and followers to match your donations.',
+      link: '/join',
     },
   ];
 </script>
