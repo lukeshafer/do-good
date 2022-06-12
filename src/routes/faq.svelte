@@ -26,13 +26,15 @@
   }
 
   main {
-    max-width: 40em;
+    max-width: 100%;
     flex-wrap: wrap;
+    flex-direction: column;
   }
 
   h1 {
-    display: flex;
-    justify-content: center;
+    margin: 0 auto;
+    padding: 1em;
+    font-weight: bold;
   }
 
   div {

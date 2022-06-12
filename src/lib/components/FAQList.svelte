@@ -1,20 +1,41 @@
 <script lang="ts">
   import CollapsibleCard from 'svelte-collapsible-card';
+  import NavItem from './Nav/NavItem.svelte';
 
   let questionList = [
-    { id: 1, question: 'Who do we help?', answer: 'Answer 1' },
-    { id: 2, question: 'Why Do Good Collective?', answer: 'Answer 2' },
-    { id: 3, question: "What are DGC's long-term goals?", answer: 'Answer 3' },
+    {
+      id: 1,
+      question: 'Who do we help?',
+      answer:
+        'Do Good Collective helps disabled people, people of color, people in the LGBTQIA+ community, and more!',
+      link: '',
+    },
+    {
+      id: 2,
+      question: 'Why us?',
+      answer:
+        "The founding members of Do Good Collective firmly believe in the power of mutual aid. We believe in using our own individual privileges to help folks in need who aren't receiving adequate help from existing institutions. We help ourselves by helping others!",
+      link: '',
+    },
+    {
+      id: 3,
+      question: "What are DGC's long-term goals?",
+      answer: 'Answer 3',
+      link: '',
+    },
     {
       id: 4,
       question: 'What is DGC currently working on?',
-      answer: 'Answer 4',
+      answer:
+        "Great question! Click the link below to see the fundraiser(s) we're currently working on!",
+      link: '/fundraisers',
     },
     { id: 5, question: 'How do I apply for aid?', answer: 'Answer 5' },
     {
       id: 6,
-      question: 'How did Do Good Collective get started?',
+      question: 'How did DGC get started?',
       answer: 'Answer 6',
+      link: '',
     },
   ];
 </script>
@@ -26,26 +47,40 @@
       <li>
         {#if !(item.id % 2 === 0)}
           <CollapsibleCard>
-            <h2
-              slot="header"
-              class="question odd"
-              aria-labelledby={item.question}>
-              {item.question}
-            </h2>
+            <div slot="header">
+              <h3
+                media="screen"
+                class="question odd"
+                aria-labelledby={item.question}>
+                {item.question}
+              </h3>
+            </div>
             <div slot="body" class="answer" aria-labelledby={item.answer}>
               <p>{item.answer}</p>
             </div>
           </CollapsibleCard>
         {:else}
           <CollapsibleCard>
-            <h2
-              slot="header"
-              class="question even"
-              aria-labelledby={item.question}>
-              {item.question}
-            </h2>
-            <div slot="body" class="answer" aria-labelledby={item.answer}>
-              <p>{item.answer}</p>
+            <div slot="header">
+              <h3
+                media="screen"
+                class="question even"
+                aria-labelledby={item.question}>
+                {item.question}
+              </h3>
+            </div>
+            <div slot="body" class="body answer" aria-labelledby={item.answer}>
+              {#if item.link === ''}
+                <p>{item.answer}</p>
+              {:else}
+                <p>{item.answer}</p>
+                <p class="link">
+                  <a
+                    href={item.link}
+                    aria-labelledby="Navigate to the appropriate screen"
+                    >Click here!</a>
+                </p>
+              {/if}
             </div>
           </CollapsibleCard>
         {/if}
@@ -65,6 +100,17 @@
 
   .answer {
     background-color: #ffe389;
+    width: 100%;
+    padding: 0.5em;
+    display: flex;
+    width: 100%;
+    padding: 0.5em;
+    justify-content: center;
+  }
+
+  .link {
+    display: flex;
+    justify-content: center;
   }
 
   main {
@@ -75,12 +121,11 @@
   ul {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
     flex-wrap: wrap;
     list-style: none;
     padding: 0.5em;
-    width: auto;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
     color: rgb(50, 50, 50);
     font-size: 1.1rem;
   }
@@ -90,20 +135,28 @@
     width: 100%;
   }
 
-  h2 {
+  h3 {
     display: flex;
-    align-items: center;
-    justify-self: stretch;
+    justify-self: flex-start;
+    flex-wrap: wrap;
     margin: 0;
-    width: 95%;
+    width: 100%;
     padding: 0.5em;
-    display: flex;
   }
 
   div {
     display: flex;
-    justify-content: flex-start;
-    padding: 1em;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     width: 100%;
+  }
+
+  p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+    width: 95%;
   }
 </style>
