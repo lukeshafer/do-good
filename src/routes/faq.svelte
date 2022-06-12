@@ -33,7 +33,7 @@
 
   h1 {
     margin: 0 auto;
-    padding: 1em;
+    padding: 0.25em;
     font-weight: bold;
   }
 
