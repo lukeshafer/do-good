@@ -1,3 +1,7 @@
+<!--TODO
+  - Get link to Google Form/Application for aid to link question id: 5
+  - Confirm questions/answers with Contributors
+-->
 <script lang="ts">
   import CollapsibleCard from 'svelte-collapsible-card';
   import NavItem from './Nav/NavItem.svelte';
@@ -20,7 +24,8 @@
     {
       id: 3,
       question: "What are DGC's long-term goals?",
-      answer: 'Answer 3',
+      answer:
+        "We're hoping to build a sustainable and successful future in which we care for each other, recognizing that many of us are not being cared for by the systems we live in.",
       link: '',
     },
     {
@@ -30,11 +35,18 @@
         "Great question! Click the link below to see the fundraiser(s) we're currently working on!",
       link: '/fundraisers',
     },
-    { id: 5, question: 'How do I apply for aid?', answer: 'Answer 5' },
+    {
+      id: 5,
+      question: 'How do I apply for aid?',
+      answer:
+        'If you (or someone you know) is in need of aid, please fill out the form linked below and we will get back to you as soon as possible!',
+      link: '',
+    },
     {
       id: 6,
       question: 'How did DGC get started?',
-      answer: 'Answer 6',
+      answer:
+        "In May 2022, a group of friends came together to crowdfund a wheelchair for their friend, Enny. After the Enny's Wheels fundraiser raised over $3,300 in a week, the Discord server decided to continue crowdfunding efforts under Do Good Collective.",
       link: '',
     },
   ];
@@ -48,36 +60,36 @@
         {#if !(item.id % 2 === 0)}
           <CollapsibleCard>
             <div slot="header">
-              <h3
+              <h2
                 media="screen"
                 class="question odd"
                 aria-labelledby={item.question}>
                 {item.question}
-              </h3>
+              </h2>
             </div>
             <div slot="body" class="answer" aria-labelledby={item.answer}>
-              <p>{item.answer}</p>
+              <p aria-labelledby={item.answer}>{item.answer}</p>
             </div>
           </CollapsibleCard>
         {:else}
           <CollapsibleCard>
             <div slot="header">
-              <h3
+              <h2
                 media="screen"
                 class="question even"
                 aria-labelledby={item.question}>
                 {item.question}
-              </h3>
+              </h2>
             </div>
             <div slot="body" class="body answer" aria-labelledby={item.answer}>
               {#if item.link === ''}
                 <p>{item.answer}</p>
               {:else}
-                <p>{item.answer}</p>
+                <p aria-labelledby={item.answer}>{item.answer}</p>
                 <p class="link">
                   <a
                     href={item.link}
-                    aria-labelledby="Navigate to the appropriate screen"
+                    aria-labelledby="Click here to the appropriate screen"
                     >Click here!</a>
                 </p>
               {/if}
@@ -135,7 +147,7 @@
     width: 100%;
   }
 
-  h3 {
+  h2 {
     display: flex;
     justify-self: flex-start;
     flex-wrap: wrap;

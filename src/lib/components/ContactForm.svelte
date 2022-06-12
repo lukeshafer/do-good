@@ -2,6 +2,7 @@
   TODO 
   - add file attachments options (POST-INITIAL RELEASE)
   - fix 500 internal server error and build email/send email on POST successful
+  - update success message: "Your submission has been received! We'll get back to you as soon as we can!"
   -->
 <script lang="ts">
   let pronouns = [
