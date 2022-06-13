@@ -5,6 +5,7 @@
 
 <main>
   <Box background="var(--accent-color)">
+    <h1>Contact Us</h1>
     <div class="content">
       <ContactForm />
     </div>
@@ -27,6 +28,10 @@
 
   main {
     max-width: 40em;
+  }
+
+  h1 {
+    font-weight: bold;
   }
 
   div {
