@@ -1,16 +1,26 @@
 <script lang="ts" context="module">
   import type { Load } from '@sveltejs/kit';
+  import { marked } from 'marked';
+  import sanitizeHtml from 'sanitize-html';
+
   export const load: Load = async ({ params, fetch }) => {
-    const url = `http://localhost:1337/api/fundraisers/${params.slug}`;
+    const apiPath = import.meta.env.VITE_API_PATH as string;
+    const url = `${apiPath}/fundraisers/${params.slug}`;
     const response = await fetch(url);
     const { data } = await response.json();
     const fundraiser = data?.attributes as Fundraiser;
+    let sanitizedStory = '';
+
+    if (fundraiser.story) {
+      let translatedStory = marked.parse(fundraiser.story);
+      sanitizedStory = sanitizeHtml(translatedStory);
+    }
 
     return {
       status: response.status,
       props: {
         title: response.ok && fundraiser.title,
-        story: response.ok && fundraiser.story,
+        story: response.ok && sanitizedStory,
         href: response.ok && fundraiser.donationLink,
       },
     };
@@ -19,22 +29,18 @@
 
 <script lang="ts">
   import Box from '$lib/components/Box.svelte';
-  import { marked } from 'marked';
-  import DOMPurify from 'dompurify';
   import { onMount } from 'svelte';
 
   export let title: string, story: string, href: string;
 
   let sanitizedStory = '';
 
-  console.log(
-    onMount(() => {
-      // Translate Markdown to HTML
-      let translatedStory = marked.parse(story);
-      // Sanitize HTML so it's safe for the browser
-      sanitizedStory = DOMPurify.sanitize(translatedStory);
-    })
-  );
+  // onMount(() => {
+  //   // Translate Markdown to HTML
+  //   // let translatedStory = marked.parse(story);
+  //   // Sanitize HTML so it's safe for the browser
+  //   // sanitizedStory = DOMPurify.sanitize(translatedStory);
+  // });
 </script>
 
 <svelte:head>
@@ -45,7 +51,7 @@
   <Box background="var(--primary-color)">
     <div class="content">
       <h2>{title}</h2>
-      {@html sanitizedStory}
+      {@html story}
       <div class="link-wrapper">
         <Box background="var(--accent-color)" {href} target="_blank">
           <p class="link" style="width:auto">Donate Now!</p>
