@@ -9,19 +9,14 @@
     const response = await fetch(url);
     const { data } = await response.json();
     const fundraiser = data?.attributes as Fundraiser;
-    let sanitizedStory = '';
-
-    if (fundraiser.story) {
-      let translatedStory = marked.parse(fundraiser.story);
-      sanitizedStory = sanitizeHtml(translatedStory);
-    }
+    let sanitizedStory = sanitizeHtml(fundraiser?.story);
 
     return {
       status: response.status,
       props: {
-        title: response.ok && fundraiser.title,
+        title: response.ok && fundraiser?.title,
         story: response.ok && sanitizedStory,
-        href: response.ok && fundraiser.donationLink,
+        href: response.ok && fundraiser?.donationLink,
       },
     };
   };
