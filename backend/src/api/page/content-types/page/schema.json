@@ -12,35 +12,19 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "Cover": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
     },
-    "Content": {
+    "content": {
       "type": "richtext",
       "required": true
-    },
-    "URL": {
-      "type": "uid",
-      "targetField": "Title",
-      "required": true
-    },
-    "Blocks": {
-      "type": "dynamiczone",
-      "components": [
-        "blocks.box",
-        "blocks.collapsible-menu",
-        "blocks.section"
-      ]
     }
   }
 }

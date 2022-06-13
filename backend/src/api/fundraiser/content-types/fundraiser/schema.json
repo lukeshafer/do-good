@@ -28,25 +28,12 @@
       "default": 0,
       "required": true
     },
-    "cover": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "story": {
       "type": "richtext"
     },
     "donationLink": {
       "type": "string",
       "required": true
-    },
-    "additional": {
-      "type": "component",
-      "repeatable": true,
-      "component": "blocks.section"
     },
     "slug": {
       "type": "uid",
