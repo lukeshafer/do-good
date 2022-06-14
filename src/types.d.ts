@@ -13,6 +13,21 @@ type Page = {
   content: string;
 };
 
+type NavigationMenu = {
+  includeHomePage: boolean;
+  includeFAQ: boolean;
+  pages: [
+    {
+      id: number;
+      page: {
+        data: {
+          attributes: Page;
+        };
+      };
+    }
+  ];
+};
+
 // Declaring Modules
 declare module 'svelte-collapsible';
 declare module 'svelte-collapsible-card';
