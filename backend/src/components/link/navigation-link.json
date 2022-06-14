@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_link_navigation_links",
+  "info": {
+    "displayName": "Navigation Link",
+    "icon": "paperclip",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "page": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
+    }
+  }
+}
