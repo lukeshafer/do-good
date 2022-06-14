@@ -43,7 +43,4 @@
 
   --button4-values: 142, 156, 219;
   --button4-color: rgb(var(--button4-values));
-
-  /* Colors based on context. Should be based on one of the above colors */
-  --error-color: var(--button1-color);
 }
