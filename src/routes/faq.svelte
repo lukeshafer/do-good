@@ -3,7 +3,7 @@
   //import type { Load } from '@sveltejs/kit';
   import { onMount } from 'svelte';
   import sanitizeHtml from 'sanitize-html';
-  import Box from '$lib/components/Box.svelte';
+  import CollapsibleCard from 'svelte-collapsible-card';
 
   let faqs = [];
   let error = null;
@@ -39,70 +39,12 @@
       for (var i = 0; i < faqs.length; i++) {
         console.log('ID: ', faqs[i].id);
         console.log('Question: ', faqs[i]?.attributes.question);
-        console.log('Answer: ', faqs[i]?.attributes.answer);
+        console.log('Answer: ', sanitizeHtml(faqs[i]?.attributes.answer));
       }
     } catch (e) {
       error = e;
     }
   });
-  /*
-  let questionList = [
-    {
-      id: 1,
-      question: 'Who do we help?',
-      answer:
-        'Do Good Collective helps disabled people, people of color, people in the LGBTQIA+ community, and more!',
-      link: '',
-    },
-    {
-      id: 2,
-      question: 'Why us?',
-      answer:
-        "The founding members of Do Good Collective firmly believe in the power of mutual aid. We believe in using our own individual privileges to help folks in need who aren't receiving adequate help from existing institutions. We help ourselves by helping others!",
-      link: '',
-    },
-    {
-      id: 3,
-      question: "What are DGC's long-term goals?",
-      answer:
-        "We're hoping to build a sustainable and successful future in which we care for each other, recognizing that many of us are not being cared for by the systems we live in.",
-      link: '',
-    },
-    {
-      id: 4,
-      question: 'What is DGC currently working on?',
-      answer:
-        "Great question! Click the link below to see the fundraiser(s) we're currently working on!",
-      link: '/fundraisers',
-    },
-    {
-      id: 5,
-      question: 'How do I apply for aid?',
-      answer:
-        'If you (or someone you know) is in need of aid, please fill out the form linked below and we will get back to you as soon as possible!',
-      link: '',
-    },
-    {
-      id: 6,
-      question: 'How did DGC get started?',
-      answer:
-        "In May 2022, a group of friends in a Discord server came together to crowdfund a wheelchair for their friend, Enny. After the Enny's Wheels fundraiser raised over $3,300 in a week, the Discord server decided to continue crowdfunding efforts under Do Good Collective.",
-      link: '',
-    },
-    {
-      id: 7,
-      question: 'Are my donations tax deductible?',
-      answer:
-        'Yes! Do Good Collective is parentered with a 501(c)(3), so all of your monetary donations made for Do Good Collective fundraisers are tax deductible.',
-    },
-    {
-      id: 8,
-      question: 'How can I get involved?',
-      answer:
-        'Click the link below to become a member of Do Good Collective!\nAlso, feel free to donate to our fundraisers and share them on social media. Challenge your friends and followers to match your donations.',
-      link: '/join',
-    },
-  ];*/
 </script>
 
 <svelte:head>
@@ -111,7 +53,7 @@
 
 <main>
   <h1>Frequently Asked Questions</h1>
-  <p aria-labelledby="Click any question to see the answer!">
+  <p class="help" aria-labelledby="Click any question to see the answer!">
     (Click any question to see the answer!)
   </p>
 
@@ -121,11 +63,36 @@
   {:else}
     <ul>
       {#each faqs as faq}
-        <li>
-          <Box>
-            <h2>{faq.id} : {faq?.attributes.question}</h2>
-            {@html faq?.attributes.answer}
-          </Box>
+        <li class="faq">
+          {#if !(faq.id % 2 === 0)}
+            <CollapsibleCard>
+              <div slot="header">
+                <h2
+                  media="screen"
+                  class="question odd"
+                  aria-labelledby={faq.question}>
+                  {faq?.attributes.question}
+                </h2>
+              </div>
+              <div slot="body" class="answer" aria-labelledby={faq.answer}>
+                {@html faq?.attributes.answer}
+              </div>
+            </CollapsibleCard>
+          {:else}
+            <CollapsibleCard>
+              <div slot="header">
+                <h2
+                  media="screen"
+                  class="question even"
+                  aria-labelledby={faq.question}>
+                  {faq?.attributes.question}
+                </h2>
+              </div>
+              <div slot="body" class="body answer" aria-labelledby={faq.answer}>
+                {@html faq?.attributes.answer}
+              </div>
+            </CollapsibleCard>
+          {/if}
         </li>
       {/each}
     </ul>
@@ -157,23 +124,82 @@
     transition: 200ms;
   }
 
-  main {
-    max-width: 100%;
-    flex-wrap: wrap;
-    flex-direction: column;
+  .help {
+    text-align: center;
   }
 
-  h1 {
-    margin: 0 auto;
-    padding: 0.25em;
-    font-weight: bold;
+  .even {
+    background-color: #7db2aa;
+  }
+
+  .odd {
+    background-color: #8e9cdb;
+  }
+
+  .answer {
+    background-color: #ffe389;
+    width: 95%;
+    padding: 0.5em;
+    display: flex;
+    padding: 1em;
+    justify-content: flex-start;
+  }
+
+  .link {
+    display: flex;
+    justify-content: center;
+  }
+
+  .faq {
+    display: flex;
+    text-align: left;
+    font-family: 'Fira Code';
+  }
+
+  main {
+    max-width: 40em;
+    flex-wrap: wrap;
+  }
+
+  ul {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5em;
+    width: 100%;
+    margin: 0;
+    color: rgb(50, 50, 50);
+    font-size: 1.1rem;
+  }
+
+  li {
+    margin-bottom: 2em;
+    width: 100%;
+  }
+
+  h2 {
+    display: flex;
+    justify-self: flex-start;
+    flex-wrap: wrap;
+    margin: 0;
+    width: 100%;
+    padding: 0.5em;
   }
 
   div {
-    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
   }
 
   p {
-    font-style: italic;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+    width: 95%;
   }
 </style>

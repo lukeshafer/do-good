@@ -18,6 +18,7 @@
     <NavItem href="/join">Join</NavItem>
     <NavItem href="/faq">FAQ</NavItem>
     <NavItem href="/contact">Contact Us</NavItem>
+    <NavItem href="/aid">Apply For Aid</NavItem>
   </Navbar>
 </Header>
 
