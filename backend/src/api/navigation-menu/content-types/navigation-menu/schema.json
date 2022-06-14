@@ -21,7 +21,7 @@
       "default": true,
       "required": true
     },
-    "pages": {
+    "page": {
       "type": "component",
       "repeatable": true,
       "component": "link.navigation-link"
