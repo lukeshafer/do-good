@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "navigation_menus",
+  "info": {
+    "singularName": "navigation-menu",
+    "pluralName": "navigation-menus",
+    "displayName": "Navigation Menu"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "includeHomePage": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "includeFAQ": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "page": {
+      "type": "component",
+      "repeatable": true,
+      "component": "link.navigation-link"
+    }
+  }
+}
