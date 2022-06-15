@@ -5,6 +5,15 @@
   - update success message: "Your submission has been received! We'll get back to you as soon as we can!"
   -->
 <script lang="ts">
+  export let fields: ContactField[];
+
+  const inputType = {
+    short: 'text',
+    long: 'text',
+    email: 'email',
+    phone: 'tel',
+  };
+
   let pronouns = [
     { id: 1, text: '-Select-' },
     { id: 2, text: 'He/Him/His' },
@@ -13,6 +22,7 @@
     { id: 5, text: 'Ze/Hir/Hirs' },
     { id: 6, text: 'Other - Please Specify' },
   ];
+
   let pronounSelected = pronouns[0].text;
 
   let formFields = {
@@ -148,6 +158,72 @@
       class="error info"
       >Required fields are marked by an asterisk. (*)
     </span>
+
+    {#each fields as field, index}
+      <span class="formField">
+        <label
+          for="{index.toString()}{field.name}"
+          class:required-field={field.isRequired}>
+          {field.name}:
+        </label>
+        <label for={validationErrors.name} class="error"
+          >{validationErrors.name}</label>
+      </span>
+      {#if field.__component === 'form-fields.text'}
+        <!-- Text fields -->
+
+        <!-- Render field based on its type -->
+        {#if field.type === 'short'}
+          <input
+            type="text"
+            name="{index.toString()}{field.name}"
+            placeholder={field.name}
+            bind:value={formFields.name} />
+        {:else if field.type === 'long'}
+          <textarea
+            name="{index.toString()}{field.name}"
+            placeholder={field.name}
+            bind:value={formFields.message} />
+        {:else if field.type === 'phone'}
+          <input
+            type="tel"
+            name="{index.toString()}{field.name}"
+            placeholder={field.name}
+            bind:value={formFields.name} />
+        {:else if field.type === 'email'}
+          <input
+            type="email"
+            name="{index.toString()}{field.name}"
+            placeholder={field.name}
+            bind:value={formFields.name} />
+        {:else}
+          will this happen?
+        {/if}
+      {:else if field.__component === 'form-fields.drop-down'}
+        <!-- DROP DOWN LOGIC GOES HERE! -->
+        <select
+          placeholder="--Select--"
+          bind:value={pronounSelected}
+          on:change={() => (formFields.pronouns = pronounSelected)}>
+          {#each pronouns as pronoun}
+            <option value={pronoun.text}>{pronoun.text}</option>
+          {/each}
+        </select>
+        {#if pronounSelected === 'Other - Please Specify'}
+          {(formFields.pronouns = '')}
+          <input
+            name="pronouns"
+            placeholder="Enter your pronouns"
+            bind:value={formFields.pronouns} />
+        {/if}
+        <!-- loop through the options -->
+        <!-- check if it includes "other" -->
+      {/if}
+    {/each}
+
+    <p>-----------------</p>
+
+    <!-------- AUTO INPUTS ABOVE --------->
 
     <!--Name-->
     <span for="name" class="formField">

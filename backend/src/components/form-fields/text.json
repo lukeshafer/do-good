@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_form_fields_texts",
+  "info": {
+    "displayName": "text",
+    "icon": "i-cursor",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "isRequired": {
+      "type": "boolean",
+      "default": false
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "short",
+        "long",
+        "email",
+        "phone"
+      ],
+      "required": true
+    },
+    "note": {
+      "type": "string"
+    }
+  }
+}
