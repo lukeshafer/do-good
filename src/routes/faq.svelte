@@ -32,6 +32,8 @@
         .then(checkStatus)
         .then(parseJSON);
       faqs = res.data;
+
+      /* The following is for troubleshooting - leaving in here strictly in case stuff randomly stops working!
       console.log('Faqs: ', faqs);
 
       console.log('size of faqs:', faqs.length);
@@ -41,6 +43,7 @@
         console.log('Question: ', faqs[i]?.attributes.question);
         console.log('Answer: ', sanitizeHtml(faqs[i]?.attributes.answer));
       }
+      */
     } catch (e) {
       error = e;
     }
@@ -74,8 +77,14 @@
                   {faq?.attributes.question}
                 </h2>
               </div>
-              <div slot="body" class="answer" aria-labelledby={faq.answer}>
-                {@html faq?.attributes.answer}
+              <div
+                slot="body"
+                class="answer"
+                aria-labelledby={(faq?.attributes.answer).replace(
+                  /<[^>]+>/g,
+                  ''
+                )}>
+                {@html sanitizeHtml(faq?.attributes.answer)}
               </div>
             </CollapsibleCard>
           {:else}
@@ -88,8 +97,14 @@
                   {faq?.attributes.question}
                 </h2>
               </div>
-              <div slot="body" class="body answer" aria-labelledby={faq.answer}>
-                {@html faq?.attributes.answer}
+              <div
+                slot="body"
+                class="body answer"
+                aria-labelledby={(faq?.attributes.answer).replace(
+                  /<[^>]+>/g,
+                  ''
+                )}>
+                {@html sanitizeHtml(faq?.attributes.answer)}
               </div>
             </CollapsibleCard>
           {/if}
@@ -97,17 +112,6 @@
       {/each}
     </ul>
   {/if}
-
-  <!--
-  <Box background="var(--primary-color)">
-    <div class="content">
-      <h2>{q}</h2>
-      {@html a}
-    </div>
-  </Box>
--->
-
-  <!--<FAQList />-->
 </main>
 
 <style>
