@@ -1,4 +1,4 @@
-<!-- This is a template for generic pages used by the Page collection type -->
+<!-- This will populate the navbar automatically -->
 <script lang="ts" context="module">
   import type { Load } from '@sveltejs/kit';
   import qs from 'qs';
@@ -20,8 +20,12 @@
     const { attributes } = data as { attributes: NavigationMenu };
     const { includeHomePage, includeFAQ, pages: pageObjects } = attributes;
 
-    let pages = pageObjects.map((page) => {
-      return page.page.data.attributes;
+    let pages = pageObjects.map((page): Page => {
+      const newPage = page.page.data.attributes;
+      return {
+        ...newPage,
+        title: page.title,
+      };
     });
 
     return {

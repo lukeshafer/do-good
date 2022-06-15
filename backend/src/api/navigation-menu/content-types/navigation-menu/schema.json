@@ -4,7 +4,8 @@
   "info": {
     "singularName": "navigation-menu",
     "pluralName": "navigation-menus",
-    "displayName": "Navigation Menu"
+    "displayName": "Navigation Menu",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,7 +22,7 @@
       "default": true,
       "required": true
     },
-    "page": {
+    "pages": {
       "type": "component",
       "repeatable": true,
       "component": "link.navigation-link"

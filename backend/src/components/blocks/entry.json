@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_blocks_entries",
+  "info": {
+    "displayName": "entry",
+    "icon": "ad",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string"
+    }
+  }
+}

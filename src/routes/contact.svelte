@@ -1,13 +1,51 @@
+<script lang="ts" context="module">
+  import type { Load } from '@sveltejs/kit';
+  import qs from 'qs';
+
+  const query = qs.stringify({
+    populate: {
+      fields: {
+        populate: 'entries',
+      },
+    },
+  });
+
+  export const load: Load = async ({ fetch }) => {
+    const apiPath = import.meta.env.VITE_API_PATH as string;
+    const url = `${apiPath}/contact-form?${query}`;
+    const response = await fetch(url);
+    const {
+      data: {
+        attributes: { fields },
+      },
+    } = (await response.json()) as {
+      data: {
+        attributes: { fields: ContactField[] };
+      };
+    };
+
+    return {
+      status: response.status,
+      props: {
+        fields,
+      },
+    };
+  };
+</script>
+
 <script lang="ts">
   import Box from '$lib/components/Box.svelte';
   import ContactForm from '$lib/components/ContactForm.svelte';
+  export let fields: ContactField[];
+
+  console.log(fields);
 </script>
 
 <main>
   <Box background="var(--accent-color)">
     <h1>Contact Us</h1>
     <div class="content">
-      <ContactForm />
+      <ContactForm {fields} />
     </div>
   </Box>
 </main>
