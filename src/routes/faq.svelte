@@ -129,6 +129,8 @@
   }
 
   .help {
+    display: flex;
+    justify-content: space-evenly;
     text-align: center;
   }
 
