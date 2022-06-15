@@ -10,7 +10,10 @@
 
 <Header>
   <Logo width="10em" />
-  <Navbar />
+  <Navbar>
+    <NavItem href="/">Home</NavItem>
+    <NavItem href="https://store.dogoodcollective.net">Store</NavItem>
+  </Navbar>
 </Header>
 
 <slot />
