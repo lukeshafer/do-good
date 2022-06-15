@@ -12,7 +12,7 @@
   <Logo width="10em" />
   <Navbar>
     <NavItem href="/">Home</NavItem>
-    <NavItem href="https://store.dogoodcollective.net">Store</NavItem>
+    <NavItem href="https://dogoodco.bigcartel.com">Store</NavItem>
   </Navbar>
 </Header>
 
