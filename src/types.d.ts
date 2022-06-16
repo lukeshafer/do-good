@@ -13,20 +13,20 @@ type Page = {
   content: string;
 };
 
+type InternalLink = {
+  id: number;
+  title: string;
+  page: {
+    data: {
+      attributes: Page;
+    };
+  };
+};
+
 type NavigationMenu = {
   includeHomePage: boolean;
   includeFAQ: boolean;
-  pages: [
-    {
-      id: number;
-      title: string;
-      page: {
-        data: {
-          attributes: Page;
-        };
-      };
-    }
-  ];
+  pages: InternalLink[];
 };
 
 type FieldComponent = 'form-fields.text' | 'form-fields.drop-down';
@@ -44,6 +44,22 @@ type ContactField = {
       value: string;
     }
   ];
+};
+
+type HomePage = {
+  featured: FeaturedFundraiser;
+  resourceLinks: InternalLink[];
+};
+
+type FeaturedFundraiser = {
+  title: string;
+  shortDescription: string;
+  icon: StrapiImage;
+  fundraiser: {
+    data: {
+      attributes: Fundraiser;
+    };
+  };
 };
 
 // Declaring Modules
