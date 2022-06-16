@@ -12,16 +12,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "ResourceLinks": {
-      "displayName": "Button Links",
-      "type": "component",
-      "repeatable": true,
-      "component": "link.button-links"
-    },
-    "Featured": {
+    "featured": {
       "type": "component",
       "repeatable": false,
       "component": "blocks.featured-page"
+    },
+    "resourceLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "link.navigation-link",
+      "max": 4
     }
   }
 }

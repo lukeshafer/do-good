@@ -7,10 +7,10 @@
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
-    "Icon": {
+    "icon": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -22,6 +22,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::fundraiser.fundraiser"
+    },
+    "shortDescription": {
+      "type": "text"
     }
   }
 }
