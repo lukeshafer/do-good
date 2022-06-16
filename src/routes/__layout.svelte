@@ -60,6 +60,7 @@
     {#if includeFAQ}
       <NavItem href="/faq">FAQ</NavItem>
     {/if}
+    <NavItem href="/contact">Contact</NavItem>
     {#each pages as page}
       <NavItem href="/{page.slug}">{page.title}</NavItem>
     {/each}
