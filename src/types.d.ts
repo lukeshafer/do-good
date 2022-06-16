@@ -29,14 +29,21 @@ type NavigationMenu = {
   ];
 };
 
+type FieldComponent = 'form-fields.text' | 'form-fields.drop-down';
 type FieldType = 'short' | 'long' | 'phone' | 'email';
 
 type ContactField = {
-  __component: string;
+  __component: FieldComponent;
   name: string;
   isRequired: boolean;
   type: FieldType;
   note: string;
+  allowOther: boolean;
+  entries: [
+    {
+      value: string;
+    }
+  ];
 };
 
 // Declaring Modules

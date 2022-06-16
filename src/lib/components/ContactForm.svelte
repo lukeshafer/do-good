@@ -7,41 +7,17 @@
 <script lang="ts">
   export let fields: ContactField[];
 
-  const inputType = {
-    short: 'text',
-    long: 'text',
-    email: 'email',
-    phone: 'tel',
-  };
+  // two arrays of blank strings of the same length as fields
+  const formData = fields.map(() => '');
+  const validationErrorList = formData;
 
-  let pronouns = [
-    { id: 1, text: '-Select-' },
-    { id: 2, text: 'He/Him/His' },
-    { id: 3, text: 'She/Her/Hers' },
-    { id: 4, text: 'They/Them/Theirs' },
-    { id: 5, text: 'Ze/Hir/Hirs' },
-    { id: 6, text: 'Other - Please Specify' },
-  ];
+  let dropDownIndex = 0;
 
-  let pronounSelected = pronouns[0].text;
+  const selectedDropdowns = fields
+    .filter((field) => field.__component === 'form-fields.drop-down')
+    .map(() => '');
 
-  let formFields = {
-    name: '',
-    pronouns: '',
-    email: '',
-    phone: '',
-    reason: '',
-    message: '',
-  };
-  let validationErrors = {
-    name: '',
-    pronouns: '',
-    email: '',
-    phone: '',
-    reason: '',
-    message: '',
-  };
-  let valid = false;
+  let valid: boolean;
 
   let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
   let phoneTemplate = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -49,56 +25,49 @@
   const formValidation = () => {
     valid = true;
 
-    //validate name
-    if (formFields.name.trim().length < 1) {
-      valid = false;
-      validationErrors.name = 'Name is required!';
-    } else {
-      validationErrors.name = '';
-    }
+    for (let index in fields) {
+      const field = fields[index];
+      const data = formData[index];
 
-    //validate pronouns
-    if (formFields.pronouns == '-Select-') {
-      formFields.pronouns = '';
-    }
+      if (field.isRequired && data.trim().length < 1) {
+        valid = false;
+        validationErrorList[index] = `${field.name} is required!`;
+      } else {
+        validationErrorList[index] = '';
+      }
 
-    //validate email
-    if (!regex.test(formFields.email)) {
-      valid = false;
-      validationErrors.email = 'Email is required - must be a valid email!';
-    } else {
-      validationErrors.email = '';
-    }
-
-    //validate telephone
-    if (
-      formFields.phone.trim().length > 0 &&
-      !formFields.phone.match(phoneTemplate)
-    ) {
-      valid = false;
-      validationErrors.phone =
-        'If including telephone, must contain 10 numbers! Example: ###-###-####';
-    } else {
-      validationErrors.phone = '';
-    }
-
-    //validate reason
-    if (formFields.reason.trim().length < 1) {
-      valid = false;
-      validationErrors.reason = 'Reason is required!';
-    } else if (formFields.reason.trim().length > 25) {
-      valid = false;
-      validationErrors.reason = "Reason can't be longer than 25 characters!";
-    } else {
-      validationErrors.reason = '';
-    }
-
-    //validate message
-    if (formFields.message.trim().length == 0) {
-      valid = false;
-      validationErrors.message = 'Message is required!';
-    } else {
-      validationErrors.message = '';
+      switch (field.__component) {
+        case 'form-fields.text':
+          switch (field.type) {
+            case 'email':
+              //validate email
+              if (!regex.test(data) && data.trim().length > 0) {
+                valid = false;
+                validationErrorList[
+                  index
+                ] = `${field.name} must be a valid email address!`;
+              } else {
+                validationErrorList[index] = '';
+              }
+              break;
+            case 'phone':
+              //validate telephone
+              if (data.trim().length > 0 && !data.match(phoneTemplate)) {
+                valid = false;
+                validationErrorList[
+                  index
+                ] = `${field.name} must contain 10 numbers! Example: ###-###-####`;
+              } else {
+                validationErrorList[index] = '';
+              }
+          }
+          break;
+        case 'form-fields.text':
+          //validate dropdown
+          if (data == '--Select--') {
+            formData[index] = '';
+          }
+      }
     }
 
     if (!valid) {
@@ -109,37 +78,43 @@
   };
 
   let responseMessage = '';
-  let responseError;
+  let responseError: unknown;
 
   const submitForm = async () => {
     if (formValidation()) {
-      console.log('request is : ', formFields);
+      console.log('request is : ', formData);
       try {
-        let name = formFields.name;
-        let pronouns = formFields.pronouns;
-        let email = formFields.email;
-        let phone = formFields.phone;
-        let reason = formFields.reason;
-        let msg = formFields.message;
-        console.log(name, pronouns, email, phone, reason, msg);
+        // let name = formFields.name;
+        // let pronouns = formFields.pronouns;
+        // let email = formFields.email;
+        // let phone = formFields.phone;
+        // let reason = formFields.reason;
+        // let msg = formFields.message;
+        // console.log(name, pronouns, email, phone, reason, msg);
 
-        const result = await fetch('api/contact', {
-          method: 'POST',
-          body: JSON.stringify({
-            name,
-            pronouns,
-            email,
-            phone,
-            reason,
-            msg,
-          }),
-        });
+        const responseBody = {
+          fj: 'jfds',
+        };
 
-        const data = await result.json();
-        console.log(data);
-        responseMessage = data;
-        console.log(responseMessage);
-      } catch (err) {
+        responseMessage = '👍';
+
+        // const result = await fetch('api/contact', {
+        //   method: 'POST',
+        //   body: JSON.stringify({
+        //     name,
+        //     pronouns,
+        //     email,
+        //     phone,
+        //     reason,
+        //     msg,
+        //   }),
+        // });
+
+        // const data = await result.json();
+        // console.log(data);
+        // responseMessage = data;
+        // console.log(responseMessage);
+      } catch (err: unknown) {
         responseError = err;
       }
     }
@@ -166,8 +141,8 @@
           class:required-field={field.isRequired}>
           {field.name}:
         </label>
-        <label for={validationErrors.name} class="error"
-          >{validationErrors.name}</label>
+        <label for="{index.toString()}{field.name}" class="error"
+          >{validationErrorList[index]}</label>
       </span>
       {#if field.__component === 'form-fields.text'}
         <!-- Text fields -->
@@ -178,133 +153,51 @@
             type="text"
             name="{index.toString()}{field.name}"
             placeholder={field.name}
-            bind:value={formFields.name} />
+            bind:value={formData[index]} />
         {:else if field.type === 'long'}
           <textarea
             name="{index.toString()}{field.name}"
             placeholder={field.name}
-            bind:value={formFields.message} />
+            bind:value={formData[index]} />
         {:else if field.type === 'phone'}
           <input
             type="tel"
             name="{index.toString()}{field.name}"
             placeholder={field.name}
-            bind:value={formFields.name} />
+            bind:value={formData[index]} />
         {:else if field.type === 'email'}
           <input
             type="email"
             name="{index.toString()}{field.name}"
             placeholder={field.name}
-            bind:value={formFields.name} />
-        {:else}
-          will this happen?
+            bind:value={formData[index]} />
         {/if}
       {:else if field.__component === 'form-fields.drop-down'}
         <!-- DROP DOWN LOGIC GOES HERE! -->
         <select
           placeholder="--Select--"
-          bind:value={pronounSelected}
-          on:change={() => (formFields.pronouns = pronounSelected)}>
-          {#each pronouns as pronoun}
-            <option value={pronoun.text}>{pronoun.text}</option>
+          bind:value={selectedDropdowns[dropDownIndex]}
+          on:change={() =>
+            (formData[index] = selectedDropdowns[dropDownIndex])}>
+          <option value="--Select--">{'--Select--'}</option>
+          {#each field.entries as entry}
+            <option value={entry.value}>{entry.value}</option>
           {/each}
+          {#if field.allowOther}
+            <option value="">{'Other - Please Specify'}</option>
+          {/if}
         </select>
-        {#if pronounSelected === 'Other - Please Specify'}
-          {(formFields.pronouns = '')}
+        {#if selectedDropdowns[dropDownIndex] === ''}
           <input
             name="pronouns"
             placeholder="Enter your pronouns"
-            bind:value={formFields.pronouns} />
+            bind:value={formData[index]} />
         {/if}
-        <!-- loop through the options -->
-        <!-- check if it includes "other" -->
+        <script lang="ts">
+          dropDownIndex++;
+        </script>
       {/if}
     {/each}
-
-    <p>-----------------</p>
-
-    <!-------- AUTO INPUTS ABOVE --------->
-
-    <!--Name-->
-    <span for="name" class="formField">
-      <label for="name" class="required-field"> Name: </label>
-      <label for={validationErrors.name} class="error"
-        >{validationErrors.name}</label>
-    </span>
-    <input
-      type="text"
-      name="name"
-      placeholder="Name"
-      bind:value={formFields.name} />
-
-    <!--Pronouns-->
-    <label for="pronouns"> Pronouns: </label>
-    <select
-      placeholder={pronounSelected}
-      bind:value={pronounSelected}
-      on:change={() => (formFields.pronouns = pronounSelected)}>
-      {#each pronouns as pronoun}
-        <option value={pronoun.text}>{pronoun.text}</option>
-      {/each}
-    </select>
-    {#if pronounSelected == 'Other - Please Specify'}
-      {(formFields.pronouns = '')}
-      <input
-        name="pronouns"
-        placeholder="Enter your pronouns"
-        bind:value={formFields.pronouns} />
-    {/if}
-
-    <!--Email-->
-    <span for="email" class="formField">
-      <label for="email" class="required-field"> Email: </label>
-      <label for={validationErrors.email} class="error"
-        >{validationErrors.email}</label>
-    </span>
-    <input
-      type="email"
-      name="email"
-      placeholder="Email"
-      bind:value={formFields.email} />
-
-    <!--Phone-->
-    <span for="phone" class="formField">
-      <label for="phone"> Telephone: </label>
-      <label for={validationErrors.phone} class="error"
-        >{validationErrors.phone}</label>
-    </span>
-    <input
-      type="text"
-      name="phone"
-      placeholder="Telephone"
-      bind:value={formFields.phone} />
-
-    <!--Reason for Contacting Us-->
-    <span for="reason" class="formField">
-      <label
-        for="Reason (explain in detail when possible)"
-        class="required-field">
-        Reason (explain in detail when possible):
-      </label>
-      <label for={validationErrors.reason} class="error"
-        >{validationErrors.reason}</label>
-    </span>
-    <input
-      type="text"
-      name="reason"
-      placeholder="Reason"
-      bind:value={formFields.reason} />
-
-    <!--Message-->
-    <span for="message" class="formField">
-      <label for="message" class="required-field"> Message: </label>
-      <label for={validationErrors.message} class="error"
-        >{validationErrors.message}</label>
-    </span>
-    <textarea
-      name="message"
-      placeholder="Message"
-      bind:value={formFields.message} />
 
     <!--Submit-->
     <span class="btn-wrapper">
@@ -316,12 +209,9 @@
 {:else if responseError}
   <p>Error - Something went wrong on our end but you tried to enter:</p>
   <br />
-  <p>Name: {formFields.name}</p>
-  <p>Pronouns: {formFields.pronouns}</p>
-  <p>Email: {formFields.email}</p>
-  <p>Phone: {formFields.phone}</p>
-  <p>Reason: {formFields.reason}</p>
-  <p>Message: {formFields.message}</p>
+  {#each fields as field, index}
+    <p>{field.name}: {formData[index]}</p>
+  {/each}
 {/if}
 
 <style>
