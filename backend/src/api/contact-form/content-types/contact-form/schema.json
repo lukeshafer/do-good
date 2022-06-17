@@ -4,7 +4,8 @@
   "info": {
     "singularName": "contact-form",
     "pluralName": "contact-forms",
-    "displayName": "Contact Form"
+    "displayName": "Contact Form",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

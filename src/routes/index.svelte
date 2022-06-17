@@ -13,6 +13,13 @@
     },
   });
 
+  const tileColors = [
+    'button1-color',
+    'button2-color',
+    'button3-color',
+    'button4-color',
+  ];
+
   export const load: Load = async ({ fetch }) => {
     const apiPath = import.meta.env.VITE_API_PATH as string;
     const url = `${apiPath}/api/home-page?${query}`;
@@ -73,9 +80,9 @@
   </FeaturedBox>
 
   <div class="button-wrapper">
-    {#each links as link}
+    {#each links as link, index}
       <div class="button">
-        <Box background="var(--button1-color)" href="/{link.slug}">
+        <Box background="var(--{tileColors[index % 4]})" href="/{link.slug}">
           <div class="button-content">
             <p>{link.title}</p>
           </div>
@@ -92,11 +99,6 @@
     justify-content: center;
     gap: 2em;
   }
-
-  .button {
-    width: 10em;
-  }
-
   div.button-wrapper {
     display: grid;
     width: min(150%, 90vw);
@@ -111,5 +113,10 @@
     height: 9em;
     width: 9em;
     margin: 0;
+  }
+
+  .button-content p {
+    font-size: 2em;
+    color: var(--secondary-color);
   }
 </style>
