@@ -5,7 +5,6 @@
 <main>
   <Box background="var(--primary-color)">
     <div class="content">
-      <h2>Rally for Mr. Talley!</h2>
       <p>
         We're fundraising for Mr. Brandon Talley, a single father who has been
         on the kidney transplant list for so long that he now also needs a
