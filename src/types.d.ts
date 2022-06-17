@@ -5,6 +5,7 @@ type Fundraiser = {
   goal: number;
   story: string;
   donationLink: string;
+  slug: string;
 };
 
 type Page = {

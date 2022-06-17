@@ -56,7 +56,7 @@
 
 <main>
   <FeaturedBox
-    href="/fundraisers/rally-for-mr-talley"
+    href="/fundraisers/{featuredFundraiser.slug}"
     background="var(--accent-color)">
     <h2 slot="title">{featured.title}</h2>
     <p slot="goal">
@@ -66,7 +66,7 @@
       width="100"
       slot="icon"
       src="{import.meta.env.VITE_API_PATH}{featuredIcon.url}"
-      alt="Two hands with a cartoon heart between them" />
+      alt={featuredIcon.alternativeText} />
     <p slot="body">
       {featured.shortDescription}
     </p>
