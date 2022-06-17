@@ -41,7 +41,8 @@ main {
   display: flex;
   justify-content: center;
   margin: 2em auto;
-  max-width: 50em;
+  /* max-width: 50em; */
+  width: min(40em, 90vw);
 }
 
 header {
@@ -63,7 +64,7 @@ h6 {
 
 h1 {
   font-weight: 400;
-  font-size: 3em;
+  font-size: 2.5em;
 }
 
 h2 {

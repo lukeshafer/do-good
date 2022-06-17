@@ -37,9 +37,6 @@
 
 <style>
   main {
-    max-width: 40em;
-    padding: 0 2em;
-    /* color: var(--secondary-color); */
     color: black;
     flex-direction: column;
     justify-content: space-evenly;
@@ -60,6 +57,7 @@
     margin: 0 auto;
     padding: 0 1em;
     font-weight: bold;
+    text-align: center;
   }
 
   .content :global(p) {
