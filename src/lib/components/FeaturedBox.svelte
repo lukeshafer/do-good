@@ -82,6 +82,7 @@
     width: 90%;
     font-size: 1.1em;
     margin-bottom: 0.5em;
+    justify-self: center;
   }
 
   .body > :global(*) {
@@ -116,9 +117,11 @@
       font-size: 3em;
       display: flex;
       align-items: center;
+      text-align: center;
     }
 
     .icon {
+      margin-top: -1em;
       grid-column: 1;
       grid-row: 2;
     }

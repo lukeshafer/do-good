@@ -5,7 +5,7 @@
 
   export const load: Load = async ({ params, fetch }) => {
     const apiPath = import.meta.env.VITE_API_PATH as string;
-    const url = `${apiPath}/pages/${params.slug}`;
+    const url = `${apiPath}/api/pages/${params.slug}`;
     const response = await fetch(url);
     const { data } = await response.json();
     const page = data?.attributes as Page;

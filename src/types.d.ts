@@ -26,6 +26,7 @@ type InternalLink = {
 type NavigationMenu = {
   includeHomePage: boolean;
   includeFAQ: boolean;
+  includeContactForm: boolean;
   pages: InternalLink[];
 };
 
@@ -54,12 +55,23 @@ type HomePage = {
 type FeaturedFundraiser = {
   title: string;
   shortDescription: string;
-  icon: StrapiImage;
+  icon: {
+    data: {
+      attributes: StrapiImage;
+    };
+  };
   fundraiser: {
     data: {
       attributes: Fundraiser;
     };
   };
+};
+
+type StrapiImage = {
+  name: string;
+  alternativeText: string;
+  caption: string;
+  url: string;
 };
 
 // Declaring Modules

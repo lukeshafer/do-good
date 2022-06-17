@@ -12,7 +12,7 @@
 
   export const load: Load = async ({ fetch }) => {
     const apiPath = import.meta.env.VITE_API_PATH as string;
-    const url = `${apiPath}/contact-form?${query}`;
+    const url = `${apiPath}/api/contact-form?${query}`;
     const response = await fetch(url);
     const {
       data: {

@@ -5,7 +5,7 @@
 
   export const load: Load = async ({ params, fetch }) => {
     const apiPath = import.meta.env.VITE_API_PATH as string;
-    const url = `${apiPath}/fundraisers/${params.slug}`;
+    const url = `${apiPath}/api/fundraisers/${params.slug}`;
     const response = await fetch(url);
     const { data } = await response.json();
     const fundraiser = data?.attributes as Fundraiser;

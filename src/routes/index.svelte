@@ -15,7 +15,7 @@
 
   export const load: Load = async ({ fetch }) => {
     const apiPath = import.meta.env.VITE_API_PATH as string;
-    const url = `${apiPath}/home-page?${query}`;
+    const url = `${apiPath}/api/home-page?${query}`;
     console.log(url);
     const response = await fetch(url);
     const {
@@ -45,6 +45,9 @@
   import FeaturedBox from '$lib/components/FeaturedBox.svelte';
   import Box from '$lib/components/Box.svelte';
   export let featured: FeaturedFundraiser, links: Page[];
+
+  const featuredIcon = featured.icon.data.attributes;
+  const featuredFundraiser = featured.fundraiser.data.attributes;
 </script>
 
 <svelte:head>
@@ -57,25 +60,28 @@
     background="var(--accent-color)">
     <h2 slot="title">{featured.title}</h2>
     <p slot="goal">
-      Goal: ${featured.fundraiser.data.attributes.goal.toLocaleString('en-US')}
+      Goal: ${featuredFundraiser.goal.toLocaleString('en-US')}
     </p>
     <img
       width="100"
       slot="icon"
-      src="/images/hands-with-heart.svg"
+      src="{import.meta.env.VITE_API_PATH}{featuredIcon.url}"
       alt="Two hands with a cartoon heart between them" />
     <p slot="body">
-      Mr. Talley needs a kidney and a pancreas. We're trying to make sure he
-      doesn't have to worry about providing for his kids this summer. Please
-      help us out!
+      {featured.shortDescription}
     </p>
   </FeaturedBox>
 
   <div class="button-wrapper">
-    <Box background="var(--button1-color)">
-      <div class="button-content">
-        <p>Help us out!</p>
-      </div></Box>
+    {#each links as link}
+      <div class="button">
+        <Box background="var(--button1-color)" href="/{link.slug}">
+          <div class="button-content">
+            <p>{link.title}</p>
+          </div>
+        </Box>
+      </div>
+    {/each}
   </div>
 </main>
 
@@ -87,9 +93,17 @@
     gap: 2em;
   }
 
+  .button {
+    width: 10em;
+  }
+
   div.button-wrapper {
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    width: min(150%, 90vw);
+    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+    grid-auto-rows: auto;
+    place-items: center;
+    gap: 2em;
   }
 
   div.button-content {

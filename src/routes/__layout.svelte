@@ -4,7 +4,7 @@
   import qs from 'qs';
 
   const query = qs.stringify({
-    fields: ['includeHomePage', 'includeFAQ'],
+    fields: '*',
     populate: {
       pages: {
         populate: '*',
@@ -14,11 +14,16 @@
 
   export const load: Load = async ({ fetch }) => {
     const apiPath = import.meta.env.VITE_API_PATH as string;
-    const url = `${apiPath}/navigation-menu?${query}`;
+    const url = `${apiPath}/api/navigation-menu?${query}`;
     const response = await fetch(url);
     const { data } = await response.json();
     const { attributes } = data as { attributes: NavigationMenu };
-    const { includeHomePage, includeFAQ, pages: pageObjects } = attributes;
+    const {
+      includeHomePage,
+      includeFAQ,
+      includeContactForm,
+      pages: pageObjects,
+    } = attributes;
 
     let pages = pageObjects.map((page): Page => {
       const newPage = page.page.data.attributes;
@@ -31,9 +36,10 @@
     return {
       status: response.status,
       props: {
-        includeHomePage: includeHomePage,
-        includeFAQ: includeFAQ,
-        pages: pages,
+        includeHomePage,
+        includeFAQ,
+        includeContactForm,
+        pages,
       },
     };
   };
@@ -48,7 +54,10 @@
   import '../colors.css';
   import '../global.css';
 
-  export let includeHomePage: boolean, includeFAQ: boolean, pages: Page[];
+  export let includeHomePage: boolean,
+    includeFAQ: boolean,
+    includeContactForm: boolean,
+    pages: Page[];
 </script>
 
 <Header>
@@ -60,7 +69,9 @@
     {#if includeFAQ}
       <NavItem href="/faq">FAQ</NavItem>
     {/if}
-    <NavItem href="/contact">Contact</NavItem>
+    {#if includeContactForm}
+      <NavItem href="/contact">Contact</NavItem>
+    {/if}
     {#each pages as page}
       <NavItem href="/{page.slug}">{page.title}</NavItem>
     {/each}
