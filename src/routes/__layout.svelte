@@ -48,7 +48,7 @@
 
     const apiPath = import.meta.env.VITE_API_PATH as string;
     console.log('apiPath = ', apiPath);
-    const url = `${apiPath}/navigation-menu?${queryNav}`;
+    const url = `${apiPath}/api/navigation-menu?${queryNav}`;
     const response = await fetch(url);
     const { data } = await response.json();
     const { attributes } = data as { attributes: NavigationMenu };
