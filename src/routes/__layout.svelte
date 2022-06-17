@@ -4,7 +4,7 @@
   import qs from 'qs';
 
   const queryNav = qs.stringify({
-    fields: ['includeHomePage', 'includeFAQ'],
+    fields: '*',
     populate: {
       pages: {
         populate: '*',
@@ -12,6 +12,7 @@
     },
   });
 
+  /*
   const queryFooter = qs.stringify({
     populate: {
       footerResourceLinks: {
@@ -19,6 +20,7 @@
       },
     },
   });
+  */
 
   export const load: Load = async ({ fetch }) => {
     /* Promise.all - how to correctly separate the data ( .then(function (data))
@@ -58,7 +60,7 @@
     } = attributes;
 
     let pages = pageObjects.map((page): Page => {
-      const newPage = page.page.data.attributes;
+      const newPage = page.page.data?.attributes;
       return {
         ...newPage,
         title: page.title,
@@ -102,12 +104,14 @@
   import '../colors.css';
   import '../global.css';
   import { onMount } from 'svelte';
+  /*
   import type {
     attribute_to_object,
     loop_guard,
     set_attributes,
   } from 'svelte/internal';
   import Contact from './contact.svelte';
+  */
 
   let socials = [];
   let error = null;
