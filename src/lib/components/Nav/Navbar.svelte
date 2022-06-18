@@ -33,6 +33,7 @@
     background: var(--primary-color);
     margin-left: -10em;
     padding-left: 10em;
+    margin-right: calc(-1 * var(--h-padding));
     height: fit-content;
   }
 

@@ -31,6 +31,20 @@ type NavigationMenu = {
   pages: InternalLink[];
 };
 
+type Footer = {
+  footerResourceLinks: InternalLink[];
+};
+
+type Social = {
+  url: string;
+  logoAltText: string;
+  SocialMediaLogo: {
+    data: {
+      attributes: StrapiImage;
+    };
+  };
+};
+
 type FieldComponent = 'form-fields.text' | 'form-fields.drop-down';
 type FieldType = 'short' | 'long' | 'phone' | 'email';
 

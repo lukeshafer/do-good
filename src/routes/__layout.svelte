@@ -12,7 +12,6 @@
     },
   });
 
-  /*
   const queryFooter = qs.stringify({
     populate: {
       footerResourceLinks: {
@@ -20,7 +19,42 @@
       },
     },
   });
-  */
+
+  // pass data from Nav response - breaks data down into attributes
+  const destructureNav = async ({
+    data: { attributes },
+  }: {
+    data: { attributes: NavigationMenu };
+  }) => {
+    const pages = attributes.pages.map((page): Page => {
+      const newPage = page.page.data?.attributes;
+      return {
+        ...newPage,
+        title: page.title,
+      };
+    });
+    return {
+      ...attributes,
+      pages,
+    };
+  };
+
+  const destructureFooter = async ({
+    data: { attributes },
+  }: {
+    data: { attributes: Footer };
+  }) => {
+    const pages = attributes.footerResourceLinks.map((link): Page => {
+      const newPage = link.page.data?.attributes;
+      return {
+        ...newPage,
+        title: link.title,
+      };
+    });
+    return {
+      pages,
+    };
+  };
 
   export const load: Load = async ({ fetch }) => {
     /* Promise.all - how to correctly separate the data ( .then(function (data))
@@ -47,51 +81,36 @@
       */
 
     const apiPath = import.meta.env.VITE_API_PATH as string;
-    console.log('apiPath = ', apiPath);
-    const url = `${apiPath}/api/navigation-menu?${queryNav}`;
-    const response = await fetch(url);
-    const { data } = await response.json();
-    const { attributes } = data as { attributes: NavigationMenu };
-    const {
-      includeHomePage,
-      includeFAQ,
-      includeContactForm,
-      pages: pageObjects,
-    } = attributes;
+    const navURL = `${apiPath}/api/navigation-menu?${queryNav}`;
+    const navResponse = await fetch(navURL);
+    const nav = await destructureNav(await navResponse.json());
 
-    let pages = pageObjects.map((page): Page => {
-      const newPage = page.page.data?.attributes;
-      return {
-        ...newPage,
-        title: page.title,
-      };
-    });
+    const footerURL = `${apiPath}/api/footer?${queryFooter}`;
+    const footerResponse = await fetch(footerURL);
+    const footer = await destructureFooter(await footerResponse.json());
 
     return {
-      status: response.status,
+      status: navResponse.status,
       props: {
-        includeHomePage,
-        includeFAQ,
-        includeContactForm,
-        pages,
+        nav,
+        footer,
       },
     };
-    /*
-    const footerUrl = '${apiPath}/footer?{queryFooter}';
-    const fResponse = await fetch(footerUrl);
-    const { fData } = await fResponse.json();
-    const { fAttributes } = fData;
-    const { footerResourceLinks: resourceObjects, socials: socialObjects } =
-      fAttributes;
 
-    let resourcePages = resourceObjects.map((page): Page => {
-      const newResourcePage = page.page.fData.fAttributes;
-      return {
-        ...newResourcePage,
-        title: page.title,
-      };
-    });
-    */
+    // const footerUrl = `${apiPath}/footer?${queryFooter}`;
+    // const fResponse = await fetch(footerUrl);
+    // const { fData } = await fResponse.json();
+    // const { fAttributes } = fData;
+    // const { footerResourceLinks: resourceObjects, socials: socialObjects } =
+    //   fAttributes;
+
+    // let resourcePages = resourceObjects.map((page): Page => {
+    //   const newResourcePage = page.page.fData.fAttributes;
+    //   return {
+    //     ...newResourcePage,
+    //     title: page.title,
+    //   };
+    // });
   };
 </script>
 
@@ -104,6 +123,17 @@
   import '../colors.css';
   import '../global.css';
   import { onMount } from 'svelte';
+
+  export let nav: {
+    pages: Page[];
+    includeHomePage: boolean;
+    includeFAQ: boolean;
+    includeContactForm: boolean;
+  };
+
+  export let footer: { pages: Page[] };
+  console.log(footer.pages);
+
   /*
   import type {
     attribute_to_object,
@@ -114,7 +144,7 @@
   */
 
   let socials = [];
-  let error = null;
+  let error = null as unknown;
 
   onMount(async () => {
     const parseJSON = (resp) => (resp.json ? resp.json() : resp);
@@ -149,29 +179,24 @@
         console.log('logoAltText: ', socials[i]?.attributes.logoAltText);
       }
     } catch (e) {
-      error = e;
+      error = e as unknown;
     }
   });
-
-  export let includeHomePage: boolean,
-    includeFAQ: boolean,
-    includeContactForm: boolean,
-    pages: Page[];
 </script>
 
 <Header>
   <Logo width="10em" />
   <Navbar>
-    {#if includeHomePage}
+    {#if nav.includeHomePage}
       <NavItem href="/">Home</NavItem>
     {/if}
-    {#if includeFAQ}
+    {#if nav.includeFAQ}
       <NavItem href="/faq">FAQ</NavItem>
     {/if}
-    {#if includeContactForm}
+    {#if nav.includeContactForm}
       <NavItem href="/contact">Contact</NavItem>
     {/if}
-    {#each pages as page}
+    {#each nav.pages as page}
       <NavItem href="/{page.slug}">{page.title}</NavItem>
     {/each}
     <!-- <NavItem href="/">What is DGC?</NavItem>
