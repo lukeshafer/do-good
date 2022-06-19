@@ -118,29 +118,33 @@
 <slot />
 
 <footer>
+  <div class="copyright">
+    <h3>&copy;2022, Do Good Collective</h3>
+  </div>
   <div class="container">
     <div class="resources">
-      <h3>Resources</h3>
-      <ul class="links">
-        {#each footer.resourcePages as foot}
-          <li>
-            {@html sanitizeHtml(foot.content)}
-          </li>
-        {/each}
-      </ul>
+      <h4>Resources</h4>
+      {#each footer.resourcePages as foot}
+        <li class="links">
+          {@html sanitizeHtml(
+            foot.content.substring(3, foot.content.length - 4)
+          )}
+        </li>
+      {/each}
     </div>
     <div class="resources">
-      <h3>DGC</h3>
-      <ul class="links">
-        {#each footer.dgcPages as otherFoot}
-          <li>
-            {@html sanitizeHtml(otherFoot.content)}
-          </li>
-        {/each}
-      </ul>
+      <h4>DGC</h4>
+      {#each footer.dgcPages as otherFoot}
+        <li class="links">
+          {@html sanitizeHtml(
+            otherFoot.content.substring(3, otherFoot.content.length - 4)
+          )}
+        </li>
+        <br />
+      {/each}
     </div>
     <div class="resources">
-      <h3>Socials</h3>
+      <h4>Socials</h4>
       <p class="special">Follow us on social media!</p>
       <ul class="socials">
         {#if error !== null}
@@ -170,12 +174,24 @@
     background-color: var(--primary-color);
   }
 
+  div {
+    padding: 0 0 0 0;
+  }
+
   a {
     padding: 0%;
     text-align: left;
   }
 
   h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 1em;
+    text-align: center;
+  }
+
+  h4 {
     padding: none;
     text-align: center;
   }
@@ -188,11 +204,12 @@
 
   .container {
     display: flex;
+    padding: 0 0 0 0;
   }
 
   .resources {
     flex: 1;
-    padding: 1em;
+    padding: none;
   }
 
   .socials {
@@ -205,7 +222,7 @@
   .links {
     display: flex;
     justify-content: center;
-    padding: 0 0 0 0;
+    padding: none;
   }
 
   .special {
