@@ -9,14 +9,59 @@ module.exports = () => {
           // disable strapi theme, will use default ckeditor theme //
           strapiTheme: false,
           // styles applied to editor container (global scope) //
-          // styles: `
-          //   @import 'colors.css'
+          styles: /* css */ `
+            @import url("./colors.css");
 
-          //   :root{
-          //     --ck-color-focus-border:red;
-          //     --ck-color-text:red;
-          //   }
-          //  `,
+            @font-face {
+              font-family: 'Fira Code';
+              src: url('/public/fonts/fira-code/FiraCode-VariableFont_wght.ttf') format('truetype');
+            }
+
+            :root{
+              --primary-values: 230, 222, 255;
+              --primary-color: rgb(var(--primary-values));
+
+              --secondary-values: 37, 77, 86;
+              --secondary-color: rgb(var(--secondary-values));
+
+              --background-values: 245, 246, 248;
+              --background-color: rgb(var(--background-values));
+
+              --accent-values: 187, 208, 255;
+              --accent-color: rgb(var(--accent-values));
+
+              --border-values: 119, 131, 141;
+              --border-color: rgb(var(--border-values));
+
+              --box-shadow-values: 101, 117, 153;
+              --box-shadow-color: rgb(var(--box-shadow-values));
+
+              --h-shadow-primary-values: 204, 121, 116;
+              --h-shadow-primary-color: rgb(var(--h-shadow-primary-values));
+
+              --h-shadow-secondary-values: 39, 128, 148;
+              --h-shadow-secondary-color: rgb(var(--h-shadow-secondary-values));
+
+              --text-accent-values: 83, 68, 173;
+              --text-accent-color: rgb(var(--text-accent-values));
+
+              --button1-values: 207, 135, 144;
+              --button1-color: rgb(var(--button1-values));
+
+              --button2-values: 232, 201, 120;
+              --button2-color: rgb(var(--button2-values));
+
+              --button3-values: 125, 178, 170;
+              --button3-color: rgb(var(--button3-values));
+
+              --button4-values: 142, 156, 219;
+              --button4-color: rgb(var(--button4-values));
+
+              /* Colors based on context. Should be based on one of the above colors */
+              --error-color: var(--button1-color);
+            }
+
+           `,
         },
         editor: {
           // editor default config
@@ -95,37 +140,120 @@ module.exports = () => {
             supportAllValues: true,
           },
           fontColor: {
-            // colors: [
-            //   {
-            //     color: 'hsl',
-            //     label: 'Violet??',
-            //   },
-            //   {
-            //     color: 'hsl(0, 0%, 30%)',
-            //     label: 'Dim grey',
-            //   },
-            //   {
-            //     color: 'hsl(0, 0%, 60%)',
-            //     label: 'Grey',
-            //   },
-            //   {
-            //     color: 'hsl(0, 0%, 90%)',
-            //     label: 'Light grey',
-            //   },
-            //   {
-            //     color: 'hsl(0, 0%, 100%)',
-            //     label: 'White',
-            //     hasBorder: true,
-            //   },
-
-            //   // ...
-            // ],
+            colors: [
+              {
+                color: 'var(--primary-color)',
+                label: 'Primary',
+              },
+              {
+                color: 'var(--secondary-color)',
+                label: 'Secondary',
+              },
+              {
+                color: 'var(--background-color)',
+                label: 'Background',
+              },
+              {
+                color: 'var(--accent-color)',
+                label: 'Accent',
+              },
+              {
+                color: 'var(--border-color)',
+                label: 'Border',
+              },
+              {
+                color: 'var(--box-shadow-color)',
+                label: 'Box Shadow',
+              },
+              {
+                color: 'var(--h-shadow-primary-color)',
+                label: 'Header Shadow Primary',
+              },
+              {
+                color: 'var(--h-shadow-secondary-color)',
+                label: 'Header Shadow Secondary',
+              },
+              {
+                color: 'var(--text-accent-color)',
+                label: 'Text Accent',
+              },
+              {
+                color: 'var(--button1-color)',
+                label: 'Button 1',
+              },
+              {
+                color: 'var(--button2-color)',
+                label: 'Button 2',
+              },
+              {
+                color: 'var(--button3-color)',
+                label: 'Button 3',
+              },
+              {
+                color: 'var(--button4-color)',
+                label: 'Button 4',
+              },
+            ],
             columns: 5,
-            documentColors: 10,
+            documentColors: 15,
           },
           fontBackgroundColor: {
+            colors: [
+              {
+                color: 'var(--primary-color)',
+                label: 'Primary',
+              },
+              {
+                color: 'var(--secondary-color)',
+                label: 'Secondary',
+              },
+              {
+                color: 'var(--background-color)',
+                label: 'Background',
+              },
+              {
+                color: 'var(--accent-color)',
+                label: 'Accent',
+              },
+              {
+                color: 'var(--border-color)',
+                label: 'Border',
+              },
+              {
+                color: 'var(--box-shadow-color)',
+                label: 'Box Shadow',
+              },
+              {
+                color: 'var(--h-shadow-primary-color)',
+                label: 'Header Shadow Primary',
+              },
+              {
+                color: 'var(--h-shadow-secondary-color)',
+                label: 'Header Shadow Secondary',
+              },
+              {
+                color: 'var(--text-accent-color)',
+                label: 'Text Accent',
+              },
+              {
+                color: 'var(--button1-color)',
+                label: 'Button 1',
+              },
+              {
+                color: 'var(--button2-color)',
+                label: 'Button 2',
+              },
+              {
+                color: 'var(--button3-color)',
+                label: 'Button 3',
+              },
+              {
+                color: 'var(--button4-color)',
+                label: 'Button 4',
+              },
+            ],
             columns: 5,
-            documentColors: 10,
+            documentColors: 15,
           },
           // https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
           // default language: 'en',
