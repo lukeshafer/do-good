@@ -49,13 +49,6 @@
 </main>
 
 <style>
-  .grid-wrapper {
-    display: grid;
-    font-size: min(0.8em, 2vw);
-    grid-template-columns: 6em 7em 20em 10em;
-    grid-template-rows: repeat(5, 3em) auto;
-  }
-
   .content {
     padding: 1em 1em;
     position: relative;

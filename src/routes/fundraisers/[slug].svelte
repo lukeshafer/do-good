@@ -1,6 +1,5 @@
 <script lang="ts" context="module">
   import type { Load } from '@sveltejs/kit';
-  import { marked } from 'marked';
   import sanitizeHtml from 'sanitize-html';
 
   export const load: Load = async ({ params, fetch }) => {
@@ -24,18 +23,7 @@
 
 <script lang="ts">
   import Box from '$lib/components/Box.svelte';
-  import { onMount } from 'svelte';
-
   export let title: string, story: string, href: string;
-
-  let sanitizedStory = '';
-
-  // onMount(() => {
-  //   // Translate Markdown to HTML
-  //   // let translatedStory = marked.parse(story);
-  //   // Sanitize HTML so it's safe for the browser
-  //   // sanitizedStory = DOMPurify.sanitize(translatedStory);
-  // });
 </script>
 
 <svelte:head>
@@ -45,7 +33,6 @@
 <main>
   <Box background="var(--primary-color)">
     <div class="content">
-      <h2>{title}</h2>
       {@html story}
       <div class="link-wrapper">
         <Box background="var(--accent-color)" {href} target="_blank">
