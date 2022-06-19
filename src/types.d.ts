@@ -33,6 +33,7 @@ type NavigationMenu = {
 
 type Footer = {
   footerResourceLinks: InternalLink[];
+  dgcLinks: InternalLink[];
 };
 
 type Social = {

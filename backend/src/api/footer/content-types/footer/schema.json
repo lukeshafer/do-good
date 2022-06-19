@@ -21,6 +21,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::social.social"
+    },
+    "dgcLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "link.navigation-link",
+      "required": true
     }
   }
 }

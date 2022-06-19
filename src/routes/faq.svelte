@@ -122,12 +122,6 @@
     grid-template-rows: repeat(5, 3em) auto;
   }
 
-  .content {
-    padding: 1em 1em;
-    position: relative;
-    transition: 200ms;
-  }
-
   .help {
     display: flex;
     justify-content: space-evenly;

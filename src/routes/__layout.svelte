@@ -1,35 +1,11 @@
 <!-- This will populate the navbar automatically -->
 <script lang="ts" context="module">
   import type { Load } from '@sveltejs/kit';
-  export const load: Load = async ({ fetch }) => {
-    // @KAMERON: can this comment block be removed?
-    /* Promise.all - how to correctly separate the data ( .then(function (data))
-    const apiPath = import.meta.env.VITE_API_PATH as string;
-    Promise.all([
-      fetch('${apiPath}/navigation-menu?${queryNav}'),
-      fetch('${apiPath}/footer?${queryFooter}'),
-    ])
-      .then(function (responses) {
-        return Promise.all(
-          responses.map(function (response) {
-            return response.json();
-          })
-        );
-      })
-      .then(function (data) {
-        //Log data
-        //Do stuff
-      })
-      .catch(function (error) {
-        //if there's an error log it
-        console.log(error);
-      });
-      */
 
+  export const load: Load = async ({ fetch }) => {
     const navURL = `/api/layout.json`;
     const response = await fetch(navURL);
     const { nav, footer } = await response.json();
-
     return {
       status: response.status,
       props: {
@@ -37,22 +13,6 @@
         footer,
       },
     };
-
-    // @KAMERON: can this comment block be removed also?
-    // const footerUrl = `${apiPath}/footer?${queryFooter}`;
-    // const fResponse = await fetch(footerUrl);
-    // const { fData } = await fResponse.json();
-    // const { fAttributes } = fData;
-    // const { footerResourceLinks: resourceObjects, socials: socialObjects } =
-    //   fAttributes;
-
-    // let resourcePages = resourceObjects.map((page): Page => {
-    //   const newResourcePage = page.page.fData.fAttributes;
-    //   return {
-    //     ...newResourcePage,
-    //     title: page.title,
-    //   };
-    // });
   };
 </script>
 
@@ -65,6 +25,8 @@
   import '../colors.css';
   import '../global.css';
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
+  import sanitizeHtml from 'sanitize-html';
 
   export let nav: {
     pages: Page[];
@@ -73,8 +35,9 @@
     includeContactForm: boolean;
   };
 
-  export let footer: { pages: Page[] };
-  console.log(footer.pages);
+  export let footer: { resourcePages: Page[]; dgcPages: Page[] };
+  console.log(footer.resourcePages);
+  console.log(footer.dgcPages);
 
   /*
   import type {
@@ -112,6 +75,7 @@
         .then(parseJSON);
       socials = res.data;
 
+      /*
       for (var i = 0; i < socials.length; i++) {
         console.log(
           'SocialMediaLogo: ',
@@ -120,6 +84,7 @@
         console.log('url: ', socials[i]?.attributes.url);
         console.log('logoAltText: ', socials[i]?.attributes.logoAltText);
       }
+      */
     } catch (e) {
       error = e as unknown;
     }
@@ -153,27 +118,104 @@
 <slot />
 
 <footer>
-  {#if error !== null}
-    {error}
-    {console.log(error)}
-  {:else}
-    <ul>
-      {#each socials as social}
-        <li class="social">
-          <a
-            href={social?.attributes.url}
-            aria-labelledby={social?.attributes.logoAltText}
-            ><img
-              src="{'http://localhost:1337'}{social?.attributes.SocialMediaLogo
-                ?.data?.attributes?.url}"
-              alt={social?.attributes.logoAltText}
-              width="30em"
-              height="30em" /></a>
-        </li>
-      {/each}
-    </ul>
-  {/if}
+  <div class="container">
+    <div class="resources">
+      <h3>Resources</h3>
+      <ul class="links">
+        {#each footer.resourcePages as foot}
+          <li>
+            {@html sanitizeHtml(foot.content)}
+          </li>
+        {/each}
+      </ul>
+    </div>
+    <div class="resources">
+      <h3>DGC</h3>
+      <ul class="links">
+        {#each footer.dgcPages as otherFoot}
+          <li>
+            {@html sanitizeHtml(otherFoot.content)}
+          </li>
+        {/each}
+      </ul>
+    </div>
+    <div class="resources">
+      <h3>Socials</h3>
+      <p class="special">Follow us on social media!</p>
+      <ul class="socials">
+        {#if error !== null}
+          {error}
+          {console.log(error)}
+        {:else}
+          {#each socials as social}
+            <a
+              class="special"
+              href={social?.attributes.url}
+              aria-labelledby={social?.attributes.logoAltText}
+              ><img
+                src="{'http://localhost:1337'}{social?.attributes
+                  .SocialMediaLogo?.data?.attributes?.url}"
+                alt={social?.attributes.logoAltText}
+                width="40em"
+                height="40em" /></a>
+          {/each}
+        {/if}
+      </ul>
+    </div>
+  </div>
 </footer>
 
 <style>
+  footer {
+    background-color: var(--primary-color);
+  }
+
+  a {
+    padding: 0%;
+    text-align: left;
+  }
+
+  h3 {
+    padding: none;
+    text-align: center;
+  }
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .container {
+    display: flex;
+  }
+
+  .resources {
+    flex: 1;
+    padding: 1em;
+  }
+
+  .socials {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 0 0 0;
+  }
+
+  .links {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 0 0;
+  }
+
+  .special {
+    text-align: center;
+    padding: 0%;
+  }
+
+  @media (max-width: 400px) {
+    .container {
+      display: block;
+    }
+  }
 </style>
