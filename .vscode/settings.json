@@ -3,5 +3,21 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "cssPeek.peekFromLanguages": ["svelte"],
-  "conventionalCommits.scopes": ["Header", "Documentation", "Styles", "Backend"]
+  "conventionalCommits.scopes": [
+    "Header",
+    "Documentation",
+    "Styles",
+    "Backend"
+  ],
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]",
+    "@KAMERON",
+    "@LUKE"
+  ]
 }

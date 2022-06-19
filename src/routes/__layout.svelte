@@ -1,62 +1,8 @@
 <!-- This will populate the navbar automatically -->
 <script lang="ts" context="module">
   import type { Load } from '@sveltejs/kit';
-  import qs from 'qs';
-
-  const queryNav = qs.stringify({
-    fields: '*',
-    populate: {
-      pages: {
-        populate: '*',
-      },
-    },
-  });
-
-  const queryFooter = qs.stringify({
-    populate: {
-      footerResourceLinks: {
-        populate: '*',
-      },
-    },
-  });
-
-  // pass data from Nav response - breaks data down into attributes
-  const destructureNav = async ({
-    data: { attributes },
-  }: {
-    data: { attributes: NavigationMenu };
-  }) => {
-    const pages = attributes.pages.map((page): Page => {
-      const newPage = page.page.data?.attributes;
-      return {
-        ...newPage,
-        title: page.title,
-      };
-    });
-    return {
-      ...attributes,
-      pages,
-    };
-  };
-
-  const destructureFooter = async ({
-    data: { attributes },
-  }: {
-    data: { attributes: Footer };
-  }) => {
-    const pages = attributes.footerResourceLinks.map((link): Page => {
-      const newPage = link.page.data?.attributes;
-      return {
-        ...newPage,
-        title: link.title,
-      };
-    });
-    return {
-      pages,
-    };
-  };
-
   export const load: Load = async ({ fetch }) => {
+    // @KAMERON: can this comment block be removed?
     /* Promise.all - how to correctly separate the data ( .then(function (data))
     const apiPath = import.meta.env.VITE_API_PATH as string;
     Promise.all([
@@ -80,23 +26,19 @@
       });
       */
 
-    const apiPath = import.meta.env.VITE_API_PATH as string;
-    const navURL = `${apiPath}/api/navigation-menu?${queryNav}`;
-    const navResponse = await fetch(navURL);
-    const nav = await destructureNav(await navResponse.json());
-
-    const footerURL = `${apiPath}/api/footer?${queryFooter}`;
-    const footerResponse = await fetch(footerURL);
-    const footer = await destructureFooter(await footerResponse.json());
+    const navURL = `/api/layout.json`;
+    const response = await fetch(navURL);
+    const { nav, footer } = await response.json();
 
     return {
-      status: navResponse.status,
+      status: response.status,
       props: {
         nav,
         footer,
       },
     };
 
+    // @KAMERON: can this comment block be removed also?
     // const footerUrl = `${apiPath}/footer?${queryFooter}`;
     // const fResponse = await fetch(footerUrl);
     // const { fData } = await fResponse.json();
