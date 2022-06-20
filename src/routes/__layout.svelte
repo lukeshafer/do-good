@@ -187,7 +187,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    padding-top: 1em;
+    padding: none;
     text-align: center;
   }
 
@@ -202,14 +202,16 @@
     justify-content: flex-start;
   }
 
+  .copyright {
+    padding-top: 2em;
+  }
   .container {
     display: flex;
-    padding: 0 0 0 0;
   }
 
   .resources {
     flex: 1;
-    padding: none;
+    padding: 1em;
   }
 
   .socials {
@@ -222,7 +224,7 @@
   .links {
     display: flex;
     justify-content: center;
-    padding: none;
+    padding: 0 0 0 0;
   }
 
   .special {
