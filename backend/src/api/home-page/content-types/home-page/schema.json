@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "featured": {
+    "Featured": {
       "type": "component",
       "repeatable": false,
       "component": "blocks.featured-page"

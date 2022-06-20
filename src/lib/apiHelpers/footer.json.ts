@@ -5,6 +5,9 @@ const queryFooter = qs.stringify({
     footerResourceLinks: {
       populate: '*',
     },
+    dgcLinks: {
+      populate: '*',
+    },
   },
 });
 
@@ -13,15 +16,25 @@ const destructureFooter = async ({
 }: {
   data: { attributes: Footer };
 }) => {
-  const pages = attributes.footerResourceLinks.map((link): Page => {
-    const newPage = link.page.data?.attributes;
+  const resourcePages = attributes.footerResourceLinks.map((link): Page => {
+    const resourcePage = link.page.data?.attributes;
     return {
-      ...newPage,
+      ...resourcePage,
       title: link.title,
     };
   });
+
+  const dgcPages = attributes.dgcLinks.map((link): Page => {
+    const dgcPage = link.page.data?.attributes;
+    return {
+      ...dgcPage,
+      title: link.title,
+    };
+  });
+
   return {
-    pages,
+    resourcePages,
+    dgcPages,
   };
 };
 
