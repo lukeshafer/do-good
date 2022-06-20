@@ -9,13 +9,13 @@
 
   // two arrays of blank strings of the same length as fields
   const formData = fields.map(() => '');
-  const validationErrorList = formData;
+  const validationErrorList = fields.map(() => '');
 
   let dropDownIndex = 0;
 
   const selectedDropdowns = fields
     .filter((field) => field.__component === 'form-fields.drop-down')
-    .map(() => '');
+    .map(() => '-Select-');
 
   let valid: boolean;
 
@@ -41,11 +41,11 @@
           switch (field.type) {
             case 'email':
               //validate email
-              if (!regex.test(data) && data.trim().length > 0) {
+              if (!regex.test(data)) {
                 valid = false;
                 validationErrorList[
                   index
-                ] = `${field.name} must be a valid email address!`;
+                ] = `${field.name} is required - must be a valid email address!`;
               } else {
                 validationErrorList[index] = '';
               }
@@ -64,8 +64,8 @@
           break;
         case 'form-fields.text':
           //validate dropdown
-          if (data == '--Select--') {
-            formData[index] = '';
+          if (data == '-Select-') {
+            formData[index] = '-Select-';
           }
       }
     }
@@ -175,11 +175,10 @@
       {:else if field.__component === 'form-fields.drop-down'}
         <!-- DROP DOWN LOGIC GOES HERE! -->
         <select
-          placeholder="--Select--"
           bind:value={selectedDropdowns[dropDownIndex]}
           on:change={() =>
             (formData[index] = selectedDropdowns[dropDownIndex])}>
-          <option value="--Select--">{'--Select--'}</option>
+          <option value="-Select-" selected>{'-Select-'}</option>
           {#each field.entries as entry}
             <option value={entry.value}>{entry.value}</option>
           {/each}
@@ -193,9 +192,12 @@
             placeholder="Enter your pronouns"
             bind:value={formData[index]} />
         {/if}
+
+        <!--
         <script lang="ts">
           dropDownIndex++;
         </script>
+        -->
       {/if}
     {/each}
 
