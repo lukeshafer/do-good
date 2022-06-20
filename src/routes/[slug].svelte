@@ -1,26 +1,4 @@
 <!-- This is a template for generic pages used by the Page collection type -->
-<script lang="ts" context="module">
-  import type { Load } from '@sveltejs/kit';
-  import sanitizeHtml from 'sanitize-html';
-
-  export const load: Load = async ({ params, fetch }) => {
-    const apiPath = import.meta.env.VITE_API_PATH as string;
-    const url = `${apiPath}/api/pages/${params.slug}`;
-    const response = await fetch(url);
-    const { data } = await response.json();
-    const page = data?.attributes as Page;
-    let sanitizedContent = sanitizeHtml(page?.content);
-
-    return {
-      status: response.status,
-      props: {
-        title: response.ok && page.title,
-        content: response.ok && sanitizedContent,
-      },
-    };
-  };
-</script>
-
 <script lang="ts">
   export let title: string, content: string;
 </script>

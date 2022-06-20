@@ -1,26 +1,3 @@
-<script lang="ts" context="module">
-  import type { Load } from '@sveltejs/kit';
-  import sanitizeHtml from 'sanitize-html';
-
-  export const load: Load = async ({ params, fetch }) => {
-    const apiPath = import.meta.env.VITE_API_PATH as string;
-    const url = `${apiPath}/api/fundraisers/${params.slug}`;
-    const response = await fetch(url);
-    const { data } = await response.json();
-    const fundraiser = data?.attributes as Fundraiser;
-    let sanitizedStory = sanitizeHtml(fundraiser?.story);
-
-    return {
-      status: response.status,
-      props: {
-        title: response.ok && fundraiser?.title,
-        story: response.ok && sanitizedStory,
-        href: response.ok && fundraiser?.donationLink,
-      },
-    };
-  };
-</script>
-
 <script lang="ts">
   import Box from '$lib/components/Box.svelte';
   export let title: string, story: string, href: string;
