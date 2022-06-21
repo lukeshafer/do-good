@@ -36,8 +36,8 @@
   };
 
   export let footer: { resourcePages: Page[]; dgcPages: Page[] };
-  console.log(footer.resourcePages);
-  console.log(footer.dgcPages);
+  // console.log(footer.resourcePages);
+  // console.log(footer.dgcPages);
 
   /*
   import type {
