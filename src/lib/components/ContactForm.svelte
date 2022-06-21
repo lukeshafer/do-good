@@ -21,6 +21,26 @@
 
   let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
   let phoneTemplate = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  /*
+  const sendEmail = () => {
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: 'dogoodcollectiveorg@gmail.com', // Change to your recipient
+      from: `${formData[2]}`, // Change to your verified sender
+      subject: `${formData[4]}`,
+      text: 'and easy to do anywhere, even with Node.js',
+      html: '<div>`${formData[5]}`<br /><br />`${formData[0]}`<br />`${formData[1]}`<br />`${formData[3]`</div>',
+    };
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };*/
 
   const formValidation = () => {
     valid = true;
@@ -93,22 +113,20 @@
         // console.log(name, pronouns, email, phone, reason, msg);
 
         const responseBody = {
-          fj: 'jfds',
+          from: `${formData[2]}`,
+          subject: `${formData[4]}`,
+          text: 'This is a test.',
+          html: '<div>{formData[5]}</div><div>{formData[0]}</div><div>{formData[3]}</div><div>{formData[1]}</div>',
         };
 
-        responseMessage = '👍';
+        responseMessage = 'Email sent.';
 
-        // const result = await fetch('api/contact', {
-        //   method: 'POST',
-        //   body: JSON.stringify({
-        //     name,
-        //     pronouns,
-        //     email,
-        //     phone,
-        //     reason,
-        //     msg,
-        //   }),
-        // });
+        const result = await fetch('api/email/controllers/Email', {
+          method: 'POST',
+          body: JSON.stringify({
+            responseBody,
+          }),
+        });
 
         // const data = await result.json();
         // console.log(data);
@@ -124,10 +142,7 @@
 {#if !responseMessage && !responseError}
   <!-- FORMSPREE LINK: https://formspree.io/f/mgedqaob-->
   <!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>-->
-  <form
-    action="/api/contact"
-    method="POST"
-    on:submit|preventDefault={submitForm}>
+  <form action="/emails" method="POST" on:submit|preventDefault={submitForm}>
     <span
       for="Required fields are marked by an asterisk. (*)"
       class="error info"

@@ -49,8 +49,10 @@
   "type": "module",
   "dependencies": {
     "-": "^0.0.1",
+    "@strapi/provider-email-sendgrid": "^4.2.0",
     "g": "^2.0.1",
     "npm": "^8.12.1",
-    "sanitize-html": "^2.7.0"
+    "sanitize-html": "^2.7.0",
+    "strapi-plugin-email-designer": "^2.1.1"
   }
 }

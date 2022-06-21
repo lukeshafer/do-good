@@ -1,5 +1,18 @@
-module.exports = () => {
+module.exports = ({ env }) => {
   return {
+    email: {
+      config: {
+        provider: 'sendgrid',
+        providerOptions: {
+          apiKey: env('SENDGRID_API_KEY'),
+        },
+        settings: {
+          defaultFrom: 'dogoodcollectiveorg@gmail.com',
+          defaultReplyTo: 'dogoodcollectiveorg@gmail.com',
+          testAddress: 'dogoodcollectiveorg@gmail.com',
+        },
+      },
+    },
     ckeditor: {
       enabled: true,
       config: {
