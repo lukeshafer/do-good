@@ -2,7 +2,6 @@
   import Box from '$lib/components/Box.svelte';
   import type { Load } from '@sveltejs/kit';
   export const load: Load = ({ error, status, params }) => {
-    console.log(error);
     return {
       props: {
         status: status,

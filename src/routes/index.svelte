@@ -23,6 +23,7 @@
   export const load: Load = async ({ fetch }) => {
     const apiPath = import.meta.env.VITE_API_PATH as string;
     const url = `${apiPath}/api/home-page?${query}`;
+    console.log(url);
     const response = await fetch(url);
     const {
       data: { attributes },
