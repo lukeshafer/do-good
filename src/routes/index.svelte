@@ -72,7 +72,7 @@
     <img
       width="100"
       slot="icon"
-      src="{import.meta.env.VITE_API_PATH}{featuredIcon.url}"
+      src={featuredIcon.url}
       alt={featuredIcon.alternativeText} />
     <p slot="body">
       {featured.shortDescription}
