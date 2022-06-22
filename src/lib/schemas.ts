@@ -30,11 +30,32 @@ export const internalLinkSchema = z.object({
   page: pageSchema,
 });
 
+const navigationLinkSchema = z.object({
+  __component: z.literal('link.navigation-link'),
+  id: z.number(),
+  title: z.string(),
+  page: pageSchema,
+});
+
+const navigationDropDownSchema = z.object({
+  title: z.string(),
+  __component: z.literal('link.nav-drop-down'),
+  links: z.array(internalLinkSchema),
+});
+
+export const navigationItemsSchema = navigationLinkSchema.or(
+  navigationDropDownSchema
+);
+
 export const navigationMenuSchema = z.object({
-  includeHomePage: z.boolean(),
-  includeFAQ: z.boolean(),
-  includeContactForm: z.boolean(),
-  pages: z.array(internalLinkSchema),
+  data: z.object({
+    attributes: z.object({
+      includeHomePage: z.boolean(),
+      includeFAQ: z.boolean(),
+      includeContactForm: z.boolean(),
+      pages: z.array(navigationItemsSchema),
+    }),
+  }),
 });
 
 export const footerSchema = z.object({

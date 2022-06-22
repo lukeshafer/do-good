@@ -1,43 +1,17 @@
-<!-- This will populate the navbar automatically -->
-<script lang="ts" context="module">
-  import type { Load } from '@sveltejs/kit';
-
-  export const load: Load = async ({ fetch }) => {
-    const navURL = `/api/layout.json`;
-    const response = await fetch(navURL);
-    const { nav, footer } = await response.json();
-    return {
-      status: response.status,
-      props: {
-        nav,
-        footer,
-      },
-    };
-  };
-</script>
-
 <script lang="ts">
   import Header from '$lib/components/Header.svelte';
   import Logo from '$lib/components/Logo.svelte';
   import Navbar from '$lib/components/Nav/Navbar.svelte';
   import NavItem from '$lib/components/Nav/NavItem.svelte';
+  import NavDropDown from '$lib/components/Nav/NavDropDown.svelte';
   import 'normalize.css';
   import '../colors.css';
   import '../global.css';
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import sanitizeHtml from 'sanitize-html';
-
-  export let nav: {
-    pages: Page[];
-    includeHomePage: boolean;
-    includeFAQ: boolean;
-    includeContactForm: boolean;
-  };
-
-  export let footer: { resourcePages: Page[]; dgcPages: Page[] };
-  // console.log(footer.resourcePages);
-  // console.log(footer.dgcPages);
+  import { nav } from '$lib/apiHelpers/nav.json';
+  import { footer } from '$lib/apiHelpers/footer.json';
 
   /*
   import type {
@@ -104,7 +78,17 @@
       <NavItem href="/contact">Contact</NavItem>
     {/if}
     {#each nav.pages as page}
-      <NavItem href="/{page.slug}">{page.title}</NavItem>
+      {#if page.__component === 'link.navigation-link'}
+        <NavItem href="/{page.page.data.attributes.slug}"
+          >{page.page.data.attributes.title}</NavItem>
+      {:else if page.__component === 'link.nav-drop-down'}
+        <NavDropDown name={page.title}>
+          {#each page.links as link}
+            <NavItem href="/{link.page.data.attributes.slug}"
+              >{link.page.data.attributes.title}</NavItem>
+          {/each}
+        </NavDropDown>
+      {/if}
     {/each}
     <!-- <NavItem href="/">What is DGC?</NavItem>
     <NavItem href="/">How can I help?</NavItem>

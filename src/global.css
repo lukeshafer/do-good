@@ -75,7 +75,8 @@ p {
   font: 500 1em var(--body-font);
 }
 
-a {
+a,
+button {
   font-family: var(--body-font);
 }
 

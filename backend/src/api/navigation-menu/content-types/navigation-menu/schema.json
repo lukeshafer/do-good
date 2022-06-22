@@ -22,13 +22,15 @@
       "default": true,
       "required": true
     },
-    "pages": {
-      "type": "component",
-      "repeatable": true,
-      "component": "link.navigation-link"
-    },
     "includeContactForm": {
       "type": "boolean"
+    },
+    "pages": {
+      "type": "dynamiczone",
+      "components": [
+        "link.nav-drop-down",
+        "link.navigation-link"
+      ]
     }
   }
 }
