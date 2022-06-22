@@ -1,3 +1,20 @@
+<script lang="ts" context="module">
+  import type { Load } from '@sveltejs/kit';
+
+  export const load: Load = async ({ fetch }) => {
+    const navURL = `/api/layout.json`;
+    const response = await fetch(navURL);
+    const { nav, footer } = await response.json();
+    return {
+      status: response.status,
+      props: {
+        nav: response.ok && nav,
+        footer: response.ok && footer,
+      },
+    };
+  };
+</script>
+
 <script lang="ts">
   import Header from '$lib/components/Header.svelte';
   import Logo from '$lib/components/Logo.svelte';
@@ -7,12 +24,13 @@
   import 'normalize.css';
   import '../colors.css';
   import '../global.css';
-  import { nav } from '$lib/apiHelpers/nav.json';
-  import { footer } from '$lib/apiHelpers/footer.json';
+  import type { nav, footer } from './api/layout.json';
   import FooterLinks from '$lib/components/Footer/FooterLinks.svelte';
   import FooterSocials from '$lib/components/Footer/FooterSocials.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import FooterCopyright from '$lib/components/Footer/FooterCopyright.svelte';
+
+  export let nav: nav, footer: footer;
 </script>
 
 <Header>
@@ -44,7 +62,7 @@
 </Header>
 
 <slot>
-  <!-- Page content will go here -->
+  <!-- Sveltekit inserts page content here -->
 </slot>
 
 <Footer>
