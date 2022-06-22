@@ -20,11 +20,7 @@
     "path": "/documentation",
     "showGeneratedFiles": true,
     "generateDefaultResponse": true,
-    "plugins": [
-      "email",
-      "upload",
-      "users-permissions"
-    ]
+    "plugins": ["email", "upload", "users-permissions"]
   },
   "servers": [
     {
@@ -52,9 +48,7 @@
     "schemas": {
       "Error": {
         "type": "object",
-        "required": [
-          "error"
-        ],
+        "required": ["error"],
         "properties": {
           "data": {
             "nullable": true,
@@ -89,15 +83,10 @@
       },
       "ContactFormRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "heading",
-              "fields"
-            ],
+            "required": ["heading", "fields"],
             "type": "object",
             "properties": {
               "heading": {
@@ -152,12 +141,7 @@
                         },
                         "type": {
                           "type": "string",
-                          "enum": [
-                            "short",
-                            "long",
-                            "email",
-                            "phone"
-                          ]
+                          "enum": ["short", "long", "email", "phone"]
                         },
                         "note": {
                           "type": "string"
@@ -246,12 +230,7 @@
                               },
                               "type": {
                                 "type": "string",
-                                "enum": [
-                                  "short",
-                                  "long",
-                                  "email",
-                                  "phone"
-                                ]
+                                "enum": ["short", "long", "email", "phone"]
                               },
                               "note": {
                                 "type": "string"
@@ -661,12 +640,7 @@
                             },
                             "type": {
                               "type": "string",
-                              "enum": [
-                                "short",
-                                "long",
-                                "email",
-                                "phone"
-                              ]
+                              "enum": ["short", "long", "email", "phone"]
                             },
                             "note": {
                               "type": "string"
@@ -984,9 +958,7 @@
       },
       "FaqRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
             "required": [],
@@ -1675,14 +1647,10 @@
       },
       "FooterRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "dgcLinks"
-            ],
+            "required": ["dgcLinks"],
             "type": "object",
             "properties": {
               "footerResourceLinks": {
@@ -3530,9 +3498,7 @@
       },
       "FundraiserRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
             "required": [
@@ -4263,9 +4229,7 @@
       },
       "HomePageRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
             "required": [],
@@ -6097,15 +6061,10 @@
       },
       "NavigationMenuRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "includeHomePage",
-              "includeFAQ"
-            ],
+            "required": ["includeHomePage", "includeFAQ"],
             "type": "object",
             "properties": {
               "includeHomePage": {
@@ -7140,16 +7099,10 @@
       },
       "PageRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "title",
-              "slug",
-              "content"
-            ],
+            "required": ["title", "slug", "content"],
             "type": "object",
             "properties": {
               "title": {
@@ -7844,16 +7797,10 @@
       },
       "SocialRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "SocialMediaLogo",
-              "url",
-              "logoAltText"
-            ],
+            "required": ["SocialMediaLogo", "url", "logoAltText"],
             "type": "object",
             "properties": {
               "SocialMediaLogo": {
@@ -9290,19 +9237,10 @@
       },
       "UploadFileRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
-            ],
+            "required": ["name", "hash", "mime", "size", "url", "provider"],
             "type": "object",
             "properties": {
               "name": {
@@ -10133,14 +10071,10 @@
       },
       "UsersPermissionsPermissionRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "action"
-            ],
+            "required": ["action"],
             "type": "object",
             "properties": {
               "action": {
@@ -11328,14 +11262,10 @@
       },
       "UsersPermissionsRoleRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "name"
-            ],
+            "required": ["name"],
             "type": "object",
             "properties": {
               "name": {
@@ -12604,15 +12534,10 @@
       },
       "UsersPermissionsUserRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "username",
-              "email"
-            ],
+            "required": ["username", "email"],
             "type": "object",
             "properties": {
               "username": {
@@ -13927,9 +13852,7 @@
             }
           }
         },
-        "tags": [
-          "Contact-form"
-        ],
+        "tags": ["Contact-form"],
         "parameters": [
           {
             "name": "sort",
@@ -14077,9 +14000,7 @@
             }
           }
         },
-        "tags": [
-          "Contact-form"
-        ],
+        "tags": ["Contact-form"],
         "parameters": [],
         "operationId": "put/contact-form",
         "requestBody": {
@@ -14157,9 +14078,7 @@
             }
           }
         },
-        "tags": [
-          "Contact-form"
-        ],
+        "tags": ["Contact-form"],
         "parameters": [],
         "operationId": "delete/contact-form"
       }
@@ -14228,9 +14147,7 @@
             }
           }
         },
-        "tags": [
-          "Faq"
-        ],
+        "tags": ["Faq"],
         "parameters": [
           {
             "name": "sort",
@@ -14378,9 +14295,7 @@
             }
           }
         },
-        "tags": [
-          "Faq"
-        ],
+        "tags": ["Faq"],
         "parameters": [],
         "operationId": "post/faqs",
         "requestBody": {
@@ -14459,9 +14374,7 @@
             }
           }
         },
-        "tags": [
-          "Faq"
-        ],
+        "tags": ["Faq"],
         "parameters": [
           {
             "name": "id",
@@ -14539,9 +14452,7 @@
             }
           }
         },
-        "tags": [
-          "Faq"
-        ],
+        "tags": ["Faq"],
         "parameters": [
           {
             "name": "id",
@@ -14630,9 +14541,7 @@
             }
           }
         },
-        "tags": [
-          "Faq"
-        ],
+        "tags": ["Faq"],
         "parameters": [
           {
             "name": "id",
@@ -14712,9 +14621,7 @@
             }
           }
         },
-        "tags": [
-          "Footer"
-        ],
+        "tags": ["Footer"],
         "parameters": [
           {
             "name": "sort",
@@ -14862,9 +14769,7 @@
             }
           }
         },
-        "tags": [
-          "Footer"
-        ],
+        "tags": ["Footer"],
         "parameters": [],
         "operationId": "put/footer",
         "requestBody": {
@@ -14942,9 +14847,7 @@
             }
           }
         },
-        "tags": [
-          "Footer"
-        ],
+        "tags": ["Footer"],
         "parameters": [],
         "operationId": "delete/footer"
       }
@@ -15013,9 +14916,7 @@
             }
           }
         },
-        "tags": [
-          "Fundraiser"
-        ],
+        "tags": ["Fundraiser"],
         "parameters": [
           {
             "name": "sort",
@@ -15163,9 +15064,7 @@
             }
           }
         },
-        "tags": [
-          "Fundraiser"
-        ],
+        "tags": ["Fundraiser"],
         "parameters": [],
         "operationId": "post/fundraisers",
         "requestBody": {
@@ -15244,9 +15143,7 @@
             }
           }
         },
-        "tags": [
-          "Fundraiser"
-        ],
+        "tags": ["Fundraiser"],
         "parameters": [
           {
             "name": "id",
@@ -15324,9 +15221,7 @@
             }
           }
         },
-        "tags": [
-          "Fundraiser"
-        ],
+        "tags": ["Fundraiser"],
         "parameters": [
           {
             "name": "id",
@@ -15415,9 +15310,7 @@
             }
           }
         },
-        "tags": [
-          "Fundraiser"
-        ],
+        "tags": ["Fundraiser"],
         "parameters": [
           {
             "name": "id",
@@ -15497,9 +15390,7 @@
             }
           }
         },
-        "tags": [
-          "Home-page"
-        ],
+        "tags": ["Home-page"],
         "parameters": [
           {
             "name": "sort",
@@ -15647,9 +15538,7 @@
             }
           }
         },
-        "tags": [
-          "Home-page"
-        ],
+        "tags": ["Home-page"],
         "parameters": [],
         "operationId": "put/home-page",
         "requestBody": {
@@ -15727,9 +15616,7 @@
             }
           }
         },
-        "tags": [
-          "Home-page"
-        ],
+        "tags": ["Home-page"],
         "parameters": [],
         "operationId": "delete/home-page"
       }
@@ -15798,9 +15685,7 @@
             }
           }
         },
-        "tags": [
-          "Navigation-menu"
-        ],
+        "tags": ["Navigation-menu"],
         "parameters": [
           {
             "name": "sort",
@@ -15948,9 +15833,7 @@
             }
           }
         },
-        "tags": [
-          "Navigation-menu"
-        ],
+        "tags": ["Navigation-menu"],
         "parameters": [],
         "operationId": "put/navigation-menu",
         "requestBody": {
@@ -16028,9 +15911,7 @@
             }
           }
         },
-        "tags": [
-          "Navigation-menu"
-        ],
+        "tags": ["Navigation-menu"],
         "parameters": [],
         "operationId": "delete/navigation-menu"
       }
@@ -16099,9 +15980,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [
           {
             "name": "sort",
@@ -16249,9 +16128,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [],
         "operationId": "post/pages",
         "requestBody": {
@@ -16330,9 +16207,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [
           {
             "name": "id",
@@ -16410,9 +16285,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [
           {
             "name": "id",
@@ -16501,9 +16374,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [
           {
             "name": "id",
@@ -16583,9 +16454,7 @@
             }
           }
         },
-        "tags": [
-          "Social"
-        ],
+        "tags": ["Social"],
         "parameters": [
           {
             "name": "sort",
@@ -16733,9 +16602,7 @@
             }
           }
         },
-        "tags": [
-          "Social"
-        ],
+        "tags": ["Social"],
         "parameters": [],
         "operationId": "post/socials",
         "requestBody": {
@@ -16814,9 +16681,7 @@
             }
           }
         },
-        "tags": [
-          "Social"
-        ],
+        "tags": ["Social"],
         "parameters": [
           {
             "name": "id",
@@ -16894,9 +16759,7 @@
             }
           }
         },
-        "tags": [
-          "Social"
-        ],
+        "tags": ["Social"],
         "parameters": [
           {
             "name": "id",
@@ -16985,9 +16848,7 @@
             }
           }
         },
-        "tags": [
-          "Social"
-        ],
+        "tags": ["Social"],
         "parameters": [
           {
             "name": "id",
@@ -17067,9 +16928,7 @@
             }
           }
         },
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "sort",
@@ -17219,9 +17078,7 @@
             }
           }
         },
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -17300,9 +17157,7 @@
             }
           }
         },
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -17382,9 +17237,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - Permission"
-        ],
+        "tags": ["Users-permissions - Permission"],
         "parameters": [],
         "operationId": "get/users-permissions/permissions"
       }
@@ -17453,9 +17306,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - Role"
-        ],
+        "tags": ["Users-permissions - Role"],
         "parameters": [
           {
             "name": "id",
@@ -17535,9 +17386,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - Role"
-        ],
+        "tags": ["Users-permissions - Role"],
         "parameters": [
           {
             "name": "sort",
@@ -17685,9 +17534,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - Role"
-        ],
+        "tags": ["Users-permissions - Role"],
         "parameters": [],
         "operationId": "post/users-permissions/roles",
         "requestBody": {
@@ -17766,9 +17613,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - Role"
-        ],
+        "tags": ["Users-permissions - Role"],
         "parameters": [
           {
             "name": "role",
@@ -17857,9 +17702,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - Role"
-        ],
+        "tags": ["Users-permissions - Role"],
         "parameters": [
           {
             "name": "role",
@@ -17939,9 +17782,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - User"
-        ],
+        "tags": ["Users-permissions - User"],
         "parameters": [],
         "operationId": "get/users/count"
       }
@@ -18010,9 +17851,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - User"
-        ],
+        "tags": ["Users-permissions - User"],
         "parameters": [
           {
             "name": "sort",
@@ -18160,9 +17999,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - User"
-        ],
+        "tags": ["Users-permissions - User"],
         "parameters": [],
         "operationId": "post/users",
         "requestBody": {
@@ -18241,9 +18078,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - User"
-        ],
+        "tags": ["Users-permissions - User"],
         "parameters": [],
         "operationId": "get/users/me"
       }
@@ -18312,9 +18147,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - User"
-        ],
+        "tags": ["Users-permissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -18392,9 +18225,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - User"
-        ],
+        "tags": ["Users-permissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -18483,9 +18314,7 @@
             }
           }
         },
-        "tags": [
-          "Users-permissions - User"
-        ],
+        "tags": ["Users-permissions - User"],
         "parameters": [
           {
             "name": "id",
