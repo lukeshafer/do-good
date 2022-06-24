@@ -3,6 +3,7 @@
   import FooterSocials from './Socials.svelte';
   import FooterResources from './FooterResources.svelte';
   import type { Load } from '@sveltejs/kit';
+  import FooterCopyright from './FooterCopyright.svelte';
 
   export const load: Load = async ({ fetch }) => {
     const navURL = `/api/layout.json`;
@@ -21,19 +22,17 @@
 </script>
 
 <footer>
-  <div class="copyright">
-    <h3>&copy;2022, Do Good Collective</h3>
-  </div>
+  <FooterCopyright />
   <div class="container">
     <FooterResources />
     <FooterDgc />
-
     <FooterSocials />
   </div>
 </footer>
 <svelte:body />
 
-<div class="copyright">
-  <h3>&copy;2022, Do Good Collective</h3>
-</div>
-<div class="container" />
+<style>
+  .container {
+    display: flex;
+  }
+</style>

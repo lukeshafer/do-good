@@ -1,7 +1,7 @@
 <script lang="ts">
   import sanitizeHtml from 'sanitize-html';
 
-  export let items: Page[];
+  export let items: InternalLink[];
   export let header: string;
 </script>
 
@@ -9,7 +9,7 @@
   <h4>{header}</h4>
   {#each items as item}
     <li class="links">
-      {@html sanitizeHtml(item.content.substring(3, item.content.length - 4))}
+      {item.title} - will be linked soon
     </li>
     <br />
   {/each}
@@ -20,6 +20,7 @@
     display: flex;
     justify-content: center;
     padding: 0 0 0 0;
+    font-family: 'Fira Code';
   }
 
   .resources {
@@ -30,5 +31,9 @@
   h4 {
     padding: none;
     text-align: center;
+  }
+
+  a {
+    font-family: 'Fira Code';
   }
 </style>
