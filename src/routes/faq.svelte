@@ -23,12 +23,15 @@
     };
 
     try {
-      const res = await fetch('http://localhost:1337/api/faqs', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      const res = await fetch(
+        `${import.meta.env.VITE_API_PATH}` + '/api/faqs',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
         .then(checkStatus)
         .then(parseJSON);
       faqs = res.data;
