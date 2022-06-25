@@ -65,8 +65,7 @@
           href={social?.attributes.url}
           aria-labelledby={social?.attributes.logoAltText}
           ><img
-            src="{`${import.meta.env.VITE_API_PATH}`}{social?.attributes
-              .SocialMediaLogo?.data?.attributes?.url}"
+            src={social?.attributes.SocialMediaLogo?.data?.attributes?.url}
             alt={social?.attributes.logoAltText}
             width="40em"
             height="40em" /></a>
