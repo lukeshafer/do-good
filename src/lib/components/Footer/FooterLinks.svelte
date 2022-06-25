@@ -1,7 +1,5 @@
 <script lang="ts">
-  import sanitizeHtml from 'sanitize-html';
-
-  export let items: InternalLink[];
+  export let items: Page[];
   export let header: string;
 </script>
 
@@ -9,7 +7,7 @@
   <h4>{header}</h4>
   {#each items as item}
     <li class="links">
-      {item.title} - will be linked soon
+      <a href="/{item.slug}" aria-labelledby={item.slug}>{item.title}</a>
     </li>
     <br />
   {/each}
