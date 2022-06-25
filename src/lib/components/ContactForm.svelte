@@ -104,29 +104,23 @@
     if (formValidation()) {
       console.log('request is : ', formData);
       try {
-        // let name = formFields.name;
-        // let pronouns = formFields.pronouns;
-        // let email = formFields.email;
-        // let phone = formFields.phone;
-        // let reason = formFields.reason;
-        // let msg = formFields.message;
         // console.log(name, pronouns, email, phone, reason, msg);
 
         const responseBody = {
-          from: `${formData[2]}`,
-          subject: `${formData[4]}`,
-          text: 'This is a test.',
-          html: '<div>{formData[5]}</div><div>{formData[0]}</div><div>{formData[3]}</div><div>{formData[1]}</div>',
+          name: formData[0],
+          pronouns: formData[1],
+          email: formData[2],
+          phone: formData[3],
+          reason: formData[4],
+          msg: formData[5],
         };
 
-        responseMessage = 'Email sent.';
-
-        const result = await fetch('api/email/controllers/Email', {
+        const result = await fetch('email', {
           method: 'POST',
-          body: JSON.stringify({
-            responseBody,
-          }),
+          body: JSON.stringify(responseBody),
         });
+
+        responseMessage = 'Email sent successfully.';
 
         // const data = await result.json();
         // console.log(data);
@@ -134,6 +128,7 @@
         // console.log(responseMessage);
       } catch (err: unknown) {
         responseError = err;
+        console.log(responseError);
       }
     }
   };
@@ -142,7 +137,7 @@
 {#if !responseMessage && !responseError}
   <!-- FORMSPREE LINK: https://formspree.io/f/mgedqaob-->
   <!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>-->
-  <form action="/emails" method="POST" on:submit|preventDefault={submitForm}>
+  <form action="/email" method="GET" on:submit|preventDefault={submitForm}>
     <span
       for="Required fields are marked by an asterisk. (*)"
       class="error info"

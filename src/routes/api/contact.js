@@ -1,25 +1,21 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-export const post = async ({ request }) => {
-  //console.log(request);
-
-  const body = await request.formData();
-
-  const name = body.get('name');
-  const pronouns = body.get('pronouns');
-  const email = body.get('email');
-  const phone = body.get('phone');
-  const reason = body.get('reason');
-  const msg = body.get('message');
-
-  return {
-    body: {
-      name,
-      pronouns,
-      email,
-      phone,
-      reason,
-      msg,
-    },
-  };
+module.exports = {
+  index: async (ctx) => {
+    await strapi.plugins['email'].services.email.send({
+      to: 'dogoodcollectiveorg@gmail.com',
+      from: ctx.email,
+      replyTo: ctx.email,
+      subject: ctx.reason,
+      text:
+        ctx.msg +
+        '\n\n\n' +
+        ctx.name +
+        '\n' +
+        (ctx.pronouns === '' ? '' : ctx.pronouns + '\n') +
+        (ctx.phone === '' ? '' : ctx.phone + '\n') +
+        ctx.email,
+    });
+    ctx.send('Email sent.');
+  },
 };
