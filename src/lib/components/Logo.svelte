@@ -15,8 +15,15 @@
 <style>
   a {
     z-index: 1;
+    transition: transform 100ms ease-in-out, filter 100ms ease-in-out;
   }
   img {
     border-radius: 100%;
+    filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.5));
+  }
+
+  a:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
   }
 </style>

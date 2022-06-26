@@ -10,7 +10,9 @@ export const get: RequestHandler = async ({ params }) => {
     const {
       data: { attributes: fundraiser },
     } = fundraiserSchema.parse(await response.json());
-    const sanitizedStory = sanitizeHtml(fundraiser.story);
+    const sanitizedStory = sanitizeHtml(fundraiser.story, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+    });
     return {
       status: response.status,
       body: {

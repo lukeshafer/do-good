@@ -23,7 +23,7 @@
     };
 
     try {
-      const res = await fetch('http://localhost:1337/api/faqs', {
+      const res = await fetch(`${import.meta.env.VITE_API_PATH}/api/faqs`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -67,54 +67,32 @@
     <ul>
       {#each faqs as faq}
         <li class="faq">
-          {#if !(faq.id % 2 === 0)}
-            <CollapsibleCard>
-              <div slot="header">
-                <h2
-                  media="screen"
-                  class="question odd"
-                  aria-labelledby={faq.question}>
-                  {faq?.attributes.question}
-                </h2>
-              </div>
-              <div
-                slot="body"
-                class="answer"
-                aria-labelledby={(faq?.attributes.answer).replace(
-                  /<[^>]+>/g,
-                  ''
-                )}>
-                {@html sanitizeHtml(faq?.attributes.answer)}
-              </div>
-            </CollapsibleCard>
-          {:else}
-            <CollapsibleCard>
-              <div slot="header">
-                <h2
-                  media="screen"
-                  class="question even"
-                  aria-labelledby={faq.question}>
-                  {faq?.attributes.question}
-                </h2>
-              </div>
-              <div
-                slot="body"
-                class="body answer"
-                aria-labelledby={(faq?.attributes.answer).replace(
-                  /<[^>]+>/g,
-                  ''
-                )}>
-                {@html sanitizeHtml(faq?.attributes.answer)}
-              </div>
-            </CollapsibleCard>
-          {/if}
+          <CollapsibleCard>
+            <div slot="header" class="header">
+              <h2
+                media="screen"
+                class="question"
+                aria-labelledby={faq.question}>
+                {faq?.attributes.question}
+              </h2>
+            </div>
+            <div
+              slot="body"
+              class="answer"
+              aria-labelledby={(faq?.attributes.answer).replace(
+                /<[^>]+>/g,
+                ''
+              )}>
+              {@html sanitizeHtml(faq?.attributes.answer)}
+            </div>
+          </CollapsibleCard>
         </li>
       {/each}
     </ul>
   {/if}
 </main>
 
-<style>
+<style lang="postcss">
   .grid-wrapper {
     display: grid;
     font-size: min(0.8em, 2vw);
@@ -128,21 +106,67 @@
     text-align: center;
   }
 
-  .even {
-    background-color: #7db2aa;
+  li {
+    margin-bottom: 2em;
+    width: 100%;
+
+    & h2 {
+      background-color: #00000066;
+    }
+
+    & .answer {
+      width: 95%;
+      display: flex;
+      padding: 0.5em;
+      justify-content: flex-start;
+
+      & > :global(*) {
+        margin: 0;
+        padding: 0.5em;
+        background-color: #00000066;
+      }
+    }
+
+    & .answer > :global(ol) {
+      list-style-type: circle;
+      padding-left: 2em;
+      width: 100%;
+    }
+
+    &:nth-of-type(3n-2) {
+      & .header {
+        background-color: var(--box1-color);
+      }
+      & .answer {
+        background-color: var(--box1-accent-color);
+      }
+    }
+
+    &:nth-of-type(3n-1) {
+      & .header {
+        background-color: var(--box2-color);
+      }
+      & .answer {
+        background-color: var(--box2-accent-color);
+      }
+    }
+
+    &:nth-of-type(3n) {
+      & .header {
+        background-color: var(--box3-color);
+      }
+      & .answer {
+        background-color: var(--box3-accent-color);
+      }
+    }
   }
 
-  .odd {
-    background-color: #8e9cdb;
-  }
-
-  .answer {
-    background-color: #ffe389;
-    width: 95%;
+  .header {
     padding: 0.5em;
-    display: flex;
-    padding: 1em;
-    justify-content: flex-start;
+  }
+
+  h2 {
+    font-size: 2em;
   }
 
   .link {
@@ -153,7 +177,6 @@
   .faq {
     display: flex;
     text-align: left;
-    font-family: 'Fira Code';
   }
 
   main {
@@ -169,13 +192,8 @@
     padding: 0.5em;
     width: 100%;
     margin: 0;
-    color: rgb(50, 50, 50);
-    font-size: 1.1rem;
-  }
-
-  li {
-    margin-bottom: 2em;
-    width: 100%;
+    color: var(--primary-color);
+    font-family: var(--body-font);
   }
 
   h2 {

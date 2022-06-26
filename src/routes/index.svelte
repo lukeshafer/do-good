@@ -50,6 +50,8 @@
 
 <script lang="ts">
   import FeaturedBox from '$lib/components/FeaturedBox.svelte';
+  import RallyForMrTalley from '$lib/components/FeaturedFundraisers/RallyForMrTalley.svelte';
+  import PrideFull from '$lib/components/FeaturedFundraisers/PrideFull.svelte';
   import Box from '$lib/components/Box.svelte';
   export let featured: FeaturedFundraiser, links: Page[];
 
@@ -62,61 +64,22 @@
 </svelte:head>
 
 <main>
-  <FeaturedBox
-    href="/fundraisers/{featuredFundraiser.slug}"
-    background="var(--accent-color)">
-    <h2 slot="title">{featured.title}</h2>
-    <p slot="goal">
-      Goal: ${featuredFundraiser.goal.toLocaleString('en-US')}
-    </p>
-    <img
-      width="100"
-      slot="icon"
-      src={featuredIcon.url}
-      alt={featuredIcon.alternativeText} />
-    <p slot="body">
-      {featured.shortDescription}
-    </p>
-  </FeaturedBox>
-
-  <div class="button-wrapper">
-    {#each links as link, index}
-      <div class="button">
-        <Box background="var(--{tileColors[index % 4]})" href="/{link.slug}">
-          <div class="button-content">
-            <p>{link.title}</p>
-          </div>
-        </Box>
-      </div>
-    {/each}
-  </div>
+  <h1>Do Good Collective</h1>
+  <PrideFull />
+  <RallyForMrTalley />
 </main>
 
 <style>
+  h1 {
+    font: 4.5em 'Special Elite', 'Courier New', monospace;
+    text-transform: lowercase;
+    color: var(--heading-text-color);
+    text-shadow: 0 0 0.5rem rgba(var(--heading-text-values), 0.75);
+  }
   main {
     display: grid;
     justify-items: center;
     justify-content: center;
     gap: 2em;
-  }
-  div.button-wrapper {
-    display: grid;
-    width: min(150%, 90vw);
-    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
-    grid-auto-rows: auto;
-    place-items: center;
-    gap: 2em;
-  }
-
-  div.button-content {
-    display: block;
-    height: 9em;
-    width: 9em;
-    margin: 0;
-  }
-
-  .button-content p {
-    font-size: 2em;
-    color: var(--secondary-color);
   }
 </style>

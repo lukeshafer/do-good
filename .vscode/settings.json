@@ -20,5 +20,9 @@
     "[x]",
     "@KAMERON",
     "@LUKE"
-  ]
+  ],
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
+  "svg.preview.background": "white"
 }

@@ -16,6 +16,11 @@
     "title": {
       "type": "string",
       "required": true
+    },
+    "fundraisers": {
+      "type": "component",
+      "repeatable": true,
+      "component": "link.fundraiser-link"
     }
   }
 }

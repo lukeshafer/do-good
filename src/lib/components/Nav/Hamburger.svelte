@@ -6,8 +6,8 @@
   let backgroundImage = ``;
 </script>
 
-<div hidden class="wrapper" aria-hidden="true">
-  <Box background="white">
+<div class="wrapper">
+  <Box background="transparent">
     <button
       class="hamburger"
       class:active={$isNavActive}
@@ -21,37 +21,43 @@
   </Box>
 </div>
 
-<style>
+<style lang="postcss">
   button.hamburger {
     display: flex;
     font-size: 1.3em;
     flex-direction: column;
     justify-content: center;
     border-style: none;
-    --line-spacing: 0.5em;
+    --line-spacing: 0.3em;
     gap: var(--line-spacing);
     padding: var(--line-spacing);
     background-color: transparent;
-    /* margin-left: auto; */
   }
+
   button.hamburger:hover {
     cursor: pointer;
+
+    & span {
+      filter: brightness(1.5);
+    }
   }
-  button.hamburger:hover span {
-    filter: brightness(150%);
-  }
+
+  /* Styling the hamburger lines */
   button.hamburger span {
+    border-radius: 1em;
     display: block;
     width: 2.5em;
     text-align: center;
-    --line-height: 0.3em;
+    --line-height: 0.4em;
     --translate-amount: calc(var(--line-spacing) + var(--line-height));
     height: var(--line-height);
     position: relative;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     transform-origin: center;
-    transition: transform 250ms;
+    transition: transform 250ms, filter 100ms;
   }
+
+  /* Below selectors are for animating the X */
   button.hamburger.active span:first-child {
     transform: translateY(var(--translate-amount)) rotate(0.125turn);
   }
@@ -60,11 +66,5 @@
   }
   button.hamburger.active span {
     transform: scale(0, 1);
-  }
-
-  @media screen and (max-width: 700px) {
-    .wrapper {
-      display: block;
-    }
   }
 </style>

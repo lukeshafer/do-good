@@ -15,16 +15,18 @@
     height: 3em;
     display: flex;
     align-items: center;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
+    width: 100%;
   }
 
   a {
     display: block;
-    padding: 1em;
-    font-size: 1.2em;
+    padding: 0 1em;
+    font-size: 2em;
     font-weight: 300;
+    font-family: var(--subtitle-font);
     text-decoration: none;
-    color: var(--secondary-color);
+    color: var(--heading-text-color);
     text-shadow: 0.05em 0.05em rgba(var(--secondary-values), 0.4);
   }
 

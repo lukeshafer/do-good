@@ -29,7 +29,8 @@
       "type": "dynamiczone",
       "components": [
         "link.nav-drop-down",
-        "link.navigation-link"
+        "link.navigation-link",
+        "link.fundraiser-link"
       ]
     }
   }

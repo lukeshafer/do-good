@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_link_fundraiser_links",
+  "info": {
+    "displayName": "Fundraiser Link",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "fundraiser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::fundraiser.fundraiser"
+    }
+  }
+}
