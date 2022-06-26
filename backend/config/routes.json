@@ -3,7 +3,7 @@
     {
       "method": "POST",
       "path": "/email",
-      "handler": "contact.index",
+      "handler": "contact",
       "config": {
         "policies": []
       }

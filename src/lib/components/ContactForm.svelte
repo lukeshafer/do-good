@@ -5,6 +5,9 @@
   - update success message: "Your submission has been received! We'll get back to you as soon as we can!"
   -->
 <script lang="ts">
+  import sgMail from '@sendgrid/mail';
+  sgMail.setApiKey(import.meta.env.SENDGRID_API_KEY);
+  console.log(import.meta.env.SENDGRID_API_KEY);
   export let fields: ContactField[];
 
   // two arrays of blank strings of the same length as fields
@@ -100,6 +103,12 @@
   let responseMessage = '';
   let responseError: unknown;
 
+  function sendIt() {
+    fetch(import.meta.env.VITE_API_PATH + '/api/contact', {
+      method: 'GET',
+    });
+  }
+
   const submitForm = async () => {
     if (formValidation()) {
       console.log('request is : ', formData);
@@ -115,10 +124,14 @@
           msg: formData[5],
         };
 
-        const result = await fetch('email', {
+        const urlString = import.meta.env.VITE_API_PATH + 'api/contact';
+        /*
+        const result = await fetch(urlString, {
           method: 'POST',
           body: JSON.stringify(responseBody),
         });
+*/
+        sendIt();
 
         responseMessage = 'Email sent successfully.';
 
@@ -137,7 +150,7 @@
 {#if !responseMessage && !responseError}
   <!-- FORMSPREE LINK: https://formspree.io/f/mgedqaob-->
   <!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>-->
-  <form action="/email" method="GET" on:submit|preventDefault={submitForm}>
+  <form on:submit|preventDefault={submitForm}>
     <span
       for="Required fields are marked by an asterisk. (*)"
       class="error info"
