@@ -1,8 +1,10 @@
 <script lang="ts">
-  import FooterDgc from './FooterDGC.svelte';
   import FooterSocials from './Socials.svelte';
-  import FooterResources from './FooterResources.svelte';
   import type { Load } from '@sveltejs/kit';
+  import FooterCopyright from './FooterCopyright.svelte';
+  import Footer from '../Footer.svelte';
+  import FooterLinks from './FooterLinks.svelte';
+  import { footer } from './FooterSections.svelte';
 
   export const load: Load = async ({ fetch }) => {
     const navURL = `/api/layout.json`;
@@ -20,20 +22,18 @@
   // console.log(footer.dgcPages);
 </script>
 
-<footer>
-  <div class="copyright">
-    <h3>&copy;2022, Do Good Collective</h3>
-  </div>
+<Footer>
+  <FooterCopyright />
   <div class="container">
-    <FooterResources />
-    <FooterDgc />
-
+    <FooterLinks items={footer.resourcePages} header="Resources" />
+    <FooterLinks items={footer.dgcPages} header="DGC" />
     <FooterSocials />
   </div>
-</footer>
+</Footer>
 <svelte:body />
 
-<div class="copyright">
-  <h3>&copy;2022, Do Good Collective</h3>
-</div>
-<div class="container" />
+<style>
+  .container {
+    display: flex;
+  }
+</style>

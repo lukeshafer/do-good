@@ -22,12 +22,15 @@
       'Content-Type': 'application/json',
     };
     try {
-      const res = await fetch('http://localhost:1337/api/socials?populate=*', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      const res = await fetch(
+        `${import.meta.env.VITE_API_PATH}` + '/api/socials?populate=*',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
         .then(checkStatus)
         .then(parseJSON);
       socials = res.data;
@@ -62,8 +65,7 @@
           href={social?.attributes.url}
           aria-labelledby={social?.attributes.logoAltText}
           ><img
-            src="{'http://localhost:1337'}{social?.attributes.SocialMediaLogo
-              ?.data?.attributes?.url}"
+            src={social?.attributes.SocialMediaLogo?.data?.attributes?.url}
             alt={social?.attributes.logoAltText}
             width="40em"
             height="40em" /></a>

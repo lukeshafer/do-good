@@ -5,6 +5,9 @@
   - update success message: "Your submission has been received! We'll get back to you as soon as we can!"
   -->
 <script lang="ts">
+  import sgMail from '@sendgrid/mail';
+  sgMail.setApiKey(import.meta.env.SENDGRID_API_KEY);
+  console.log(import.meta.env.SENDGRID_API_KEY);
   export let fields: ContactField[];
 
   // two arrays of blank strings of the same length as fields
@@ -97,36 +100,41 @@
     }
   };
 
+  /*
   let responseMessage = '';
   let responseError: unknown;
 
-  const submitForm = async () => {
+  function sendIt() {
+    fetch(import.meta.env.VITE_API_PATH + '/api/email', {
+      method: 'GET',
+    });
+  }
+*/
+  function submitForm() {
     if (formValidation()) {
       console.log('request is : ', formData);
+
+      /*
       try {
-        // let name = formFields.name;
-        // let pronouns = formFields.pronouns;
-        // let email = formFields.email;
-        // let phone = formFields.phone;
-        // let reason = formFields.reason;
-        // let msg = formFields.message;
         // console.log(name, pronouns, email, phone, reason, msg);
 
         const responseBody = {
-          from: `${formData[2]}`,
-          subject: `${formData[4]}`,
-          text: 'This is a test.',
-          html: '<div>{formData[5]}</div><div>{formData[0]}</div><div>{formData[3]}</div><div>{formData[1]}</div>',
+          name: formData[0],
+          pronouns: formData[1],
+          email: formData[2],
+          phone: formData[3],
+          reason: formData[4],
+          msg: formData[5],
         };
-
-        responseMessage = 'Email sent.';
-
-        const result = await fetch('api/email/controllers/Email', {
+        const urlString = import.meta.env.VITE_API_PATH + 'api/email';
+        
+        const result = await fetch(urlString, {
           method: 'POST',
-          body: JSON.stringify({
-            responseBody,
-          }),
+          body: JSON.stringify(responseBody),
         });
+        //sendIt();
+
+        responseMessage = 'Email sent successfully.';
 
         // const data = await result.json();
         // console.log(data);
@@ -134,93 +142,103 @@
         // console.log(responseMessage);
       } catch (err: unknown) {
         responseError = err;
-      }
+        console.log(responseError);
+      }*/
     }
-  };
+  }
 </script>
 
-{#if !responseMessage && !responseError}
-  <!-- FORMSPREE LINK: https://formspree.io/f/mgedqaob-->
-  <!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>-->
-  <form action="/emails" method="POST" on:submit|preventDefault={submitForm}>
-    <span
-      for="Required fields are marked by an asterisk. (*)"
-      class="error info"
-      >Required fields are marked by an asterisk. (*)
+<title>Contact Us</title>
+
+<!--{#if !responseMessage && !responseError}-->
+<!-- FORMSPREE LINK: https://formspree.io/f/xnqwygjw-->
+<!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>
+on:submit|preventDefault={formValidation}-->
+<form action="https://formspree.io/f/xnqwygjw" method="POST">
+  <span for="Required fields are marked by an asterisk. (*)" class="error info"
+    >Required fields are marked by an asterisk. (*)
+  </span>
+
+  {#each fields as field, index}
+    <span class="formField">
+      <label
+        for="{index.toString()}{field.name}"
+        class:required-field={field.isRequired}>
+        {field.name}:
+      </label>
+      <label for="{index.toString()}{field.name}" class="error"
+        >{validationErrorList[index]}</label>
     </span>
+    {#if field.__component === 'form-fields.text'}
+      <!-- Text fields -->
 
-    {#each fields as field, index}
-      <span class="formField">
-        <label
-          for="{index.toString()}{field.name}"
-          class:required-field={field.isRequired}>
-          {field.name}:
-        </label>
-        <label for="{index.toString()}{field.name}" class="error"
-          >{validationErrorList[index]}</label>
-      </span>
-      {#if field.__component === 'form-fields.text'}
-        <!-- Text fields -->
-
-        <!-- Render field based on its type -->
-        {#if field.type === 'short'}
-          <input
-            type="text"
-            name="{index.toString()}{field.name}"
-            placeholder={field.name}
-            bind:value={formData[index]} />
-        {:else if field.type === 'long'}
-          <textarea
-            name="{index.toString()}{field.name}"
-            placeholder={field.name}
-            bind:value={formData[index]} />
-        {:else if field.type === 'phone'}
-          <input
-            type="tel"
-            name="{index.toString()}{field.name}"
-            placeholder={field.name}
-            bind:value={formData[index]} />
-        {:else if field.type === 'email'}
-          <input
-            type="email"
-            name="{index.toString()}{field.name}"
-            placeholder={field.name}
-            bind:value={formData[index]} />
+      <!-- Render field based on its type -->
+      {#if field.type === 'short'}
+        <input
+          type="text"
+          name={field.name}
+          placeholder={field.name}
+          id={field.name}
+          bind:value={formData[index]} />
+      {:else if field.type === 'long'}
+        <textarea
+          name={field.name}
+          placeholder={field.name}
+          id={field.name}
+          bind:value={formData[index]} />
+      {:else if field.type === 'phone'}
+        <input
+          type="tel"
+          name={field.name}
+          placeholder={field.name}
+          id={field.name}
+          bind:value={formData[index]} />
+      {:else if field.type === 'email'}
+        <input
+          type="email"
+          name={field.name}
+          placeholder={field.name}
+          id={field.name}
+          bind:value={formData[index]} />
+      {/if}
+    {:else if field.__component === 'form-fields.drop-down'}
+      <!-- DROP DOWN LOGIC GOES HERE! -->
+      <select
+        name="Pronouns"
+        id="pronouns"
+        bind:value={selectedDropdowns[dropDownIndex]}
+        on:change={() => (formData[index] = selectedDropdowns[dropDownIndex])}>
+        <option value="-Select-" selected>{'-Select-'}</option>
+        {#each field.entries as entry}
+          <option value={entry.value}>{entry.value}</option>
+        {/each}
+        {#if field.allowOther}
+          <option value="">{'Other - Please Specify'}</option>
         {/if}
-      {:else if field.__component === 'form-fields.drop-down'}
-        <!-- DROP DOWN LOGIC GOES HERE! -->
-        <select
-          bind:value={selectedDropdowns[dropDownIndex]}
-          on:change={() =>
-            (formData[index] = selectedDropdowns[dropDownIndex])}>
-          <option value="-Select-" selected>{'-Select-'}</option>
-          {#each field.entries as entry}
-            <option value={entry.value}>{entry.value}</option>
-          {/each}
-          {#if field.allowOther}
-            <option value="">{'Other - Please Specify'}</option>
-          {/if}
-        </select>
-        {#if selectedDropdowns[dropDownIndex] === ''}
-          <input
-            name="pronouns"
-            placeholder="Enter your pronouns"
-            bind:value={formData[index]} />
-        {/if}
+      </select>
+      {#if selectedDropdowns[dropDownIndex] === ''}
+        <input
+          name="pronouns"
+          placeholder="Enter your pronouns"
+          id="pronouns"
+          bind:value={formData[index]} />
+      {/if}
 
-        <!--
+      <!--
         <script lang="ts">
           dropDownIndex++;
         </script>
         -->
-      {/if}
-    {/each}
+    {/if}
+  {/each}
 
-    <!--Submit-->
-    <span class="btn-wrapper">
-      <button class="btn" type="submit">Submit</button>
-    </span>
-  </form>
+  <!--Submit-->
+  <span class="btn-wrapper">
+    <button class="btn" type="submit">Submit</button>
+  </span>
+</form>
+
+<!--
 {:else if responseMessage}
   <p>Success</p>
 {:else if responseError}
@@ -230,7 +248,7 @@
     <p>{field.name}: {formData[index]}</p>
   {/each}
 {/if}
-
+-->
 <style>
   form {
     /*max-width: 25em;*/
