@@ -22,7 +22,7 @@ module.exports = {
 };
 */
 const sgMail = import('@sendgrid/mail');
-sgMail.setApiKey(import.meta.sendgrid.env.SENDGRID_API_KEY);
+sgMail.setApiKey(import.meta.env.SENDGRID_API_KEY);
 export async function get() {
   const msg = {
     to: 'dogoodcollectiveorg@gmail.com',

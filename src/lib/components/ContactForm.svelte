@@ -104,7 +104,7 @@
   let responseError: unknown;
 
   function sendIt() {
-    fetch(import.meta.env.VITE_API_PATH + '/api/contact', {
+    fetch(import.meta.env.VITE_API_PATH + '/api/email', {
       method: 'GET',
     });
   }
@@ -124,7 +124,7 @@
           msg: formData[5],
         };
 
-        const urlString = import.meta.env.VITE_API_PATH + 'api/contact';
+        const urlString = import.meta.env.VITE_API_PATH + 'api/email';
         /*
         const result = await fetch(urlString, {
           method: 'POST',
@@ -146,6 +146,8 @@
     }
   };
 </script>
+
+<title>Contact Us</title>
 
 {#if !responseMessage && !responseError}
   <!-- FORMSPREE LINK: https://formspree.io/f/mgedqaob-->
