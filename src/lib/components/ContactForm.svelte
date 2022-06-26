@@ -5,9 +5,12 @@
   - update success message: "Your submission has been received! We'll get back to you as soon as we can!"
   -->
 <script lang="ts">
+  import PaperSheet from './DesignBlocks/PaperSheet.svelte';
+  /*
   import sgMail from '@sendgrid/mail';
   sgMail.setApiKey(import.meta.env.SENDGRID_API_KEY);
   console.log(import.meta.env.SENDGRID_API_KEY);
+  */
   export let fields: ContactField[];
 
   // two arrays of blank strings of the same length as fields
@@ -154,89 +157,94 @@
 <!-- FORMSPREE LINK: https://formspree.io/f/xnqwygjw-->
 <!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>
 on:submit|preventDefault={formValidation}-->
-<form action="https://formspree.io/f/xnqwygjw" method="POST">
-  <span for="Required fields are marked by an asterisk. (*)" class="error info"
-    >Required fields are marked by an asterisk. (*)
-  </span>
-
-  {#each fields as field, index}
-    <span class="formField">
-      <label
-        for="{index.toString()}{field.name}"
-        class:required-field={field.isRequired}>
-        {field.name}:
-      </label>
-      <label for="{index.toString()}{field.name}" class="error"
-        >{validationErrorList[index]}</label>
+<PaperSheet>
+  <form action="https://formspree.io/f/xnqwygjw" method="POST">
+    <span
+      for="Required fields are marked by an asterisk. (*)"
+      class="error info"
+      >Required fields are marked by an asterisk. (*)
     </span>
-    {#if field.__component === 'form-fields.text'}
-      <!-- Text fields -->
 
-      <!-- Render field based on its type -->
-      {#if field.type === 'short'}
-        <input
-          type="text"
-          name={field.name}
-          placeholder={field.name}
-          id={field.name}
-          bind:value={formData[index]} />
-      {:else if field.type === 'long'}
-        <textarea
-          name={field.name}
-          placeholder={field.name}
-          id={field.name}
-          bind:value={formData[index]} />
-      {:else if field.type === 'phone'}
-        <input
-          type="tel"
-          name={field.name}
-          placeholder={field.name}
-          id={field.name}
-          bind:value={formData[index]} />
-      {:else if field.type === 'email'}
-        <input
-          type="email"
-          name={field.name}
-          placeholder={field.name}
-          id={field.name}
-          bind:value={formData[index]} />
-      {/if}
-    {:else if field.__component === 'form-fields.drop-down'}
-      <!-- DROP DOWN LOGIC GOES HERE! -->
-      <select
-        name="Pronouns"
-        id="pronouns"
-        bind:value={selectedDropdowns[dropDownIndex]}
-        on:change={() => (formData[index] = selectedDropdowns[dropDownIndex])}>
-        <option value="-Select-" selected>{'-Select-'}</option>
-        {#each field.entries as entry}
-          <option value={entry.value}>{entry.value}</option>
-        {/each}
-        {#if field.allowOther}
-          <option value="">{'Other - Please Specify'}</option>
+    {#each fields as field, index}
+      <span class="formField">
+        <label
+          for="{index.toString()}{field.name}"
+          class:required-field={field.isRequired}>
+          {field.name}:
+        </label>
+        <label for="{index.toString()}{field.name}" class="error"
+          >{validationErrorList[index]}</label>
+      </span>
+      {#if field.__component === 'form-fields.text'}
+        <!-- Text fields -->
+
+        <!-- Render field based on its type -->
+        {#if field.type === 'short'}
+          <input
+            type="text"
+            name={field.name}
+            placeholder={field.name}
+            id={field.name}
+            bind:value={formData[index]} />
+        {:else if field.type === 'long'}
+          <textarea
+            name={field.name}
+            placeholder={field.name}
+            id={field.name}
+            bind:value={formData[index]} />
+        {:else if field.type === 'phone'}
+          <input
+            type="tel"
+            name={field.name}
+            placeholder={field.name}
+            id={field.name}
+            bind:value={formData[index]} />
+        {:else if field.type === 'email'}
+          <input
+            type="email"
+            name={field.name}
+            placeholder={field.name}
+            id={field.name}
+            bind:value={formData[index]} />
         {/if}
-      </select>
-      {#if selectedDropdowns[dropDownIndex] === ''}
-        <input
-          name="pronouns"
-          placeholder="Enter your pronouns"
+      {:else if field.__component === 'form-fields.drop-down'}
+        <!-- DROP DOWN LOGIC GOES HERE! -->
+        <select
+          name="Pronouns"
           id="pronouns"
-          bind:value={formData[index]} />
-      {/if}
+          bind:value={selectedDropdowns[dropDownIndex]}
+          on:change={() =>
+            (formData[index] = selectedDropdowns[dropDownIndex])}>
+          <option value="-Select-" selected>{'-Select-'}</option>
+          {#each field.entries as entry}
+            <option value={entry.value}>{entry.value}</option>
+          {/each}
+          {#if field.allowOther}
+            <option value="">{'Other - Please Specify'}</option>
+          {/if}
+        </select>
+        {#if selectedDropdowns[dropDownIndex] === ''}
+          <input
+            name="pronouns"
+            placeholder="Enter your pronouns"
+            id="pronouns"
+            bind:value={formData[index]} />
+        {/if}
 
-      <!--
+        <!--
         <script lang="ts">
           dropDownIndex++;
         </script>
         -->
-    {/if}
-  {/each}
+      {/if}
+    {/each}
 
-  <!--Submit-->
-  <span class="btn-wrapper">
-    <button class="btn" type="submit">Submit</button>
-  </span>
-</form>
+    <!--Submit-->
+    <span class="btn-wrapper">
+      <button class="btn" type="submit">Submit</button>
+    </span>
+  </form>
+</PaperSheet>
 
 <!--
 {:else if responseMessage}
