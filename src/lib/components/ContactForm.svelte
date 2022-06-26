@@ -183,7 +183,9 @@ on:submit|preventDefault={formValidation}-->
           <input
             type="text"
             name={field.name}
-            placeholder={field.name}
+            placeholder={field.name === 'Reason - Please specify when possible'
+              ? 'Reason'
+              : field.name}
             id={field.name}
             bind:value={formData[index]} />
         {:else if field.type === 'long'}
