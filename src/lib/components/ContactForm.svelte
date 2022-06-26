@@ -100,6 +100,7 @@
     }
   };
 
+  /*
   let responseMessage = '';
   let responseError: unknown;
 
@@ -108,10 +109,12 @@
       method: 'GET',
     });
   }
-
-  const submitForm = async () => {
+*/
+  function submitForm() {
     if (formValidation()) {
       console.log('request is : ', formData);
+
+      /*
       try {
         // console.log(name, pronouns, email, phone, reason, msg);
 
@@ -123,15 +126,13 @@
           reason: formData[4],
           msg: formData[5],
         };
-
         const urlString = import.meta.env.VITE_API_PATH + 'api/email';
-        /*
+        
         const result = await fetch(urlString, {
           method: 'POST',
           body: JSON.stringify(responseBody),
         });
-*/
-        sendIt();
+        //sendIt();
 
         responseMessage = 'Email sent successfully.';
 
@@ -142,95 +143,102 @@
       } catch (err: unknown) {
         responseError = err;
         console.log(responseError);
-      }
+      }*/
     }
-  };
+  }
 </script>
 
 <title>Contact Us</title>
 
-{#if !responseMessage && !responseError}
-  <!-- FORMSPREE LINK: https://formspree.io/f/mgedqaob-->
-  <!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>-->
-  <form on:submit|preventDefault={submitForm}>
-    <span
-      for="Required fields are marked by an asterisk. (*)"
-      class="error info"
-      >Required fields are marked by an asterisk. (*)
+<!--{#if !responseMessage && !responseError}-->
+<!-- FORMSPREE LINK: https://formspree.io/f/xnqwygjw-->
+<!-- form action="/contact" method="POST" on:submit|preventDefault={handleSubmit}>
+on:submit|preventDefault={formValidation}-->
+<form action="https://formspree.io/f/xnqwygjw" method="POST">
+  <span for="Required fields are marked by an asterisk. (*)" class="error info"
+    >Required fields are marked by an asterisk. (*)
+  </span>
+
+  {#each fields as field, index}
+    <span class="formField">
+      <label
+        for="{index.toString()}{field.name}"
+        class:required-field={field.isRequired}>
+        {field.name}:
+      </label>
+      <label for="{index.toString()}{field.name}" class="error"
+        >{validationErrorList[index]}</label>
     </span>
+    {#if field.__component === 'form-fields.text'}
+      <!-- Text fields -->
 
-    {#each fields as field, index}
-      <span class="formField">
-        <label
-          for="{index.toString()}{field.name}"
-          class:required-field={field.isRequired}>
-          {field.name}:
-        </label>
-        <label for="{index.toString()}{field.name}" class="error"
-          >{validationErrorList[index]}</label>
-      </span>
-      {#if field.__component === 'form-fields.text'}
-        <!-- Text fields -->
-
-        <!-- Render field based on its type -->
-        {#if field.type === 'short'}
-          <input
-            type="text"
-            name="{index.toString()}{field.name}"
-            placeholder={field.name}
-            bind:value={formData[index]} />
-        {:else if field.type === 'long'}
-          <textarea
-            name="{index.toString()}{field.name}"
-            placeholder={field.name}
-            bind:value={formData[index]} />
-        {:else if field.type === 'phone'}
-          <input
-            type="tel"
-            name="{index.toString()}{field.name}"
-            placeholder={field.name}
-            bind:value={formData[index]} />
-        {:else if field.type === 'email'}
-          <input
-            type="email"
-            name="{index.toString()}{field.name}"
-            placeholder={field.name}
-            bind:value={formData[index]} />
+      <!-- Render field based on its type -->
+      {#if field.type === 'short'}
+        <input
+          type="text"
+          name={field.name}
+          placeholder={field.name}
+          id={field.name}
+          bind:value={formData[index]} />
+      {:else if field.type === 'long'}
+        <textarea
+          name={field.name}
+          placeholder={field.name}
+          id={field.name}
+          bind:value={formData[index]} />
+      {:else if field.type === 'phone'}
+        <input
+          type="tel"
+          name={field.name}
+          placeholder={field.name}
+          id={field.name}
+          bind:value={formData[index]} />
+      {:else if field.type === 'email'}
+        <input
+          type="email"
+          name={field.name}
+          placeholder={field.name}
+          id={field.name}
+          bind:value={formData[index]} />
+      {/if}
+    {:else if field.__component === 'form-fields.drop-down'}
+      <!-- DROP DOWN LOGIC GOES HERE! -->
+      <select
+        name="Pronouns"
+        id="pronouns"
+        bind:value={selectedDropdowns[dropDownIndex]}
+        on:change={() => (formData[index] = selectedDropdowns[dropDownIndex])}>
+        <option value="-Select-" selected>{'-Select-'}</option>
+        {#each field.entries as entry}
+          <option value={entry.value}>{entry.value}</option>
+        {/each}
+        {#if field.allowOther}
+          <option value="">{'Other - Please Specify'}</option>
         {/if}
-      {:else if field.__component === 'form-fields.drop-down'}
-        <!-- DROP DOWN LOGIC GOES HERE! -->
-        <select
-          bind:value={selectedDropdowns[dropDownIndex]}
-          on:change={() =>
-            (formData[index] = selectedDropdowns[dropDownIndex])}>
-          <option value="-Select-" selected>{'-Select-'}</option>
-          {#each field.entries as entry}
-            <option value={entry.value}>{entry.value}</option>
-          {/each}
-          {#if field.allowOther}
-            <option value="">{'Other - Please Specify'}</option>
-          {/if}
-        </select>
-        {#if selectedDropdowns[dropDownIndex] === ''}
-          <input
-            name="pronouns"
-            placeholder="Enter your pronouns"
-            bind:value={formData[index]} />
-        {/if}
+      </select>
+      {#if selectedDropdowns[dropDownIndex] === ''}
+        <input
+          name="pronouns"
+          placeholder="Enter your pronouns"
+          id="pronouns"
+          bind:value={formData[index]} />
+      {/if}
 
-        <!--
+      <!--
         <script lang="ts">
           dropDownIndex++;
         </script>
         -->
-      {/if}
-    {/each}
+    {/if}
+  {/each}
 
-    <!--Submit-->
-    <span class="btn-wrapper">
-      <button class="btn" type="submit">Submit</button>
-    </span>
-  </form>
+  <!--Submit-->
+  <span class="btn-wrapper">
+    <button class="btn" type="submit">Submit</button>
+  </span>
+</form>
+
+<!--
 {:else if responseMessage}
   <p>Success</p>
 {:else if responseError}
@@ -240,7 +248,7 @@
     <p>{field.name}: {formData[index]}</p>
   {/each}
 {/if}
-
+-->
 <style>
   form {
     /*max-width: 25em;*/
