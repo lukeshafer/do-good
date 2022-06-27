@@ -51,7 +51,7 @@
       position: relative;
       display: flex;
       min-width: 10em;
-      width: clamp(10em, 70vw, 30em);
+      width: clamp(50vw, 20em, 70vw);
       margin: 1em auto;
 
       font-size: 1.5em;

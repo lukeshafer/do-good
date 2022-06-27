@@ -7,10 +7,7 @@
 
 <style>
   header {
-    --h-padding: 4em;
-    width: calc(100vw - var(--h-padding));
-    padding-left: var(--h-padding);
-    padding-right: var(--h-padding);
+    width: 100%;
     padding-top: 2em;
     display: flex;
     flex-flow: row nowrap;

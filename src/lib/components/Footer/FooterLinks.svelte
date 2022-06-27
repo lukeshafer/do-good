@@ -18,7 +18,7 @@
     display: flex;
     justify-content: center;
     padding: 0 0 0 0;
-    font-family: 'Fira Code';
+    font-family: var(--body-font);
   }
 
   .resources {
@@ -32,6 +32,6 @@
   }
 
   a {
-    font-family: 'Fira Code';
+    font-family: var(--body-font);
   }
 </style>

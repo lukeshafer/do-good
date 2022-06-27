@@ -3,7 +3,7 @@
     height: string = width;
 </script>
 
-<a href="/">
+<a href="/" aria-label="Home Page">
   <img
     class="logo"
     src="/images/do-good-logo.png"

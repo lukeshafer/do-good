@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: column;
     min-width: 10em;
-    width: clamp(10em, 70vw, 30em);
+    width: clamp(10rem, 50vw, 30rem);
 
     font-size: 1.5em;
     font-style: italic;
@@ -83,5 +83,11 @@
   .link-wrapper {
     display: flex;
     justify-content: center;
+  }
+
+  .link {
+    font-weight: bold;
+    font-style: italic;
+    margin: 0.5em;
   }
 </style>

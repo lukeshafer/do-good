@@ -6,7 +6,7 @@
   // console.log(footer.dgcPages);
 
   let socials = [];
-  let error = null as unknown;
+  let error: unknown = null;
 
   onMount(async () => {
     const parseJSON = (resp) => (resp.json ? resp.json() : resp);
@@ -62,6 +62,7 @@
       {#each socials as social}
         <a
           class="special"
+          target="_blank"
           href={social?.attributes.url}
           aria-labelledby={social?.attributes.logoAltText}
           ><img
@@ -74,7 +75,7 @@
   </ul>
 </div>
 
-<style>
+<style lang="postcss">
   h4 {
     padding: none;
     text-align: center;
@@ -88,9 +89,19 @@
     justify-content: center;
     align-items: flex-start;
     padding: 0 0 0 0;
+    gap: 0.5em;
   }
   .special {
     text-align: center;
     padding: 0%;
+    color: var(--secondary-color);
+  }
+
+  a.special {
+    transition: transform 100ms;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 </style>

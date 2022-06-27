@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let type: 'link' | 'button' = 'link';
+  export let type: 'link' | 'button' | 'submit' | 'style-only' = 'link';
   export let href = '';
   export let target = '';
   export let action: () => unknown = () => {};
@@ -9,10 +9,18 @@
   <button class="btn" on:click={action}>
     <slot />
   </button>
-{:else}
+{:else if type === 'link'}
   <a class="btn" {href} {target}>
     <slot />
   </a>
+{:else if type === 'submit'}
+  <button class="btn" type="submit">
+    <slot />
+  </button>
+{:else if type === 'style-only'}
+  <div class="btn">
+    <slot />
+  </div>
 {/if}
 
 <style lang="postcss">

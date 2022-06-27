@@ -65,8 +65,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  overflow-x: hidden;
-  margin: 2em;
+  /* overflow-x: hidden; */
+  margin: 0em;
 }
 
 main {
@@ -134,6 +134,11 @@ p {
 a,
 button {
   font-family: var(--body-font);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 5px ridge var(--secondary-accent-color);
 }
 
 /* Use this class when you want text to be available to screen readers only */

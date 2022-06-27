@@ -30,6 +30,8 @@
   import Footer from '$lib/components/Footer.svelte';
   import FooterCopyright from '$lib/components/Footer/FooterCopyright.svelte';
   import Background from '$lib/components/Background.svelte';
+  import Button from '$lib/components/DesignBlocks/Button.svelte';
+  import { page } from '$app/stores';
 
   export let nav: nav, footer: footer;
 </script>
@@ -39,6 +41,11 @@
 <Header>
   <Logo width="10em" />
 </Header>
+
+<div class="skip-to-content">
+  <a href="#main"><Button>Skip To Content?</Button></a>
+  <div class="dark-background" />
+</div>
 
 <Navbar>
   {#if nav.includeHomePage}
@@ -51,39 +58,85 @@
     <NavItem href="/contact">Contact</NavItem>
   {/if}
   {#each nav.pages as page}
-    {#if page.__component === 'link.navigation-link'}
-      <NavItem href="/{page.page.data.attributes.slug}"
-        >{page.page.data.attributes.title}</NavItem>
+    {#if page.__component === 'link.navigation-link' && page.page.data}
+      <NavItem href="/{page.page.data.attributes.slug}">{page.title}</NavItem>
     {:else if page.__component === 'link.nav-drop-down'}
       <NavDropDown name={page.title}>
         {#each page.links as link}
-          <NavItem href="/{link.page.data.attributes.slug}"
-            >{link.page.data.attributes.title}</NavItem>
+          {#if link.page.data}
+            <NavItem href="/{link.page.data.attributes.slug}" inDropdown={true}
+              >{link.title}</NavItem>
+          {/if}
+        {/each}
+        {#each page.fundraisers as fundraiser}
+          {#if fundraiser.fundraiser.data}
+            <NavItem
+              href="/fundraisers/{fundraiser.fundraiser.data.attributes.slug}"
+              inDropdown={true}>{fundraiser.title}</NavItem>
+          {/if}
         {/each}
       </NavDropDown>
+    {:else if page.__component === 'link.fundraiser-link' && page.fundraiser.data}
+      <NavItem href="/fundraisers/{page.fundraiser.data.attributes.slug}"
+        >{page.title}</NavItem>
     {/if}
   {/each}
 </Navbar>
+
+<span id="main" />
 
 <slot>
   <!-- Sveltekit inserts page content here -->
 </slot>
 
-<!-- <Footer>
+<Footer>
   <FooterCopyright />
   <div class="container">
     <FooterLinks items={footer.resourcePages} header="Resources" />
     <FooterLinks items={footer.dgcPages} header="DGC" />
     <FooterSocials />
   </div>
-</Footer> -->
-<style>
+</Footer>
+
+<style lang="postcss">
   .container {
     display: flex;
   }
   div {
     padding: 0 0 0 0;
   }
+
+  .skip-to-content {
+    & > a {
+      top: 0;
+      right: 1em;
+      position: absolute;
+      transform: translateY(-150%);
+      transition: transform 0.3s;
+      z-index: 2;
+    }
+
+    & .dark-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+      visibility: hidden;
+    }
+  }
+
+  .skip-to-content > a:focus-visible {
+    transform: translateY(50%);
+
+    & + .dark-background {
+      opacity: 0.5;
+      visibility: visible;
+    }
+  }
+
   @media (max-width: 400px) {
     .container {
       display: block;

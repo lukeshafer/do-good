@@ -13,6 +13,12 @@ const queryNav = qs.stringify({
         page: {
           populate: '*',
         },
+        fundraisers: {
+          populate: '*',
+        },
+        fundraiser: {
+          populate: '*',
+        },
       },
     },
   },
@@ -21,10 +27,13 @@ const queryNav = qs.stringify({
 // pass data from Nav response - breaks data down into attributes
 const destructureNav = (navData: unknown) => {
   try {
-    const {
-      data: { attributes },
-    } = navigationMenuSchema.parse(navData);
-    return attributes;
+    const { data } = navigationMenuSchema.parse(navData);
+
+    if (data === null || data === undefined) {
+      throw new Error('Nav data is null or undefined');
+    }
+
+    return data?.attributes;
   } catch (err) {
     if (err instanceof ZodError) {
       console.log(JSON.stringify(err.errors, null, 2));

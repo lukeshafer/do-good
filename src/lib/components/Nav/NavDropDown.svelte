@@ -1,11 +1,25 @@
 <script lang="ts">
-  import { isNavActive } from '$lib/stores';
+  import { dropdowns } from '$lib/stores';
+  import { setContext } from 'svelte';
+
+  let open = false;
+  let index: number;
+
+  index = $dropdowns.push(open) - 1;
+  setContext('index', index);
+
+  $: $dropdowns[index] = open;
+
+  dropdowns.subscribe((value) => {
+    open = value[index];
+  });
 
   export let name: string;
 </script>
 
-<li>
-  <button on:click={void 0}>{name ? name : 'More...'} &#9660</button>
+<li class:open>
+  <button on:focus={() => (open = true)} on:click={void 0}
+    >{name ? name : 'More...'} <span>&#9660</span></button>
   <ul>
     <slot><!-- optional fallback --></slot>
   </ul>
@@ -16,20 +30,29 @@
     height: 3em;
     display: flex;
     align-items: center;
-    background-color: var(--primary-color);
+    background-color: transparent;
     position: relative;
+    width: 100%;
+
+    & span {
+      transform: rotate(0deg);
+      /* transition: transform 100ms; */
+    }
   }
 
   button {
-    background-color: var(--primary-color);
+    background-color: transparent;
     height: 100%;
     padding: 0 1em;
     border: none;
     display: block;
-    font-size: 1.2em;
+    font-size: 2em;
     font-weight: 300;
     text-decoration: none;
-    color: var(--secondary-color);
+    font-weight: 300;
+    font-family: var(--subtitle-font);
+    text-decoration: none;
+    color: var(--heading-text-color);
     text-shadow: 0.05em 0.05em rgba(var(--secondary-values), 0.4);
   }
 
@@ -46,7 +69,8 @@
     width: max(13em, 100%);
 
     & > :global(li) {
-      height: 0;
+      background-color: var(--secondary-color);
+      height: 0em;
       transition: height 200ms;
       & > :global(a) {
         opacity: 0;
@@ -55,22 +79,26 @@
     }
   }
 
-  li:hover {
-    & button {
-      filter: brightness(1.1);
-      cursor: pointer;
-      animation: dropdown 1s;
+  li:hover > button,
+  li.open > button {
+    background-color: var(--secondary-color);
+    filter: brightness(1.2);
+    cursor: pointer;
+    animation: dropdown 1s;
+
+    & span {
+      display: inline-block;
+      transform: rotate(180deg);
     }
-    & ul > :global(li) {
+
+    & button {
+    }
+    & + ul > :global(li) {
       height: 3em;
 
       & > :global(a) {
         opacity: 1;
       }
     }
-  }
-
-  li:hover > ul {
-    display: block;
   }
 </style>

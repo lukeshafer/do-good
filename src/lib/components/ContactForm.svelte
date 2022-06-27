@@ -6,6 +6,7 @@
   -->
 <script lang="ts">
   import PaperSheet from './DesignBlocks/PaperSheet.svelte';
+  import Button from './DesignBlocks/Button.svelte';
   /*
   import sgMail from '@sendgrid/mail';
   sgMail.setApiKey(import.meta.env.SENDGRID_API_KEY);
@@ -243,7 +244,8 @@ on:submit|preventDefault={formValidation}-->
 
     <!--Submit-->
     <span class="btn-wrapper">
-      <button class="btn" type="submit">Submit</button>
+      <!-- <button class="btn" type="submit">Submit</button> -->
+      <Button type="submit">Submit</Button>
     </span>
   </form>
 </PaperSheet>
@@ -274,7 +276,8 @@ on:submit|preventDefault={formValidation}-->
   label {
     display: flex;
     justify-content: flex-start;
-    font-family: 'Fira Code';
+    font-family: var(--body-font);
+    font-weight: bold;
     font-size: smaller;
   }
 
@@ -286,7 +289,7 @@ on:submit|preventDefault={formValidation}-->
     border-radius: 0;
     padding: 0.5em 1em;
     border: none;
-    font-family: 'Fira Code';
+    font-family: var(--body-font);
     background-color: rgb(255, 255, 255, 0.7);
   }
   textarea {
@@ -298,7 +301,7 @@ on:submit|preventDefault={formValidation}-->
     align-items: center;
     color: red;
     font-style: italic;
-    font-family: 'Fira Code';
+    font-family: var(--body-font);
     font-size: 55%;
   }
 
@@ -318,6 +321,7 @@ on:submit|preventDefault={formValidation}-->
   .btn-wrapper {
     display: flex;
     justify-content: center;
+    font-size: 0.6em;
   }
 
   .formField {
@@ -329,6 +333,6 @@ on:submit|preventDefault={formValidation}-->
   .btn {
     font-weight: lighter;
     cursor: pointer;
-    font-family: 'Fira Code';
+    font-family: var(--body-font);
   }
 </style>

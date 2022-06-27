@@ -28,7 +28,7 @@
     const {
       data: { attributes },
     } = (await response.json()) as { data: { attributes: HomePage } };
-    const { featured, resourceLinks } = attributes;
+    const { featured = {}, resourceLinks = [] } = attributes;
 
     let links = resourceLinks.map((link): Page => {
       const newPage = link.page.data.attributes;

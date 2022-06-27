@@ -108,7 +108,7 @@
 
   li {
     margin-bottom: 2em;
-    width: 100%;
+    width: 80%;
 
     & h2 {
       background-color: #00000066;
@@ -116,6 +116,7 @@
 
     & .answer {
       width: 95%;
+      margin: auto;
       display: flex;
       padding: 0.5em;
       justify-content: flex-start;
@@ -162,7 +163,9 @@
   }
 
   .header {
+    margin: auto;
     padding: 0.5em;
+    width: 95%;
   }
 
   h2 {
@@ -186,7 +189,7 @@
 
   ul {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
     list-style: none;
     padding: 0.5em;
@@ -194,6 +197,10 @@
     margin: 0;
     color: var(--primary-color);
     font-family: var(--body-font);
+
+    list-style-type: none;
+    padding-inline-start: 0;
+    padding: 0;
   }
 
   h2 {

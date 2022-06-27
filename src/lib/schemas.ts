@@ -24,28 +24,36 @@ export const pageSchema = z.object({
   }),
 });
 
-export const internalLinkSchema = z.object({
+export const navigationLinkSchema = z.object({
+  __component: z.optional(z.literal('link.navigation-link')),
   id: z.number(),
   title: z.string(),
-  page: pageSchema,
+  page: pageSchema.extend({
+    data: pageSchema.shape.data.nullable(),
+  }),
 });
 
-const navigationLinkSchema = z.object({
-  __component: z.literal('link.navigation-link'),
+export const fundraiserLinkSchema = z.object({
+  __component: z.optional(z.literal('link.fundraiser-link')),
   id: z.number(),
   title: z.string(),
-  page: pageSchema,
+  fundraiser: fundraiserSchema.extend({
+    data: fundraiserSchema.shape.data.nullable(),
+  }),
 });
 
 const navigationDropDownSchema = z.object({
-  title: z.string(),
   __component: z.literal('link.nav-drop-down'),
-  links: z.array(internalLinkSchema),
+  title: z.string(),
+  links: z.array(navigationLinkSchema),
+  fundraisers: z.array(fundraiserLinkSchema),
 });
 
-export const navigationItemsSchema = navigationLinkSchema.or(
-  navigationDropDownSchema
-);
+export const navigationItemsSchema = z.union([
+  navigationLinkSchema,
+  navigationDropDownSchema,
+  fundraiserLinkSchema,
+]);
 
 export const navigationMenuSchema = z.object({
   data: z.object({
@@ -59,7 +67,7 @@ export const navigationMenuSchema = z.object({
 });
 
 export const footerSchema = z.object({
-  footerResourceLinks: z.array(internalLinkSchema),
+  footerResourceLinks: z.array(navigationLinkSchema),
 });
 
 export const fieldComponentSchema = z.union([
@@ -124,7 +132,7 @@ export const homePageSchema = z.object({
   data: z.object({
     attributes: z.object({
       featured: featuredFundraiserSchema,
-      resourceLinks: z.array(internalLinkSchema),
+      resourceLinks: z.array(navigationLinkSchema),
     }),
   }),
 });

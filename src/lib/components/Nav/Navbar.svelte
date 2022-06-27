@@ -11,9 +11,17 @@
 
 <svelte:body />
 
+<!-- this span is a tab stop which will close the nav bar -->
+<span
+  aria-hidden="true"
+  tabindex="0"
+  on:focus={() => ($isNavActive = false)}
+  hidden={!active} />
+
 <div class="hamburger">
   <Hamburger />
 </div>
+
 <div
   aria-hidden="true"
   id="background"
@@ -26,6 +34,13 @@
     <slot />
   </ul>
 </nav>
+
+<!-- this span is a tab stop which will close the nav bar -->
+<span
+  aria-hidden="true"
+  tabindex="0"
+  on:focus={() => ($isNavActive = false)}
+  hidden={!active} />
 
 <style>
   nav {
@@ -45,7 +60,7 @@
     width: min(70vw, 20em);
     height: 100vh;
     z-index: 1;
-    font-size: 1em;
+    font-size: 0.8em;
     align-items: flex-start;
     /* box-shadow: 0 0 4em black; */
   }

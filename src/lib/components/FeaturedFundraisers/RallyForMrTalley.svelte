@@ -23,7 +23,7 @@
     <Photograph />
   </div>
   <div class="button">
-    <Button href="/fundraisers/rally-for-mr-talley-sample">More info</Button>
+    <Button href="/fundraisers/rally-for-mr-talley">More info</Button>
   </div>
 </div>
 
@@ -42,6 +42,7 @@
     grid-row: 1 / 3;
     height: 100%;
     width: 100%;
+    font-size: 1rem;
   }
 
   h2 {
@@ -49,6 +50,7 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: 0.6em 1fr;
     margin: 0;
+    font-size: 2.5em;
 
     & > span {
       display: block;
