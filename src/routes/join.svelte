@@ -2,6 +2,10 @@
   //Script
 </script>
 
+<svelte:head>
+  <title>Join DGC</title>
+</svelte:head>
+
 <main>
   <iframe
     title="Join Do Good Collective"
