@@ -43,7 +43,7 @@
 </Header>
 
 <div class="skip-to-content">
-  <a href="#main"><Button>Skip To Content?</Button></a>
+  <a href="#main"><Button type="style-only">Skip To Content?</Button></a>
   <div class="dark-background" />
 </div>
 
@@ -114,6 +114,11 @@
       transform: translateY(-150%);
       transition: transform 0.3s;
       z-index: 2;
+      opacity: 0;
+
+      & :global(*) {
+        opacity: 0;
+      }
     }
 
     & .dark-background {
@@ -130,6 +135,11 @@
 
   .skip-to-content > a:focus-visible {
     transform: translateY(50%);
+    opacity: 1;
+
+    & :global(*) {
+      opacity: 1;
+    }
 
     & + .dark-background {
       opacity: 0.5;
