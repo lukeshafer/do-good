@@ -61,6 +61,7 @@ export const navigationMenuSchema = z.object({
       includeHomePage: z.boolean(),
       includeFAQ: z.boolean(),
       includeContactForm: z.boolean(),
+      includeJoin: z.boolean(),
       pages: z.array(navigationItemsSchema),
     }),
   }),
