@@ -28,6 +28,7 @@ type NavigationMenu = {
   includeHomePage: boolean;
   includeFAQ: boolean;
   includeContactForm: boolean;
+  includeJoin: boolean;
   pages: InternalLink[];
 };
 
