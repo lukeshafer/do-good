@@ -28,10 +28,14 @@
     "pages": {
       "type": "dynamiczone",
       "components": [
+        "link.fundraiser-link",
         "link.nav-drop-down",
-        "link.navigation-link",
-        "link.fundraiser-link"
+        "link.navigation-link"
       ]
+    },
+    "includeJoin": {
+      "type": "boolean",
+      "required": false
     }
   }
 }

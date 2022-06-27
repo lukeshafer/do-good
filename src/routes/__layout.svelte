@@ -57,6 +57,9 @@
   {#if nav.includeContactForm}
     <NavItem href="/contact">Contact</NavItem>
   {/if}
+  {#if nav.includeJoin}
+    <NavItem href="/join">Join DGC</NavItem>
+  {/if}
   {#each nav.pages as page}
     {#if page.__component === 'link.navigation-link' && page.page.data}
       <NavItem href="/{page.page.data.attributes.slug}">{page.title}</NavItem>

@@ -42,6 +42,7 @@ const destructureNav = (navData: unknown) => {
       includeHomePage: false,
       includeFAQ: false,
       includeContactForm: false,
+      includeJoin: false,
       pages: [],
     };
   }
