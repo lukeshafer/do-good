@@ -39,6 +39,7 @@
   export let fields: ContactField[];
 </script>
 
+<title>Contact Us</title>
 <main>
   <Box background="var(--accent-color)">
     <h1>Contact Us</h1>
