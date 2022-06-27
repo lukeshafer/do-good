@@ -39,7 +39,9 @@
   export let fields: ContactField[];
 </script>
 
-<title>Contact Us</title>
+<svelte:head>
+  <title>Contact Us</title>
+</svelte:head>
 <main>
   <Box background="var(--accent-color)">
     <h1>Contact Us</h1>
