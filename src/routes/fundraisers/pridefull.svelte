@@ -10,7 +10,7 @@
   <span
     class="rainbow"
     aria-hidden="true"
-    style:transform="translateY({0.5 * y}px)" />
+    style:transform="translateY({0.2 * y}px)" />
 
   <div class="block">
     <h2>What is PrideFull?</h2>

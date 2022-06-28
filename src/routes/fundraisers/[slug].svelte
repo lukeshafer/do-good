@@ -44,7 +44,11 @@
 
     font-size: 1.5em;
     font-style: italic;
-    background-image: url('https://res.cloudinary.com/do-good-collective/image/upload/c_scale,w_469/v1656003087/pridefull/textbox_wss4yo.png');
+    border: 10px solid transparent;
+    /* background-image: url('https://res.cloudinary.com/do-good-collective/image/upload/c_scale,w_469/v1656003087/pridefull/textbox_wss4yo.png'); */
+    /* border-image-source: url('https://res.cloudinary.com/do-good-collective/image/upload/c_scale,w_469/v1656003087/pridefull/textbox_wss4yo.png'); */
+    border-image: url('https://res.cloudinary.com/do-good-collective/image/upload/c_scale,w_469/v1656003087/pridefull/textbox_wss4yo.png')
+      70 fill / 50px;
     color: black;
     background-size: 100% 100%;
     background-repeat: no-repeat;
