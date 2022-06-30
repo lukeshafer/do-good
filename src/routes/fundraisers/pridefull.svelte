@@ -47,7 +47,9 @@
   </figure>
 
   <div class="block">
+    <!--
     <span class="rainbow-eye" aria-hidden="true" />
+    -->
     <span class="rainbow-people" aria-hidden="true" />
     <h2>How can you help?</h2>
     <ul>
