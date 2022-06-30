@@ -122,18 +122,21 @@
       }
 
       & li::marker:nth-child(3n-1) {
-        color: #502e0b;
+        color: #764310;
       }
 
       & li::marker:nth-child(3n) {
-        color: #865b1b;
+        color: #ab7423;
       }
     }
 
     & > :where(p, ul) {
       font-size: 1.5em;
       font-style: italic;
-      background-image: url('https://res.cloudinary.com/do-good-collective/image/upload/c_scale,w_469/v1656003087/pridefull/textbox_wss4yo.png');
+      border: 10px solid transparent;
+      /*background-image: url('https://res.cloudinary.com/do-good-collective/image/upload/c_scale,w_469/v1656003087/pridefull/textbox_wss4yo.png');*/
+      border-image: url('https://res.cloudinary.com/do-good-collective/image/upload/c_scale,w_469/v1656003087/pridefull/textbox_wss4yo.png')
+        70 fill / 50px;
       color: black;
       background-size: 100% 100%;
       background-repeat: no-repeat;
@@ -182,8 +185,8 @@
     height: 8em;
     display: block;
     position: absolute;
-    top: -6em;
-    left: 0;
+    top: -25em;
+    left: 35em;
     opacity: 0.75;
     z-index: -1;
   }
@@ -212,9 +215,9 @@
     /* background is gradient with #00000088 in the center and transparent on all edges */
     background: radial-gradient(
       closest-side,
-      rgba(0, 0, 0, 0.88) 0%,
-      rgba(0, 0, 0, 0.88) 50%,
-      rgba(0, 0, 0, 0) 100%
+      rgba(3, 1, 44, 0.88) 50%,
+      rgba(5, 2, 68, 0.88) 75%,
+      rgba(5, 2, 68, 0) 100%
     );
 
     & > p {
