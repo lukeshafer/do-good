@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Button from '$lib/components/DesignBlocks/Button.svelte';
   let y: number;
 </script>
 
@@ -13,26 +14,18 @@
     style:transform="translateY({0.2 * y}px)" />
 
   <div class="block">
-    <h2>What is PrideFull?</h2>
+    <h2>Our Goal</h2>
     <p>
-      PrideFull is our current fundraiser that we are hosting at Do Good
-      Collective! Our priority focuses on queer, trans, and/or intersex BIPOC!
+      PrideFull is DGC's summer project, fundraising $2,000 for grocery funds
+      for 10 people in the LGBTQ+ community.
     </p>
-  </div>
-
-  <div class="block">
-    <h2>Our Main Goal:</h2>
     <p>
-      Our goal is to raise $2,000 through mutual aid funding in order to help 10
-      people get $200 in groceries!
+      Our priority is queer, trans, and/or intersex BIPOC (Black, Indigenous,
+      People of Color).
     </p>
   </div>
 
   <figure>
-    <p class="quote">
-      <u
-        >Mutual aid fundraising is the act of raising money through community!</u>
-    </p>
     <blockquote
       cite="https://ssw.uga.edu/news/article/what-is-mutual-aid-by-joel-izlar/">
       <p>
@@ -46,7 +39,7 @@
       —Joel Izlar, <cite
         ><a
           href="https://ssw.uga.edu/news/article/what-is-mutual-aid-by-joel-izlar/"
-          >https://ssw.uga.edu/news/article/what-is-mutual-aid-by-joel-izlar/</a
+          >What is Mutual Aid?</a
         ></cite>
     </figcaption>
   </figure>
@@ -57,21 +50,28 @@
     <h2>How can you help?</h2>
     <ul>
       <li>
-        <p>By donating directly to the fundraiser</p>
+        <p>Donate directly to our fundraiser</p>
       </li>
       <li>
-        <p>
-          Helping spread the word by sharing on social media, with friends and
-          family or through businesses
-        </p>
+        <p>Spread the word on social media</p>
       </li>
       <li>
-        <p>Donating portions of sales if you are a business</p>
+        <p>Tell your friends, family, and workplace</p>
       </li>
       <li>
-        <p>Asking others to match your donation!</p>
+        <p>Donate portions of business sales</p>
+      </li>
+      <li>
+        <p>Ask friends to match your donation</p>
       </li>
     </ul>
+  </div>
+  <div class="link-wrapper">
+    <Button
+      href="https://chuffed.org/project/pridefull-grocery-funds"
+      target="_blank">
+      <p class="link" style="width:auto">Donate Now!</p>
+    </Button>
   </div>
 </main>
 
@@ -228,5 +228,10 @@
         color: var(--box2-color);
       }
     }
+  }
+
+  .link-wrapper {
+    display: flex;
+    justify-content: center;
   }
 </style>
