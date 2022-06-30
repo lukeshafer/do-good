@@ -19,6 +19,8 @@
       PrideFull is DGC's summer project, fundraising $2,000 for grocery funds
       for 10 people in the LGBTQ+ community.
     </p>
+  </div>
+  <div class="block">
     <p>
       Our priority is queer, trans, and/or intersex BIPOC (Black, Indigenous,
       People of Color).
