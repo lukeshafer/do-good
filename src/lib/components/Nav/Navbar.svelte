@@ -60,7 +60,7 @@
     width: min(70vw, 20em);
     height: 100vh;
     z-index: 1;
-    font-size: 0.8em;
+    font-size: min(1.2em, 2.5vh);
     align-items: flex-start;
     /* box-shadow: 0 0 4em black; */
   }
