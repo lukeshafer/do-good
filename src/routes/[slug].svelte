@@ -18,6 +18,7 @@
     position: relative;
     flex-direction: column;
     text-align: left;
+    align-items: center;
   }
 
   .content {
@@ -51,7 +52,7 @@
       position: relative;
       display: flex;
       min-width: 10em;
-      width: clamp(50vw, 20em, 70vw);
+      width: 80%;
       margin: 1em auto;
 
       font-size: 1.5em;
