@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_blocks_sections",
+  "info": {
+    "displayName": "Section",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Box": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.box"
+    }
+  }
+}

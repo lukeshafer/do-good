@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_link_nav_drop_downs",
+  "info": {
+    "displayName": "Nav Drop-down",
+    "icon": "arrow-down",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "link.navigation-link",
+      "min": 1
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "fundraisers": {
+      "type": "component",
+      "repeatable": true,
+      "component": "link.fundraiser-link"
+    }
+  }
+}

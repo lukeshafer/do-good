@@ -7,9 +7,7 @@
 
 <style>
   header {
-    --left-gap: 4em;
-    width: calc(100vw - var(--left-gap));
-    padding-left: var(--left-gap);
+    width: 100%;
     padding-top: 2em;
     display: flex;
     flex-flow: row nowrap;

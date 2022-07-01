@@ -1,13 +1,13 @@
 <script lang="ts">
   export let background: string;
   export let href = '';
-
+  export let target = '_self';
   let open = true;
 </script>
 
 <article style:background class:has-link={href}>
   {#if href}
-    <a {href}>
+    <a {href} {target}>
       <slot />
     </a>
   {:else}

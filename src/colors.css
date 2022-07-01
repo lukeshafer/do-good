@@ -5,7 +5,61 @@
   /*  - a handy vscode extension for this is "Color Highlight" which can be set to highlight
         RGB values without an rgb function */
 
-  --primary-values: 230, 222, 255;
+  /* #f1e7dd primary */
+  --primary-values: 241, 231, 221;
+  --primary-color: rgb(var(--primary-values));
+
+  /* #e2dacc primary accent */
+  --primary-accent-values: 226, 218, 204;
+  --primary-accent-color: rgb(var(--primary-accent-values));
+
+  /* #383b6b secondary */
+  --secondary-values: 51, 59, 107;
+  --secondary-color: rgb(var(--secondary-values));
+
+  /* #737ad4 secondary accent */
+  --secondary-accent-values: 115, 122, 212;
+  --secondary-accent-color: rgb(var(--secondary-accent-values));
+
+  /* #28225b secondary dark */
+  --secondary-dark-values: 40, 34, 91;
+  --secondary-dark-color: rgb(var(--secondary-dark-values));
+
+  /* #1b1e20 tertiary */
+  --tertiary-values: 27, 30, 32;
+  --tertiary-color: rgb(var(--tertiary-values));
+
+  /* #8b92eb box1 */
+  --box1-values: 139, 146, 235;
+  --box1-color: rgb(var(--box1-values));
+
+  /* #9da2e4 box1 accent */
+  --box1-accent-values: 157, 162, 228;
+  --box1-accent-color: rgb(var(--box1-accent-values));
+
+  /* #dda9c9 box2 */
+  --box2-values: 221, 169, 201;
+  --box2-color: rgb(var(--box2-values));
+
+  /* #b889a6 box2 accent */
+  --box2-accent-values: 184, 137, 166;
+  --box2-accent-color: rgb(var(--box2-accent-values));
+
+  /* #97c3d8 box3 */
+  --box3-values: 151, 195, 216;
+  --box3-color: rgb(var(--box3-values));
+
+  /* #b2cedc box3 accent */
+  --box3-accent-values: 178, 206, 220;
+  --box3-accent-color: rgb(var(--box3-accent-values));
+
+  /* #d0e2ff heading text */
+  --heading-text-values: 208, 226, 255;
+  --heading-text-color: rgb(var(--heading-text-values));
+
+  /* ------------------------- */
+
+  /* --primary-values: 230, 222, 255;
   --primary-color: rgb(var(--primary-values));
 
   --secondary-values: 37, 77, 86;
@@ -42,5 +96,8 @@
   --button3-color: rgb(var(--button3-values));
 
   --button4-values: 142, 156, 219;
-  --button4-color: rgb(var(--button4-values));
+  --button4-color: rgb(var(--button4-values)); */
+
+  /* Colors based on context. Should be based on one of the above colors */
+  --error-color: var(--button1-color);
 }

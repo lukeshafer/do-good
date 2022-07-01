@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "socials",
+  "info": {
+    "singularName": "social",
+    "pluralName": "socials",
+    "displayName": "Social",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "SocialMediaLogo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "logoAltText": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

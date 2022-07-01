@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_form_fields_drop_downs",
+  "info": {
+    "displayName": "Drop-down",
+    "icon": "arrow-alt-circle-down",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "entries": {
+      "displayName": "entry",
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.entry",
+      "required": true
+    },
+    "isRequired": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
+    "note": {
+      "type": "string"
+    },
+    "allowOther": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

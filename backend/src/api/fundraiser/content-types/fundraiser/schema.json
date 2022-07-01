@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fundraisers",
+  "info": {
+    "singularName": "fundraiser",
+    "pluralName": "fundraisers",
+    "displayName": "Fundraiser",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "shortDescription": {
+      "type": "text",
+      "required": true,
+      "maxLength": 200,
+      "minLength": 100
+    },
+    "goal": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "story": {
+      "type": "richtext"
+    },
+    "donationLink": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "required": true,
+      "targetField": "title"
+    }
+  }
+}

@@ -3,5 +3,26 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "cssPeek.peekFromLanguages": ["svelte"],
-  "conventionalCommits.scopes": ["Header", "Documentation", "Styles"]
+  "conventionalCommits.scopes": [
+    "Header",
+    "Documentation",
+    "Styles",
+    "Backend",
+    "Navbar"
+  ],
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]",
+    "@KAMERON",
+    "@LUKE"
+  ],
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
+  "svg.preview.background": "white"
 }

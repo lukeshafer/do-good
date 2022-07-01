@@ -3,11 +3,44 @@
 :root {
   /* FYI - Color Palettes are defined in /src/colors.css !! */
 
-  --title-font: 'Podkova';
-  --body-font: 'Fira Code';
+  --title-font: 'Special Elite';
+  --heading-font: 'Droid Serif';
+  --subtitle-font: 'Podkova';
+  --body-font: 'Droid Serif';
 
   /* Root Font Size for determining rem and em values  */
-  font-size: min(130%, 3.5vw);
+  font-size: min(120%, 3.5vw);
+}
+
+@font-face {
+  font-family: 'Special Elite';
+  src: url('/fonts/special-elite/SpecialElite-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Droid Serif';
+  src: url('/fonts/droid-serif/DroidSerif-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Droid Serif';
+  src: url('/fonts/droid-serif/DroidSerif-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Droid Serif';
+  src: url('/fonts/droid-serif/DroidSerif-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Droid Serif';
+  src: url('/fonts/droid-serif/DroidSerif-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
 }
 
 @font-face {
@@ -27,13 +60,13 @@
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--secondary-dark-color);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  overflow-x: hidden;
-  margin: 2em;
+  /* overflow-x: hidden; */
+  margin: 0em;
 }
 
 main {
@@ -41,7 +74,8 @@ main {
   display: flex;
   justify-content: center;
   margin: 2em auto;
-  max-width: 50em;
+  /* max-width: 50em; */
+  width: min(40em, 100vw);
 }
 
 header {
@@ -62,20 +96,49 @@ h6 {
 }
 
 h1 {
-  font-weight: 400;
   font-size: 3em;
+  font: 600 4em var(--heading-font);
+  font-style: italic;
+  color: var(--primary-color);
+  margin: 0.5em;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5em;
+  font-weight: 400;
+}
+
+.fundraiser-heading {
+  font-size: 3em;
+  font: 600 4em var(--heading-font);
+  font-style: italic;
+  color: var(--primary-color);
+  margin: 0.5em;
+  text-align: center;
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 3em;
+  font: 600 4em 'Droid Serif';
+  font-style: italic;
+  color: var(--primary-color);
+  margin: 0;
 }
 
 p {
   font: 500 1em var(--body-font);
+  color: var(--primary-color);
 }
 
-a {
+a,
+button {
   font-family: var(--body-font);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 5px ridge var(--secondary-accent-color);
 }
 
 /* Use this class when you want text to be available to screen readers only */

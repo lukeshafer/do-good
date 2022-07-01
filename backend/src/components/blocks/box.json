@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_ui_boxes",
+  "info": {
+    "displayName": "Box",
+    "icon": "archive",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "Body": {
+      "type": "richtext"
+    },
+    "Collapsible": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.collapsible-menu"
+    }
+  }
+}
