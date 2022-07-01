@@ -13,7 +13,7 @@ git clone git@github.com:lukeshafer/do-good.git
 git clone https://github.com/lukeshafer/do-good.git
 ```
 
-If developing, make sure you're working out of the `dev`! (the default branch is dev so you should be already!)
+If developing, make sure to checkout the `dev` branch!
 
 ```bash
 git checkout dev
