@@ -79,7 +79,7 @@
   </div>
   <br />
   <div class="link-wrapper">
-    <Button href="/pridefullApplication" target="_blank">
+    <Button href="/forms/PrideFullApplication">
       <p class="link" style="width:auto">Apply for Funds</p>
     </Button>
   </div>
