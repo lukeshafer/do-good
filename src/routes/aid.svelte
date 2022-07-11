@@ -1,5 +1,7 @@
 <script>
   //Script for Aid Application page
+  import PaperSheet from '$lib/components/DesignBlocks/PaperSheet.svelte';
+  import Button from '$lib/components/DesignBlocks/Button.svelte';
 </script>
 
 <svelte:head>
@@ -8,17 +10,25 @@
 
 <main>
   <!--Main for Aid Application-->
-  <iframe
-    title="Aid Application"
-    src="https://docs.google.com/forms/d/e/1FAIpQLSdpn-lqG32NJgDZ0mIFbTfEV3s12qlyprDoAYj7sghd8uzRvw/viewform?embedded=true"
-    width="100%"
-    height="2000"
-    frameborder="0"
-    marginheight="0"
-    marginwidth="0">Loading…</iframe>
+  <PaperSheet>
+    I am applying for:
+    <div class="options">
+      <Button type="link" href="/forms/GeneralApplication">General Aid</Button>
+    </div>
+    <div class="options">
+      <Button type="link" href="/forms/PrideFullApplication"
+        >PrideFull Aid</Button>
+    </div>
+  </PaperSheet>
 </main>
 
 <style>
+  .options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em;
+  }
   main {
     display: flex;
   }

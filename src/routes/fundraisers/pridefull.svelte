@@ -77,6 +77,12 @@
       <p class="link" style="width:auto">Donate Now!</p>
     </Button>
   </div>
+  <br />
+  <div class="link-wrapper">
+    <Button href="/forms/PrideFullApplication">
+      <p class="link" style="width:auto">Apply for Funds</p>
+    </Button>
+  </div>
 </main>
 
 <style lang="postcss">
