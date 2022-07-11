@@ -12,8 +12,10 @@
   <!--Main for Aid Application-->
   <PaperSheet>
     I am applying for:
-    <div>
+    <div class="options">
       <Button type="link" href="/forms/GeneralApplication">General Aid</Button>
+    </div>
+    <div class="options">
       <Button type="link" href="/forms/PrideFullApplication"
         >PrideFull Aid</Button>
     </div>
@@ -21,6 +23,12 @@
 </main>
 
 <style>
+  .options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em;
+  }
   main {
     display: flex;
   }
