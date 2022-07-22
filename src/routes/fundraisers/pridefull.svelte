@@ -78,8 +78,12 @@
     </Button>
   </div>
   <br />
+  <p style:font-size="2em">
+    Thank you to everyone who applied! Applications are closed while we raise
+    more funds!
+  </p>
   <div class="link-wrapper">
-    <Button href="/forms/PrideFullApplication">
+    <Button href="/forms/PrideFullApplication" active={false}>
       <p class="link" style="width:auto">Apply for Funds</p>
     </Button>
   </div>

@@ -1,20 +1,30 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   export let type: 'link' | 'button' | 'submit' | 'style-only' = 'link';
   export let href = '';
   export let target = '';
+  export let active = true;
   export let action: () => unknown = () => {};
+
+  onMount(() => {
+    if (!active) {
+      href = 'javascript:void(0)';
+      action = () => {};
+    }
+  });
 </script>
 
 {#if type === 'button'}
-  <button class="btn" on:click={action}>
+  <button class="btn" on:click={action} class:disabled={!active}>
     <slot />
   </button>
 {:else if type === 'link'}
-  <a class="btn" {href} {target}>
+  <a class="btn" {href} {target} class:disabled={!active}>
     <slot />
   </a>
 {:else if type === 'submit'}
-  <button class="btn" type="submit">
+  <button class="btn" type="submit" disabled={!active} class:disabled={!active}>
     <slot />
   </button>
 {:else if type === 'style-only'}
@@ -41,9 +51,14 @@
     font-style: italic;
   }
 
-  .btn:hover {
+  a.btn:not(.disabled):hover {
     transform: scale(1.1);
     filter: brightness(1.1);
     cursor: pointer;
+  }
+
+  a.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 </style>
