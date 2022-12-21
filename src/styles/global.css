@@ -1,0 +1,37 @@
+@layer reset, base;
+
+@import './reset.css' layer(reset);
+/* Define global styles for ALL elements here */
+@layer base {
+
+  :root {
+    --f-display: "Special Elite", monospace;
+  }
+
+  body {
+    background-color: var(--yellow-0);
+  }
+
+  header {
+    background-color: var(--violet-10);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .logo {
+    max-width: 6rem;
+    max-height: 6rem;
+    object-fit: contain;
+  }
+
+  h1 {
+    font: 4rem 'Special Elite', 'Courier New', monospace;
+    text-transform: lowercase;
+    color: var(--sand-0);
+    text-shadow: 0 0 0.5rem rgba(var(--heading-text-values), 0.75);
+  }
+
+}

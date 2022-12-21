@@ -1,8 +1,11 @@
-const autoprefixer = require('autoprefixer');
-const postcssNesting = require('postcss-nesting');
+const postcssJitProps = require('postcss-jit-props');
+const OpenProps = require('open-props')
 
-const config = {
-  plugins: [autoprefixer, postcssNesting],
-};
-
-module.exports = config;
+module.exports = {
+  plugins: [
+    require('autoprefixer'),
+    require('postcss-nesting'),
+    postcssJitProps(OpenProps),
+    require('cssnano'),
+  ]
+}
