@@ -3,22 +3,58 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout>
-  <title slot="head">Do Good Collective</title>
-  <main>
-    <h1>Do Good Collective</h1>
-  </main>
+	<title slot="head">Do Good Collective</title>
+	<main>
+		<figure>
+			<blockquote
+				cite="https://twitter.com/yasminmogahed/status/734214944053297152">
+				"Be the moon in somebody's night. Be the ease, in somebody's
+				hardship."
+			</blockquote>
+			<figcaption>
+				<cite>— Yasmin Mogahed</cite>
+			</figcaption>
+		</figure>
+		<section class="introduction" aria-label="introduction">
+			<p>
+				<span class="name">Do Good Collective</span> is a mutual aid organization
+				focused on supporting the needs our community &mdash; especially
+				those of Disabled People, People of Color, LGBTQIA+ People, and other
+				marginalized communities.
+			</p>
+		</section>
+	</main>
 </BaseLayout>
 <style>
-  h1 {
-    font: 4.5em 'Special Elite', 'Courier New', monospace;
-    text-transform: lowercase;
-    color: var(--heading-text-color);
-    text-shadow: 0 0 0.5rem rgba(var(--heading-text-values), 0.75);
-  }
-  main {
-    display: grid;
-    justify-items: center;
-    justify-content: center;
-    gap: 2em;
-  }
+	main {
+		display: grid;
+		justify-content: start;
+		justify-items: center;
+		padding: 2rem clamp(1rem, 5vw, 5rem);
+		gap: 3rem;
+	}
+
+	figure {
+		justify-content: center;
+		background-color: var(--indigo-12);
+		color: var(--stone-0);
+		width: inherit;
+	}
+
+	blocquote {
+		font-size: clamp(2rem, 3vw, 3rem);
+		font-weight: 400;
+		line-height: 1.5;
+		margin: 0;
+		padding: 0;
+		max-width: 50rem;
+	}
+
+	section.introduction {
+		max-width: 80rem;
+
+		& p {
+			max-width: 40rem;
+		}
+	}
 </style>

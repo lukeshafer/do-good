@@ -2,38 +2,68 @@
 import Head from './Head.astro';
 import '../styles/global.css';
 import '@fontsource/special-elite';
+import '@fontsource/poppins';
+import '@fontsource/merriweather/300.css';
+import '@fontsource/merriweather/400.css';
+import '@fontsource/merriweather/700.css';
 ---
 
 <html lang="en">
-  <Head>
-    <slot name="head" />
-  </Head>
-  <header>
-    <a href="/" aria-label="Home Page">
-      <img
-        class="logo"
-        src="https://res.cloudinary.com/do-good-collective/image/upload/c_scale,f_auto,q_auto,r_300,w_300/v1656373864/CF76FB1F-E9BC-4BF9-8C79-17427829B2CF_swsup7.png"
-        alt="A logo of two hands holding the moon, with the words 'Do Good' above them"
-        style={{ width: '10em', height: '10em' }}
-      />
-    </a>
-    <h1>Do Good Collective</h1>
-  </header>
+	<Head>
+		<slot name="head" />
+	</Head>
+	<header>
+		<a href="/" aria-label="Home Page">
+			<img
+				class="logo"
+				src="/logo.png"
+				width="100"
+				height="100"
+				alt="A logo of two hands holding the moon, with the words 'Do Good' above them"
+			/>
+		</a>
+		<h1>Do Good Collective</h1>
+	</header>
 
-  <body>
-    <slot />
-  </body>
+	<body>
+		<slot />
+	</body>
 
-  <footer>
-    <div class="copyright">
-      <h3>&copy;2022, Do Good Collective</h3>
-    </div>
-    <ul class="socials">
-      <li>
-        <a href="https://www.facebook.com/groups/623919239148179">Facebook</a>
-      </li>
-      <li><a href="https://discord.gg/JDHJSDeJ2H">Discord</a></li>
-      <li><a href="https://www.instagram.com/dgc_org/">Instagram</a></li>
-    </ul>
-  </footer>
+	<footer>
+		<div class="copyright">
+			<h3>&copy;2022, Do Good Collective</h3>
+		</div>
+		<ul class="socials">
+			<li>
+				<a href="https://www.facebook.com/groups/623919239148179"
+					>Facebook</a
+				>
+			</li>
+			<li><a href="https://discord.gg/JDHJSDeJ2H">Discord</a></li>
+			<li><a href="https://www.instagram.com/dgc_org/">Instagram</a></li>
+		</ul>
+	</footer>
+	<style>
+		header {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: start;
+			align-items: center;
+			gap: 2rem;
+			padding: 2rem min(5vw, 3rem);
+		}
+
+		h1 {
+			font: 3rem var(--f-display);
+			text-transform: lowercase;
+			max-width: 20rem;
+		}
+
+		img {
+			border-radius: 50%;
+			max-width: 5rem;
+			max-height: 5rem;
+			object-fit: contain;
+		}
+	</style>
 </html>

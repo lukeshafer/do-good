@@ -11,6 +11,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/merriweather": "^4.5.14",
+    "@fontsource/poppins": "^4.5.10",
     "@fontsource/special-elite": "^4.5.8",
     "astro": "^1.6.11",
     "autoprefixer": "^10.4.13",

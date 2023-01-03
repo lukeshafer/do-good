@@ -2,36 +2,25 @@
 
 @import './reset.css' layer(reset);
 /* Define global styles for ALL elements here */
+/* open-props.style -- the source of our color variables */
 @layer base {
+	:root {
+		--f-sans: 'Poppins', var(--font-sans);
+		--f-serif: 'Merriweather', var(--font-serif);
+		--f-display: 'Special Elite', var(--font-sans);
+	}
 
-  :root {
-    --f-display: "Special Elite", monospace;
-  }
+	body {
+		background-color: var(--sand-0);
+		color: var(--gray-12);
+		font-family: var(--f-serif);
+	}
 
-  body {
-    background-color: var(--yellow-0);
-  }
-
-  header {
-    background-color: var(--violet-10);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    padding: 2rem;
-  }
-
-  .logo {
-    max-width: 6rem;
-    max-height: 6rem;
-    object-fit: contain;
-  }
-
-  h1 {
-    font: 4rem 'Special Elite', 'Courier New', monospace;
-    text-transform: lowercase;
-    color: var(--sand-0);
-    text-shadow: 0 0 0.5rem rgba(var(--heading-text-values), 0.75);
-  }
-
+	p {
+		font-size: 1.2rem;
+		font-weight: 400;
+		line-height: 1.8;
+		margin: 0;
+		padding: 0;
+	}
 }
